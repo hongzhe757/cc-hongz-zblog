@@ -1,0 +1,44 @@
+---
+---
+
+<button
+	id="theme-toggle"
+	type="button"
+	class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--bg-elevated)] text-[var(--ink)] shadow-sm transition hover:border-[var(--accent)]"
+	aria-label="切换浅色/深色主题"
+	title="切换主题"
+>
+	<span class="theme-icon-light">☀</span>
+	<span class="theme-icon-dark hidden">☾</span>
+</button>
+
+<script is:inline>
+	(function () {
+		const root = document.documentElement;
+		const stored = localStorage.getItem('theme');
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const initial = stored || (prefersDark ? 'dark' : 'light');
+		root.classList.toggle('dark', initial === 'dark');
+
+		function syncIcons() {
+			const dark = root.classList.contains('dark');
+			document.querySelectorAll('.theme-icon-light').forEach((el) => el.classList.toggle('hidden', dark));
+			document.querySelectorAll('.theme-icon-dark').forEach((el) => el.classList.toggle('hidden', !dark));
+		}
+		syncIcons();
+
+		document.getElementById('theme-toggle')?.addEventListener('click', () => {
+			const next = root.classList.contains('dark') ? 'light' : 'dark';
+			root.classList.toggle('dark', next === 'dark');
+			localStorage.setItem('theme', next);
+			syncIcons();
+			const frame = document.querySelector('iframe.giscus-frame');
+			if (frame) {
+				frame.contentWindow?.postMessage(
+					{ giscus: { setConfig: { theme: next === 'dark' ? 'dark' : 'light' } } },
+					'https://giscus.app',
+				);
+			}
+		});
+	})();
+</script>

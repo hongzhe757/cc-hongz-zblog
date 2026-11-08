@@ -117,4 +117,34 @@ npm run preview
 
 不要填 `https://`，不要填路径；TTL 默认即可。  
 生效后到仓库 **Settings → Pages** 确认 Custom domain 为 `blog.hongz.cc`，并勾选 **Enforce HTTPS**。  
-`public/CNAME` 已写入 `blog.hongz.cc`，勿随意删除。
+`public/CNAME` 已写入 `blog.hongz.cc`，勿随意删除。  
+证书未签发前 HTTPS 开关会灰掉，属正常；DNS 正确后等几分钟到几小时再勾。
+
+---
+
+## 五、主题与插件
+
+当前主题：墨绿点缀 + 浅色/深色切换、卡片式文章列表、粘性导航。
+
+已集成：
+
+| 插件/能力 | 说明 |
+| --- | --- |
+| Tailwind CSS v4 | 布局与组件样式 |
+| MDX / Sitemap / RSS | Astro 官方集成 |
+| Giscus | 文章评论，**用 GitHub 登录** |
+
+### 开通 Giscus（评论登录）
+
+1. 仓库已开启 **Discussions**
+2. 打开 https://giscus.app/zh → 用 GitHub 登录 → 选择仓库 `hongzhe757/cc-hongz-zblog`
+3. 安装 **Giscus** GitHub App 到该仓库（页面会提示）
+4. `src/consts.ts` 里 `GISCUS.repoId` / `categoryId` 已预填；若你改了分类，按 giscus 页面重新复制即可
+
+---
+
+## 六、父仓位置
+
+本仓库作为子模块挂在：
+
+`D:\workspace\code_workspace\code_misrui\cc-hongz-parent\cc-hongz-zblog`
