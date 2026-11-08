@@ -1,7 +1,7 @@
 ---
 title: 'response 模块总结'
 description: '是 ztools 的**自有模块（非 hutool 移植）**，定位「响应结构归一化与搜集库」。包路径 。共 64 个主类（+16 package-info），分 4 层：核心与工厂、ajax 与拦截、HTTP 与标准协议、数据库与框架适配。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-5.jpg'
 tags: ["ztools", "框架"]
 category: 'ztools'

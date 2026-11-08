@@ -1,7 +1,7 @@
 ---
 title: '积木式可插拔系统架构设计'
 description: '愿景：去单体化，用「中心平台 + 独立客户系统 + 标准化 CRUD + 插件扩展 + 工作流编排」实现代码隔离与积木拼接。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 25, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["架构", "ztools", "系统"]
 category: 'architecture'

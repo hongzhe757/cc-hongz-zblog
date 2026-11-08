@@ -1,7 +1,7 @@
 ---
 title: 'bean 包 vs hutool 差距补齐总结'
 description: 'ztools 的 bean 包此前只有 3 个文件，且其中 2 个严重不完整：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 22, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

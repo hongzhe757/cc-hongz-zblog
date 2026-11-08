@@ -1,7 +1,7 @@
 ---
 title: 'compiler 包（动态编译）总结'
 description: 'compiler 包封装了 JDK 的 javax.tools.JavaCompiler API，实现运行时动态编译 Java 源码——把字符串源码编译成 Class 并加载到内存，不落盘 .class 文件：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 24, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

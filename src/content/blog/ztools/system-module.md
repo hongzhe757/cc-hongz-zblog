@@ -1,7 +1,7 @@
 ---
 title: 'system 模块总结'
 description: '是 hutool-system 的移植镜像，包路径 。共 14 个类（+2 package-info），分 2 层：JVM/OS 系统信息采集、oshi 硬件实时信息。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-5.jpg'
 tags: ["ztools", "系统"]
 category: 'ztools'

@@ -1,7 +1,7 @@
 ---
 title: 'lang 包（语言增强）总结'
 description: 'lang 包是 hutool 的「语言层增强」，弥补 Java 标准库的不足：基础数据类型抽象、函数式接口、控制台、树、哈希、引用等。34 个顶层类 + 13 个子包：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 27, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

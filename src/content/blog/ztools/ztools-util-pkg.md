@@ -1,7 +1,7 @@
 ---
 title: 'util 包（通用工具集）总结'
 description: 'util 包是 hutool 的「通用工具集」，汇集各类静态工具方法，是使用最频繁的包。43 个工具类按用途分类：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 27, 2026'
 heroImage: '../../../assets/blog-placeholder-5.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

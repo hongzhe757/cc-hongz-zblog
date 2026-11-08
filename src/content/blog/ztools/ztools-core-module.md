@@ -1,7 +1,7 @@
 ---
 title: 'core 模块总结'
 description: '是 hutool 的移植镜像，包路径 。共 24 个顶层包。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 27, 2026'
 heroImage: '../../../assets/blog-placeholder-1.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

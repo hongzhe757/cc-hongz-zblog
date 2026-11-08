@@ -1,7 +1,7 @@
 ---
 title: 'exceptions 包（异常封装）总结'
 description: 'exceptions 包提供异常封装 + 异常工具，共 9 个文件：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 25, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

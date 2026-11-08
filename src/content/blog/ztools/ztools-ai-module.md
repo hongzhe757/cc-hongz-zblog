@@ -1,7 +1,7 @@
 ---
 title: 'ai 模块总结'
 description: '是 hutool-ai 的移植镜像，包路径 。共 48 主类，分 3 层：核心抽象、配置、7 个 LLM 模型。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "框架"]
 category: 'ztools'

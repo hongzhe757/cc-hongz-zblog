@@ -1,7 +1,7 @@
 ---
 title: 'socket 包（Socket 通信封装）总结'
 description: 'socket 包是 JDK NIO/AIO Socket 通信的轻量封装，20 个类分 4 组：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "网络"]
 category: 'ztools'

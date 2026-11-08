@@ -1,7 +1,7 @@
 ---
 title: 'convert 包（类型转换）总结'
 description: 'convert 包是 ztools 的类型转换中枢，把任意类型（String / Number / Date / 数组 / 集合 / 枚举 / Optional / UUID…）互相转换，共 49 个文件：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 25, 2026'
 heroImage: '../../../assets/blog-placeholder-5.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

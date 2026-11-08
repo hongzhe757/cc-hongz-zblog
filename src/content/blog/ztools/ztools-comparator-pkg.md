@@ -1,7 +1,7 @@
 ---
 title: 'comparator 包（比较器）总结'
 description: 'comparator 包是 java.util.Comparator 的各种实现与封装，围绕「怎么比较两个对象」展开：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 24, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

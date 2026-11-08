@@ -1,7 +1,7 @@
 ---
 title: 'cron 模块总结'
 description: '是 hutool-cron 的移植镜像，包路径 。共 34 主类，分 5 层：门面/调度、监听、Cron 表达式、任务、时间轮。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "缓存任务"]
 category: 'ztools'

@@ -1,7 +1,7 @@
 ---
 title: 'log 模块总结'
 description: '是 hutool-log 的移植镜像，包路径 。共 34 类，分 3 层：日志门面（根包）、9 个日志框架方言（dialect 子包，适配 10 种实现）、带级别前缀的包装（level 子包）。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "框架"]
 category: 'ztools'

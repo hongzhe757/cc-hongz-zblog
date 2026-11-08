@@ -1,7 +1,7 @@
 ---
 title: 'script 包（脚本引擎封装）总结'
 description: 'script 包基于 JSR-223（javax.script） 封装脚本引擎，4 个类单包结构：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "框架"]
 category: 'ztools'

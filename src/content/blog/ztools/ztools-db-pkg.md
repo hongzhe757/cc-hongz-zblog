@@ -1,7 +1,7 @@
 ---
 title: 'db 包（数据库 ORM）总结'
 description: 'db 包是 JDBC 的轻量 ORM 封装，87 个类分 8 组：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "数据"]
 category: 'ztools'

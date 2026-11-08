@@ -1,7 +1,7 @@
 ---
 title: '你好，cc-hongz-zblog'
 description: '基于 Astro + Markdown 的博客起步'
-pubDate: 'Nov 08 2026'
+pubDate: 'Nov 08, 2026'
 heroImage: '../../../assets/blog-placeholder-1.jpg'
 tags: ["博客", "meta"]
 category: 'journal'

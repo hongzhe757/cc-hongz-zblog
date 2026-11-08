@@ -1,7 +1,7 @@
 ---
 title: 'cache 包（缓存）总结'
 description: 'cache 包是本地缓存的实现，19 个类分 3 组：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "缓存任务"]
 category: 'ztools'

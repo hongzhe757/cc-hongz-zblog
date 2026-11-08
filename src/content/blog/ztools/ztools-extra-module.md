@@ -1,7 +1,7 @@
 ---
 title: 'extra 模块总结'
 description: '是 hutool-extra 的移植镜像，包路径 。共 128 个主类，分 6 层：模板引擎、邮件、远程连接（SSH/FTP）、表达式引擎、拼音与分词、其他工具。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

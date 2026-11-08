@@ -1,7 +1,7 @@
 ---
 title: 'word 包（Word 文档）总结'
 description: 'word 包负责 docx（OOXML） 文档的生成，5 个类：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "数据"]
 category: 'ztools'

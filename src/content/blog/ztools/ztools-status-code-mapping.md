@@ -1,7 +1,7 @@
 ---
 title: '状态码映射设计'
 description: '解决「统一响应 code 语义不统一」问题：三方平台（gitee/微信/阿里云等）状态码各异，需要一个**可插拔的映射层**，把三方码归一化到统一响应的 语义，且三方原始信息只进 、不污染 。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 12, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "框架", "基础核心"]
 category: 'ztools'

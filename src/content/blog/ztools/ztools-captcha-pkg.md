@@ -1,7 +1,7 @@
 ---
 title: 'captcha 包（图形验证码）总结'
 description: 'captcha 包是 captcha 模块的全部内容（15 类），分根包（8 类）+ generator 子包（7 类）：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "安全"]
 category: 'ztools'

@@ -1,7 +1,7 @@
 ---
 title: 'jwt 模块总结'
 description: '是 hutool-jwt 的移植镜像，包路径 。共 15 类，分 2 层：根包（JWT 结构 + 门面 + 校验）、signers 子包（7 类签名策略）。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-1.jpg'
 tags: ["ztools", "安全"]
 category: 'ztools'

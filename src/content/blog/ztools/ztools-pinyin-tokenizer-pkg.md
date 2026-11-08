@@ -1,7 +1,7 @@
 ---
 title: 'pinyin 与 tokenizer 包（拼音与分词）总结'
 description: 'pinyin 包（9 类）统一封装 5 种拼音库；tokenizer 包（35 类）统一封装 9 种中文分词库。共 44 类：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

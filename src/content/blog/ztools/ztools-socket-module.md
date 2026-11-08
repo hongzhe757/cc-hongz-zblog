@@ -1,7 +1,7 @@
 ---
 title: 'socket 模块总结'
 description: '是 hutool-socket 的移植镜像，包路径 。共 20 主类（+4 package-info），分根包 + aio/nio/protocol 三个子包，封装 NIO/AIO 的 Socket 通信与编解码协议。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "网络"]
 category: 'ztools'

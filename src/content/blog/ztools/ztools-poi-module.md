@@ -1,7 +1,7 @@
 ---
 title: 'poi 模块总结'
 description: '是 hutool-poi 的移植镜像，包路径 。共 66 个主类（+7 package-info），分 3 层：Excel 读写、Word 文档、OFD 文档。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "数据"]
 category: 'ztools'

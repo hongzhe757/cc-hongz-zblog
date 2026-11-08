@@ -1,7 +1,7 @@
 ---
 title: '核心与工厂 包（响应结构定义与转换）总结'
 description: '性质：自有模块（非 hutool 移植）'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "框架", "基础核心"]
 category: 'ztools'

@@ -1,7 +1,7 @@
 ---
 title: 'protector 加密模块使用指南'
 description: '是一个 jar 代码保护工具：把**可执行 jar** 内的 用 AES 加密成 密文，运行时由注入的 + 解密加载。本文讲「怎么用它加密自己的 jar」。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 05, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "安全"]
 category: 'ztools'

@@ -1,7 +1,7 @@
 ---
 title: 'ajax 与拦截 包（AJAX 标准与 Spring 集成）总结'
 description: '性质：自有模块（非 hutool 移植）'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools"]
 category: 'ztools'

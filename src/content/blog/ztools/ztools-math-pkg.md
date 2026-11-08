@@ -1,7 +1,7 @@
 ---
 title: 'math 包（数学工具）总结'
 description: 'math 包提供数学计算相关工具，覆盖排列组合、表达式求值、货币运算、位状态标记等：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 27, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

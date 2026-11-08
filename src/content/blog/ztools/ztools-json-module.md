@@ -1,7 +1,7 @@
 ---
 title: 'json 模块总结'
 description: '是 hutool-json 的移植镜像，包路径 。共 30 类，分 3 层：根包（JSON 数据结构 + 门面 + 手写解析器）、serialize 子包（序列化链）、xml 子包（JSON↔XML 转换）。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "数据"]
 category: 'ztools'

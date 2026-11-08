@@ -1,7 +1,7 @@
 ---
 title: 'aop 包（动态代理）总结'
 description: 'aop 包是动态代理的统一封装，11 个类按职责分 4 组：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "框架"]
 category: 'ztools'

@@ -1,7 +1,7 @@
 ---
 title: 'bloomFilter 模块总结'
 description: '是 hutool-bloomFilter 的移植镜像，包路径 。共 19 主类，分 3 层：过滤器、位图、哈希函数。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "安全"]
 category: 'ztools'

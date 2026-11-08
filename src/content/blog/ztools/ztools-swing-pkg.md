@@ -1,7 +1,7 @@
 ---
 title: 'swing 包（桌面 GUI 工具）总结'
 description: 'swing 包封装桌面环境相关操作（依赖 AWT，需要图形环境）：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 27, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

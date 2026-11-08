@@ -1,7 +1,7 @@
 ---
 title: 'setting 模块总结'
 description: '是 hutool-setting 的移植镜像，包路径 。共 12 主类（+4 package-info），分根包 + dialect/properties + profile 多环境 + yaml 四个层次，实现配置文件的读取、分组、变量替换与多环境切换。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-3.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

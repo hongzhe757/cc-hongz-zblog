@@ -1,7 +1,7 @@
 ---
 title: 'setting 包（配置文件读取）总结'
 description: 'setting 包是 Properties 的增强版配置文件读取，12 个类分 4 组：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Sep 01, 2026'
 heroImage: '../../../assets/blog-placeholder-2.jpg'
 tags: ["ztools", "基础核心"]
 category: 'ztools'

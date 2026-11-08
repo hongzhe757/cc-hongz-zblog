@@ -1,7 +1,7 @@
 ---
 title: 'aop 模块总结'
 description: '是 hutool-aop 的移植镜像，包路径 。共 11 主类，分 4 层：代理工厂、拦截器、切面、门面。'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-5.jpg'
 tags: ["ztools", "框架"]
 category: 'ztools'

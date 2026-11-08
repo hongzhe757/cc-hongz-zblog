@@ -1,7 +1,7 @@
 ---
 title: 'ssh 与 ftp 包（远程连接）总结'
 description: 'ssh 包（8 类）基于 JSch 实现 SSH/SFTP；ftp 包（6 类）基于 Apache Commons-Net 实现 FTP。共 14 类：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-5.jpg'
 tags: ["ztools", "网络"]
 category: 'ztools'

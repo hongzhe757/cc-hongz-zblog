@@ -1,7 +1,7 @@
 ---
 title: 'system 包（系统信息采集）总结'
 description: 'system 包是 system 模块的全部内容（14 类），分根包（11 类）+ oshi 子包（3 类）：'
-pubDate: 'Nov 08 2026'
+pubDate: 'Aug 31, 2026'
 heroImage: '../../../assets/blog-placeholder-4.jpg'
 tags: ["ztools", "系统"]
 category: 'ztools'
