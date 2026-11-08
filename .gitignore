@@ -1,10 +1,29 @@
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-*.log
-_site/
-.jekyll-cache/
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
 node_modules/
-.gitee.local.env
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
 .env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# local
+.gitee.local.env
+Thumbs.db
+

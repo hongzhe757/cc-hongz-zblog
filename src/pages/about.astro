@@ -1,0 +1,18 @@
+---
+import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="关于"
+	description="hongz 的技术博客"
+	pubDate={new Date('November 08 2026')}
+	heroImage={AboutHeroImage}
+>
+	<p>
+		这里是 <strong>hongz</strong> 的个人技术博客：笔记、工程与折腾记录。站点基于 Astro，文章用 Markdown 编写，托管在 GitHub Pages，域名 <code>blog.hongz.cc</code>。
+	</p>
+	<p>
+		仓库：<a href="https://github.com/hongzhe757/cc-hongz-zblog">cc-hongz-zblog</a>
+	</p>
+</Layout>

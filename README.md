@@ -1,34 +1,39 @@
 # cc-hongz-zblog
 
-个人技术博客（纯静态），GitHub Pages 托管。
+Astro + Markdown 个人博客，GitHub Pages 托管。
 
 | 项 | 值 |
 | --- | --- |
-| GitHub | https://github.com/hongzhe757/cc-hongz-zblog |
-| Pages | https://hongzhe757.github.io/cc-hongz-zblog/ |
-| 自定义域名 | https://blog.hongz.cc |
+| 仓库 | https://github.com/hongzhe757/cc-hongz-zblog |
+| 线上 | https://blog.hongz.cc |
+| 文章目录 | `src/content/blog/*.md` |
 
-技术选型：**纯静态 HTML**（零构建、直推即可上线；后续可再迁 Hugo/Astro）。
+## 本地开发
 
-## 本地预览
+需要 Node **≥ 22.23.4**（推荐 24）：
 
 ```bash
-python -m http.server 8080
-# 打开 http://127.0.0.1:8080/
+npm install
+npm run dev
 ```
 
 ## 写文章
 
-1. 复制 `posts/_template.html` 为新文件。
-2. 在 `index.html` 文章列表加链接。
-3. `git add . && git commit -m "..." && git push`
+1. 在 `src/content/blog/` 新建 `xxx.md`
+2. 填写 frontmatter：`title` / `description` / `pubDate`
+3. 写 Markdown 正文
+4. `git push`（上线推 `main`）
 
-## 自定义域名 DNS
+## DNSPod 域名解析（blog.hongz.cc）
 
-在 `hongz.cc` 域名解析中添加：
-
-| 类型 | 主机记录 | 记录值 |
+| 记录类型 | 主机记录 | 记录值 |
 | --- | --- | --- |
 | CNAME | `blog` | `hongzhe757.github.io` |
 
-仓库根目录已有 `CNAME` 文件（内容：`blog.hongz.cc`）。DNS 生效后，在仓库 **Settings → Pages** 确认 Custom domain 为 `blog.hongz.cc` 并勾选 HTTPS。
+说明：不要填 `https://`，不要填路径；TTL 默认即可。生效后到 GitHub 仓库 **Settings → Pages** 确认 Custom domain 为 `blog.hongz.cc`，并勾选 **Enforce HTTPS**。
+
+## 发布说明
+
+- 开发分支：`dev`
+- 线上发布：推送 `main` → GitHub Actions 构建部署
+- `public/CNAME` 已写入 `blog.hongz.cc`
