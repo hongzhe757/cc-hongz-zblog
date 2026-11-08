@@ -22,7 +22,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 				<p class="m-0 text-sm text-[var(--muted)]">发文</p>
 				<h1 class="mt-2 mb-2 text-[1.6rem] font-bold tracking-tight text-[var(--ink)] sm:text-4xl">写一篇文章</h1>
 				<p class="m-0 text-sm leading-relaxed text-[var(--muted)] sm:text-base">
-					线上 Keystatic 登录目前会 500（GitHub App 未配好）。这里用「起草 → 复制 → GitHub 提交」即可发布到
+					读者站是静态 Pages，没有在线 CMS。推荐本机 <code>npm run admin</code> 打开图形后台；或在这里起草后提交到 GitHub，部署到
 					<a href="https://blog.hongz.cc/blog/">blog.hongz.cc</a>。
 				</p>
 			</section>
@@ -81,15 +81,16 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 					<p id="write-hint" class="hint" hidden></p>
 				</form>
 
-				<details class="more">
-					<summary>本地图形后台（推荐本机写长文）</summary>
+				<details class="more" open>
+					<summary>本地图形后台（推荐）</summary>
 					<ol>
-						<li>在仓库目录执行 <code>npm run admin</code></li>
-						<li>浏览器打开 <code>http://127.0.0.1:4321/keystatic</code></li>
-						<li>保存后 <code>git push origin main</code>，等待 Actions 部署</li>
+						<li>仓库目录执行 <code>npm run admin</code>（强制 local 模式，无需 GitHub 登录）</li>
+						<li>打开 <a href="http://127.0.0.1:4321/keystatic" target="_blank" rel="noreferrer">http://127.0.0.1:4321/keystatic</a></li>
+						<li>保存后 <code>git push origin main</code>，等 Actions 部署</li>
 					</ol>
 					<p>
-						也可直接在 GitHub 改已有文件：
+						线上 Vercel Keystatic 需要配置 GitHub App（Client ID/Secret），未配好时会白屏 / 登录失败。日常请用本机后台或本页起草。
+						也可直接改仓库：
 						<a href={treeUrl} target="_blank" rel="noreferrer">打开 blog 目录</a>
 					</p>
 				</details>

@@ -16,10 +16,17 @@ export default config({
 		blog: collection({
 			label: '博客文章',
 			slugField: 'title',
-			path: 'src/content/blog/*/*',
+			// ** 支持分类目录：slug 形如 journal/hello-zblog
+			path: 'src/content/blog/**',
 			format: { contentField: 'content' },
 			schema: {
-				title: fields.slug({ name: { label: '标题' } }),
+				title: fields.slug({
+					name: { label: '标题' },
+					slug: {
+						label: '路径 slug',
+						description: '含分类目录，例如 journal/my-post 或 ztools/core-pkg',
+					},
+				}),
 				description: fields.text({
 					label: '摘要',
 					multiline: true,
@@ -52,6 +59,8 @@ export default config({
 				}),
 				content: fields.markdoc({
 					label: '正文',
+					// 现有文章都是 .md，默认 .mdoc 会读成 0 篇
+					extension: 'md',
 					options: {
 						image: {
 							directory: 'src/assets/blog',

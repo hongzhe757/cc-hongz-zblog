@@ -6,53 +6,125 @@ const skins = [
 ] as const;
 ---
 
-<div class="skin-bar" role="group" aria-label="外观">
-	<button type="button" class="mode-chip" data-mode="light" title="浅色" aria-label="浅色">☀</button>
-	<button type="button" class="mode-chip" data-mode="dark" title="深色" aria-label="深色">☾</button>
-	<span class="skin-sep" aria-hidden="true"></span>
-	{
-		skins.map((skin) => (
-			<button
-				type="button"
-				class="skin-chip"
-				data-skin={skin.id}
-				title={skin.label}
-				aria-label={skin.label}
-				style={`--swatch:${skin.swatch}`}
-			>
-				<span class="skin-dot" aria-hidden="true" />
-			</button>
-		))
-	}
+<div class="skin-wrap">
+	<button
+		type="button"
+		id="skin-toggle"
+		class="skin-toggle"
+		aria-expanded="false"
+		aria-controls="skin-panel"
+		aria-haspopup="true"
+		title="外观设置"
+		aria-label="外观设置"
+	>
+		<span class="skin-toggle-dot" id="skin-toggle-dot" aria-hidden="true"></span>
+		<span class="skin-toggle-mode" id="skin-toggle-mode" aria-hidden="true">☀</span>
+	</button>
+
+	<div id="skin-panel" class="skin-panel" hidden role="group" aria-label="外观">
+		<div class="skin-row">
+			<button type="button" class="mode-chip" data-mode="light" title="浅色" aria-label="浅色">☀ 浅色</button>
+			<button type="button" class="mode-chip" data-mode="dark" title="深色" aria-label="深色">☾ 深色</button>
+		</div>
+		<div class="skin-row skins">
+			{
+				skins.map((skin) => (
+					<button
+						type="button"
+						class="skin-chip"
+						data-skin={skin.id}
+						title={skin.label}
+						aria-label={skin.label}
+						style={`--swatch:${skin.swatch}`}
+					>
+						<span class="skin-dot" aria-hidden="true" />
+						<span class="skin-name">{skin.label}</span>
+					</button>
+				))
+			}
+		</div>
+	</div>
 </div>
 
 <style>
-	.skin-bar {
+	.skin-wrap {
+		position: relative;
+	}
+	.skin-toggle {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.2rem;
-		padding: 0.22rem;
+		justify-content: center;
+		gap: 0.35rem;
+		width: 2.45rem;
+		height: 2.2rem;
+		margin: 0;
+		padding: 0;
 		border: 1px solid var(--line);
+		border-radius: 10px;
+		background: var(--bg-elevated);
+		color: var(--ink);
+		cursor: pointer;
+	}
+	.skin-toggle[aria-expanded='true'] {
+		border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+		background: var(--accent-soft);
+	}
+	.skin-toggle-dot {
+		width: 0.85rem;
+		height: 0.85rem;
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
-		backdrop-filter: blur(8px);
+		background: var(--accent);
+		border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+	}
+	.skin-toggle-mode {
+		font-size: 0.78rem;
+		line-height: 1;
+		color: var(--muted);
+	}
+	.skin-panel {
+		position: absolute;
+		top: calc(100% + 0.4rem);
+		right: 0;
+		z-index: 60;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+		min-width: 11.5rem;
+		padding: 0.55rem;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow);
+	}
+	.skin-panel[hidden] {
+		display: none !important;
+	}
+	.skin-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
 	}
 	.mode-chip,
 	.skin-chip {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 1.9rem;
-		height: 1.9rem;
+		gap: 0.35rem;
+		min-height: 1.95rem;
 		margin: 0;
-		padding: 0;
+		padding: 0.25rem 0.55rem;
 		border: 1px solid transparent;
 		border-radius: 999px;
 		background: transparent;
 		color: var(--muted);
 		cursor: pointer;
 		line-height: 1;
-		font-size: 0.85rem;
+		font-size: 0.78rem;
+	}
+	.skin-chip {
+		flex: 1 1 auto;
+		justify-content: flex-start;
 	}
 	.mode-chip.is-active,
 	.skin-chip.is-active {
@@ -60,23 +132,17 @@ const skins = [
 		background: var(--accent-soft);
 		color: var(--accent);
 	}
-	.skin-sep {
-		width: 1px;
-		height: 1rem;
-		margin: 0 0.12rem;
-		background: var(--line);
-	}
 	.skin-dot {
-		width: 0.9rem;
-		height: 0.9rem;
+		width: 0.85rem;
+		height: 0.85rem;
 		border-radius: 999px;
 		background: var(--swatch);
 		border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+		flex-shrink: 0;
 	}
-	.skin-chip.is-active .skin-dot {
-		outline: 2px solid var(--accent);
-		outline-offset: 1px;
+	.skin-name {
+		color: inherit;
 	}
 </style>
 
@@ -86,6 +152,7 @@ const skins = [
 		const SKIN_KEY = 'blog-skin';
 		const MODE_KEY = 'theme';
 		const validSkins = ['studio', 'orchard', 'carbon'];
+		const swatches = { studio: '#1f5fbf', orchard: '#2f6a3a', carbon: '#222222' };
 		const legacy = {
 			paper: 'studio',
 			mist: 'studio',
@@ -102,6 +169,17 @@ const skins = [
 			'noir-red': 'carbon',
 		};
 
+		const toggle = document.getElementById('skin-toggle');
+		const panel = document.getElementById('skin-panel');
+		const toggleDot = document.getElementById('skin-toggle-dot');
+		const toggleMode = document.getElementById('skin-toggle-mode');
+
+		function setOpen(open) {
+			if (!toggle || !panel) return;
+			toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			panel.hidden = !open;
+		}
+
 		function syncUi(mode, skin) {
 			document.querySelectorAll('.mode-chip').forEach((btn) => {
 				btn.classList.toggle('is-active', btn.getAttribute('data-mode') === mode);
@@ -109,6 +187,8 @@ const skins = [
 			document.querySelectorAll('.skin-chip').forEach((btn) => {
 				btn.classList.toggle('is-active', btn.getAttribute('data-skin') === skin);
 			});
+			if (toggleDot) toggleDot.style.background = swatches[skin] || swatches.studio;
+			if (toggleMode) toggleMode.textContent = mode === 'dark' ? '☾' : '☀';
 		}
 
 		function notifyAppearance(mode, skin) {
@@ -170,22 +250,38 @@ const skins = [
 			} catch (_) {}
 			applyMode(mode);
 			applySkin(skin);
+			setOpen(false);
 		}
 
 		boot();
 
+		toggle?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const open = toggle.getAttribute('aria-expanded') !== 'true';
+			setOpen(open);
+		});
+
 		document.addEventListener('click', (e) => {
 			const t = e.target;
 			if (!(t instanceof Element)) return;
-			const modeBtn = t.closest('.mode-chip');
-			if (modeBtn) {
-				applyMode(modeBtn.getAttribute('data-mode') || 'light');
+			if (t.closest('.skin-wrap')) {
+				const modeBtn = t.closest('.mode-chip');
+				if (modeBtn) {
+					applyMode(modeBtn.getAttribute('data-mode') || 'light');
+					return;
+				}
+				const skinBtn = t.closest('.skin-chip');
+				if (skinBtn) {
+					applySkin(skinBtn.getAttribute('data-skin') || 'studio');
+					setOpen(false);
+				}
 				return;
 			}
-			const skinBtn = t.closest('.skin-chip');
-			if (skinBtn) {
-				applySkin(skinBtn.getAttribute('data-skin') || 'studio');
-			}
+			setOpen(false);
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') setOpen(false);
 		});
 	})();
 </script>

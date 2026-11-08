@@ -1,9 +1,23 @@
 # 发文说明
 
-> 线上 Vercel Keystatic（`/keystatic` + GitHub 登录）目前会 **500**：缺少可用的 GitHub App Client ID/Secret。  
-> 读者站是 GitHub Pages 静态站，**没有** `/keystatic` 路由。
+> 读者站 `blog.hongz.cc` 是 GitHub Pages 静态站，**没有** `/keystatic`。  
+> 本地 `.env` 若写成 `PUBLIC_KEYSTATIC_STORAGE=github` 又没配 GitHub App，本机后台也会白屏（只显示 Log in with GitHub）。
 
-## 推荐：站点发文页（已上线）
+## 推荐：本机图形后台（Keystatic local）
+
+```bat
+npm run admin
+```
+
+`npm run admin` 会强制 `PUBLIC_KEYSTATIC_STORAGE=local`。浏览器打开 http://127.0.0.1:4321/keystatic ，保存后：
+
+```bat
+git add src/content/blog
+git commit -m "docs: add post"
+git push origin main
+```
+
+## 备选：站点发文页
 
 打开 https://blog.hongz.cc/write/
 
@@ -11,20 +25,6 @@
 2. 点「复制 Markdown」  
 3. 点「打开 GitHub 新建」→ 粘贴 → Commit 到 `main`  
 4. 等 Actions 部署后文章出现在 https://blog.hongz.cc/blog/
-
-## 本机图形后台（Keystatic local）
-
-```bat
-npm run admin
-```
-
-浏览器打开 http://127.0.0.1:4321/keystatic ，保存后：
-
-```bat
-git add src/content/blog
-git commit -m "docs: add post"
-git push origin main
-```
 
 ## 若仍要修 Vercel Keystatic
 
