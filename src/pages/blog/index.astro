@@ -20,30 +20,31 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main class="site-shell py-6 sm:py-12">
-			<header class="mb-6 sm:mb-8">
-				<h1 class="m-0 text-2xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
-				<p class="mt-2 mb-0 text-sm text-[var(--muted)] sm:text-base">用 Markdown 写，Astro 自动生成列表与页面。</p>
+			<header class="panel mb-6 px-4 py-5 sm:mb-8 sm:px-6 sm:py-6">
+				<p class="hud-label m-0">Archive / Index</p>
+				<h1 class="mt-2 mb-2 text-2xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
+				<p class="m-0 text-sm text-[var(--muted)] sm:text-base">Markdown → Astro 静态编译 → Pages 分发</p>
 			</header>
-			<ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2">
+			<ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
 				{
 					posts.map((post) => (
-						<li class="card overflow-hidden">
+						<li class="card">
 							<a href={`/blog/${post.id}/`} class="block no-underline">
 								{post.data.heroImage && (
 									<Image
-										class="h-44 w-full object-cover"
+										class="h-40 w-full object-cover"
 										width={720}
 										height={360}
 										src={post.data.heroImage}
 										alt=""
 									/>
 								)}
-								<div class="p-5">
-									<p class="m-0 text-sm text-[var(--muted)]">
+								<div class="p-4 sm:p-5">
+									<p class="mono m-0 text-xs text-[var(--accent)]">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
-									<h2 class="mt-2 mb-2 text-xl font-bold text-[var(--ink)]">{post.data.title}</h2>
-									<p class="m-0 text-[var(--muted)]">{post.data.description}</p>
+									<h2 class="mt-2 mb-2 text-lg font-bold text-[var(--ink)] sm:text-xl">{post.data.title}</h2>
+									<p class="m-0 text-sm text-[var(--muted)]">{post.data.description}</p>
 								</div>
 							</a>
 						</li>

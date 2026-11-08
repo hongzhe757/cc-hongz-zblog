@@ -23,19 +23,19 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			<article>
 				{
 					heroImage && (
-						<div class="overflow-hidden rounded-xl border border-[var(--line)] shadow-[var(--shadow)] sm:rounded-[24px]">
+						<div class="panel overflow-hidden !p-0">
 							<Image class="block h-auto w-full" width={1200} height={520} src={heroImage} alt="" />
 						</div>
 					)
 				}
 				<div class="prose-body pt-5 sm:pt-8">
-					<p class="m-0 text-sm text-[var(--muted)]">
-						<FormattedDate date={pubDate} />
+					<p class="hud-label m-0">
+						LOG · <FormattedDate date={pubDate} />
 						{
 							updatedDate && (
 								<>
 									{' '}
-									· 更新于 <FormattedDate date={updatedDate} />
+									/ UPD <FormattedDate date={updatedDate} />
 								</>
 							)
 						}

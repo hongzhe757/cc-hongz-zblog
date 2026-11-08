@@ -4,13 +4,22 @@ import HeaderLink from './HeaderLink.astro';
 import SkinSettings from './SkinSettings.astro';
 ---
 
-<header class="site-header sticky top-0 z-40 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--bg-elevated)_88%,transparent)] backdrop-blur-md">
+<header class="site-header sticky top-0 z-40 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--bg)_72%,transparent)] backdrop-blur-xl">
+	<div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-70"></div>
 	<nav class="site-shell flex items-center justify-between gap-2 py-2.5 sm:py-3">
-		<a href="/" class="group min-w-0 flex items-baseline gap-2 no-underline">
-			<span class="truncate text-lg font-bold tracking-wide text-[var(--ink)] group-hover:text-[var(--accent)] sm:text-xl">
-				{SITE_TITLE}
+		<a href="/" class="group min-w-0 flex items-center gap-2 no-underline">
+			<span
+				class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[var(--accent)] text-[var(--accent)] shadow-[var(--glow)] mono text-xs font-bold"
+				aria-hidden="true"
+			>
+				HZ
 			</span>
-			<span class="hidden text-sm text-[var(--muted)] md:inline">笔记 · 工程 · 折腾</span>
+			<span class="min-w-0">
+				<span class="block truncate text-base font-bold tracking-wide text-[var(--ink)] group-hover:text-[var(--accent)] sm:text-lg">
+					{SITE_TITLE}
+				</span>
+				<span class="hud-label hidden md:block">node://blog.hongz.cc</span>
+			</span>
 		</a>
 
 		<div class="flex shrink-0 items-center gap-1.5">
@@ -20,7 +29,7 @@ import SkinSettings from './SkinSettings.astro';
 				<HeaderLink href="/about">关于</HeaderLink>
 			</div>
 			<a
-				class="hidden h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-[var(--ink)] no-underline md:inline-flex"
+				class="hidden h-9 w-9 items-center justify-center rounded-md border border-[var(--line)] text-[var(--ink)] no-underline md:inline-flex"
 				href="https://github.com/hongzhe757/cc-hongz-zblog"
 				target="_blank"
 				rel="noreferrer"
@@ -38,13 +47,13 @@ import SkinSettings from './SkinSettings.astro';
 			<button
 				id="nav-toggle"
 				type="button"
-				class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--bg-elevated)] text-[var(--ink)] sm:hidden"
+				class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] text-[var(--ink)] sm:hidden"
 				aria-label="打开菜单"
 				aria-expanded="false"
 				aria-controls="mobile-nav"
 			>
-				<span class="nav-icon-open" aria-hidden="true">☰</span>
-				<span class="nav-icon-close hidden" aria-hidden="true">✕</span>
+				<span class="nav-icon-open mono text-sm" aria-hidden="true">≡</span>
+				<span class="nav-icon-close mono text-sm hidden" aria-hidden="true">×</span>
 			</button>
 		</div>
 	</nav>
@@ -54,12 +63,7 @@ import SkinSettings from './SkinSettings.astro';
 			<HeaderLink href="/">首页</HeaderLink>
 			<HeaderLink href="/blog">文章</HeaderLink>
 			<HeaderLink href="/about">关于</HeaderLink>
-			<a
-				class="rounded-lg px-3 py-2.5 text-[var(--ink)] no-underline"
-				href="https://github.com/hongzhe757/cc-hongz-zblog"
-				target="_blank"
-				rel="noreferrer"
-			>
+			<a class="rounded-md px-3 py-2.5 text-[var(--ink)] no-underline" href="https://github.com/hongzhe757/cc-hongz-zblog" target="_blank" rel="noreferrer">
 				GitHub
 			</a>
 		</div>
@@ -70,24 +74,31 @@ import SkinSettings from './SkinSettings.astro';
 	.internal-links :global(a) {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.45rem 0.7rem;
-		border-radius: 999px;
+		padding: 0.4rem 0.75rem;
+		border-radius: 8px;
 		color: var(--ink);
 		text-decoration: none;
 		border: 1px solid transparent;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 	}
 	.internal-links :global(a.active),
 	.internal-links :global(a:hover) {
 		background: var(--accent-soft);
-		border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+		border-color: color-mix(in srgb, var(--accent) 35%, transparent);
 		color: var(--accent);
+		box-shadow: var(--glow);
 	}
 	.mobile-nav :global(a) {
 		display: block;
-		padding: 0.7rem 0.85rem;
-		border-radius: 10px;
+		padding: 0.75rem 0.85rem;
+		border-radius: 8px;
 		color: var(--ink);
 		text-decoration: none;
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
 	}
 	.mobile-nav :global(a.active),
 	.mobile-nav :global(a:hover) {

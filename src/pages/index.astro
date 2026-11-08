@@ -19,60 +19,77 @@ const posts = (await getCollection('blog'))
 	</head>
 	<body>
 		<Header />
-		<main class="site-shell py-6 sm:py-14">
-			<section class="relative overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] px-4 py-8 shadow-[var(--shadow)] sm:rounded-[28px] sm:px-10 sm:py-14">
+		<main class="site-shell py-6 sm:py-12">
+			<section class="panel relative px-4 py-8 sm:px-10 sm:py-12">
 				<div
-					class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[var(--accent-soft)] blur-2xl"
+					class="pointer-events-none absolute -right-10 top-0 h-64 w-64 rounded-full bg-[color-mix(in_srgb,var(--accent)_18%,transparent)] blur-3xl"
 					aria-hidden="true"
 				></div>
-				<p class="relative m-0 text-xs font-semibold tracking-[0.16em] text-[var(--accent)] uppercase sm:text-sm sm:tracking-[0.18em]">
-					Personal Blog
-				</p>
-				<h1 class="relative mt-3 mb-3 text-3xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">
+				<div class="relative flex flex-wrap gap-2">
+					<span class="chip"><span class="chip-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
+					<span class="chip">ASTRO · MD</span>
+					<span class="chip">PAGES</span>
+				</div>
+				<p class="hud-label relative mt-5 mb-0">Signal / Personal Blog</p>
+				<h1 class="relative mt-2 mb-3 text-3xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">
 					{SITE_TITLE}
+					<span class="text-[var(--accent)]">_</span>
 				</h1>
-				<p class="relative m-0 max-w-2xl text-base text-[var(--muted)] sm:text-lg">{SITE_DESCRIPTION}</p>
-				<div class="relative mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap">
-					<a
-						href="/blog"
-						class="inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white no-underline shadow-sm transition hover:opacity-90"
-					>
-						浏览文章
-					</a>
-					<a
-						href="/about"
-						class="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--bg)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] no-underline"
-					>
-						关于我
-					</a>
+				<p class="relative m-0 max-w-2xl text-base text-[var(--muted)] sm:text-lg">
+					{SITE_DESCRIPTION} · 赛博笔记终端，工程与折腾记录。
+				</p>
+				<div class="relative mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+					<a href="/blog" class="btn-cyber btn-cyber-primary">进入文章流</a>
+					<a href="/about" class="btn-cyber btn-cyber-ghost">关于节点</a>
 				</div>
 			</section>
 
-			<section class="mt-12">
-				<div class="mb-5 flex items-end justify-between gap-3">
-					<h2 class="m-0 text-2xl font-bold text-[var(--ink)]">最近更新</h2>
-					<a href="/blog" class="text-sm font-semibold no-underline">全部文章 →</a>
+			<section class="mt-8 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-3">
+				<div class="panel px-4 py-4">
+					<p class="hud-label m-0">Latency</p>
+					<p class="mono mt-2 mb-0 text-2xl font-bold text-[var(--ink)]">LOW</p>
 				</div>
-				<ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2">
+				<div class="panel px-4 py-4">
+					<p class="hud-label m-0">Posts</p>
+					<p class="mono mt-2 mb-0 text-2xl font-bold text-[var(--ink)]">{String(posts.length).padStart(2, '0')}</p>
+				</div>
+				<div class="panel px-4 py-4">
+					<p class="hud-label m-0">Stack</p>
+					<p class="mono mt-2 mb-0 text-sm font-bold text-[var(--ink)]">Astro / Tailwind / Giscus</p>
+				</div>
+			</section>
+
+			<section class="mt-10 sm:mt-12">
+				<div class="mb-5 flex items-end justify-between gap-3">
+					<div>
+						<p class="hud-label m-0">Feed</p>
+						<h2 class="mt-1 mb-0 text-xl font-bold text-[var(--ink)] sm:text-2xl">最近更新</h2>
+					</div>
+					<a href="/blog" class="mono text-xs font-semibold no-underline sm:text-sm">VIEW_ALL →</a>
+				</div>
+				<ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
 					{
 						posts.map((post, index) => (
-							<li class:list={['card overflow-hidden', index === 0 && 'md:col-span-2']}>
+							<li class:list={['card', index === 0 && 'md:col-span-2']}>
 								<a href={`/blog/${post.id}/`} class="block no-underline">
 									{post.data.heroImage && (
 										<Image
-											class="h-48 w-full object-cover md:h-56"
+											class:list={[
+												'w-full object-cover opacity-95',
+												index === 0 ? 'h-52 sm:h-64' : 'h-40',
+											]}
 											width={index === 0 ? 1200 : 720}
-											height={index === 0 ? 480 : 360}
+											height={index === 0 ? 520 : 360}
 											src={post.data.heroImage}
 											alt=""
 										/>
 									)}
-									<div class="p-5">
-										<p class="m-0 text-sm text-[var(--muted)]">
+									<div class="p-4 sm:p-5">
+										<p class="mono m-0 text-xs text-[var(--accent)]">
 											<FormattedDate date={post.data.pubDate} />
 										</p>
-										<h3 class="mt-2 mb-2 text-xl font-bold text-[var(--ink)]">{post.data.title}</h3>
-										<p class="m-0 text-[var(--muted)]">{post.data.description}</p>
+										<h3 class="mt-2 mb-2 text-lg font-bold text-[var(--ink)] sm:text-xl">{post.data.title}</h3>
+										<p class="m-0 text-sm text-[var(--muted)] sm:text-base">{post.data.description}</p>
 									</div>
 								</a>
 							</li>

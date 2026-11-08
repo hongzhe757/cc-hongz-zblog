@@ -1,6 +1,38 @@
-/* 皮肤：通过 html[data-skin] + .dark 组合切换 */
+/* 皮肤：html[data-skin] + .dark */
 
 :root,
+html[data-skin='cyber'] {
+	--bg: #e8f4f7;
+	--bg-elevated: #f4fbfd;
+	--ink: #06202a;
+	--muted: #4a6a75;
+	--line: #b7d5de;
+	--accent: #0891b2;
+	--accent-2: #db2777;
+	--accent-soft: #cffafe;
+	--glow: 0 0 24px color-mix(in srgb, var(--accent) 28%, transparent);
+	--shadow: 0 16px 40px rgba(6, 32, 42, 0.1);
+	--radius: 12px;
+	--font-mono: "Cascadia Code", "JetBrains Mono", Consolas, ui-monospace, monospace;
+	color-scheme: light;
+}
+
+html.dark,
+html.dark[data-skin='cyber'] {
+	--bg: #05070d;
+	--bg-elevated: #0b1220;
+	--ink: #e6f7ff;
+	--muted: #7f9aab;
+	--line: #1c3344;
+	--accent: #22d3ee;
+	--accent-2: #f472b6;
+	--accent-soft: #0d2a36;
+	--glow: 0 0 28px color-mix(in srgb, var(--accent) 35%, transparent);
+	--shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+	--radius: 12px;
+	color-scheme: dark;
+}
+
 html[data-skin='navy'] {
 	--bg: #eef1f6;
 	--bg-elevated: #ffffff;
@@ -8,13 +40,14 @@ html[data-skin='navy'] {
 	--muted: #5b6472;
 	--line: #d7dde8;
 	--accent: #1d4ed8;
+	--accent-2: #6366f1;
 	--accent-soft: #dbe7ff;
+	--glow: 0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
 	--shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-	--radius: 16px;
+	--radius: 12px;
 	color-scheme: light;
 }
 
-html.dark,
 html.dark[data-skin='navy'] {
 	--bg: #0b1220;
 	--bg-elevated: #121a2b;
@@ -22,12 +55,13 @@ html.dark[data-skin='navy'] {
 	--muted: #9aa6bd;
 	--line: #243149;
 	--accent: #7aa2ff;
+	--accent-2: #a78bfa;
 	--accent-soft: #1a2740;
+	--glow: 0 0 24px color-mix(in srgb, var(--accent) 30%, transparent);
 	--shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 	color-scheme: dark;
 }
 
-/* 黑红：偏暗底 + 猩红点缀 */
 html[data-skin='noir-red'] {
 	--bg: #f6f1f1;
 	--bg-elevated: #fffafa;
@@ -35,8 +69,11 @@ html[data-skin='noir-red'] {
 	--muted: #6b5656;
 	--line: #e4d4d4;
 	--accent: #b91c1c;
+	--accent-2: #ea580c;
 	--accent-soft: #fde2e2;
+	--glow: 0 0 22px color-mix(in srgb, var(--accent) 25%, transparent);
 	--shadow: 0 18px 40px rgba(40, 10, 10, 0.08);
+	--radius: 12px;
 	color-scheme: light;
 }
 
@@ -47,12 +84,13 @@ html.dark[data-skin='noir-red'] {
 	--muted: #b39a9a;
 	--line: #3a2424;
 	--accent: #ef4444;
+	--accent-2: #fb923c;
 	--accent-soft: #3a1515;
+	--glow: 0 0 26px color-mix(in srgb, var(--accent) 35%, transparent);
 	--shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 	color-scheme: dark;
 }
 
-/* 墨金 / 琥珀 */
 html[data-skin='amber'] {
 	--bg: #f5f1e8;
 	--bg-elevated: #fffcf5;
@@ -60,8 +98,11 @@ html[data-skin='amber'] {
 	--muted: #6b614f;
 	--line: #e2d8c4;
 	--accent: #b45309;
+	--accent-2: #ca8a04;
 	--accent-soft: #fde8c8;
+	--glow: 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent);
 	--shadow: 0 18px 40px rgba(40, 28, 8, 0.08);
+	--radius: 12px;
 	color-scheme: light;
 }
 
@@ -72,12 +113,13 @@ html.dark[data-skin='amber'] {
 	--muted: #b3a58c;
 	--line: #3a3020;
 	--accent: #f59e0b;
+	--accent-2: #fbbf24;
 	--accent-soft: #3a2a12;
+	--glow: 0 0 24px color-mix(in srgb, var(--accent) 30%, transparent);
 	--shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
 	color-scheme: dark;
 }
 
-/* 黑白灰 */
 html[data-skin='mono'] {
 	--bg: #f3f3f3;
 	--bg-elevated: #ffffff;
@@ -85,8 +127,11 @@ html[data-skin='mono'] {
 	--muted: #666666;
 	--line: #dddddd;
 	--accent: #222222;
+	--accent-2: #555555;
 	--accent-soft: #ececec;
+	--glow: none;
 	--shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+	--radius: 10px;
 	color-scheme: light;
 }
 
@@ -97,12 +142,13 @@ html.dark[data-skin='mono'] {
 	--muted: #a0a0a0;
 	--line: #2e2e2e;
 	--accent: #e5e5e5;
+	--accent-2: #a3a3a3;
 	--accent-soft: #262626;
+	--glow: none;
 	--shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 	color-scheme: dark;
 }
 
-/* 青石 / 青绿偏冷（非草绿） */
 html[data-skin='slate'] {
 	--bg: #eef3f3;
 	--bg-elevated: #ffffff;
@@ -110,8 +156,11 @@ html[data-skin='slate'] {
 	--muted: #5a6c6e;
 	--line: #d2dedf;
 	--accent: #0e7490;
+	--accent-2: #14b8a6;
 	--accent-soft: #cffafe;
+	--glow: 0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
 	--shadow: 0 18px 40px rgba(12, 30, 32, 0.08);
+	--radius: 12px;
 	color-scheme: light;
 }
 
@@ -122,7 +171,9 @@ html.dark[data-skin='slate'] {
 	--muted: #93b0b4;
 	--line: #1f3438;
 	--accent: #22d3ee;
+	--accent-2: #2dd4bf;
 	--accent-soft: #123038;
+	--glow: 0 0 24px color-mix(in srgb, var(--accent) 30%, transparent);
 	--shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
 	color-scheme: dark;
 }
