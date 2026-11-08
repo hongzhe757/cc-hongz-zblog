@@ -107,6 +107,33 @@ const skins = [
 			});
 		}
 
+		function notifyAppearance(mode, skin) {
+			try {
+				window.dispatchEvent(
+					new CustomEvent('blog:appearance', {
+						detail: { mode, skin },
+					}),
+				);
+			} catch (_) {}
+			if (typeof window.__blogSyncGiscus === 'function') {
+				window.__blogSyncGiscus(mode);
+			} else {
+				const frame = document.querySelector('iframe.giscus-frame');
+				if (frame && frame.contentWindow) {
+					frame.contentWindow.postMessage(
+						{
+							giscus: {
+								setConfig: {
+									theme: mode === 'dark' ? 'noborder_dark' : 'noborder_light',
+								},
+							},
+						},
+						'https://giscus.app',
+					);
+				}
+			}
+		}
+
 		function applyMode(mode) {
 			const next = mode === 'dark' ? 'dark' : 'light';
 			root.classList.toggle('dark', next === 'dark');
@@ -115,13 +142,7 @@ const skins = [
 			} catch (_) {}
 			const skin = root.getAttribute('data-skin') || 'paper';
 			syncUi(next, skin);
-			const frame = document.querySelector('iframe.giscus-frame');
-			if (frame && frame.contentWindow) {
-				frame.contentWindow.postMessage(
-					{ giscus: { setConfig: { theme: next === 'dark' ? 'dark' : 'light' } } },
-					'https://giscus.app',
-				);
-			}
+			notifyAppearance(next, skin);
 		}
 
 		function applySkin(skin) {
@@ -133,6 +154,7 @@ const skins = [
 			} catch (_) {}
 			const mode = root.classList.contains('dark') ? 'dark' : 'light';
 			syncUi(mode, next);
+			notifyAppearance(mode, next);
 		}
 
 		function boot() {

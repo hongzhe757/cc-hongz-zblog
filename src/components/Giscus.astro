@@ -4,50 +4,109 @@ import { GISCUS } from '../consts';
 const ready = Boolean(GISCUS.repoId && GISCUS.categoryId);
 ---
 
-<section class="mt-12 border-t border-[var(--line)] pt-8">
+<section class="giscus-wrap mt-12 border-t border-[var(--line)] pt-8">
 	<h2 class="mb-4 text-xl font-bold text-[var(--ink)]">评论</h2>
 	{
 		ready ? (
-			<script
-				is:inline
-				src="https://giscus.app/client.js"
-				data-repo={GISCUS.repo}
-				data-repo-id={GISCUS.repoId}
-				data-category={GISCUS.category}
-				data-category-id={GISCUS.categoryId}
-				data-mapping={GISCUS.mapping}
-				data-strict={GISCUS.strict}
-				data-reactions-enabled={GISCUS.reactionsEnabled}
-				data-emit-metadata={GISCUS.emitMetadata}
-				data-input-position={GISCUS.inputPosition}
-				data-theme={GISCUS.theme}
-				data-lang={GISCUS.lang}
-				data-loading="lazy"
-				crossorigin="anonymous"
-				async
-			/>
+			<div class="giscus-panel">
+				<div class="giscus" />
+				<script is:inline define:vars={{ GISCUS }}>
+					(function () {
+						function siteMode() {
+							try {
+								if (document.documentElement.classList.contains('dark')) return 'dark';
+								return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+							} catch (_) {
+								return 'light';
+							}
+						}
+
+						function giscusTheme(mode) {
+							// noborder_* 更贴合站点底色，避免评论区硬白/硬黑块
+							return mode === 'dark' ? 'noborder_dark' : 'noborder_light';
+						}
+
+						function syncGiscus(mode) {
+							const theme = giscusTheme(mode || siteMode());
+							const frame = document.querySelector('iframe.giscus-frame');
+							if (frame && frame.contentWindow) {
+								frame.contentWindow.postMessage(
+									{ giscus: { setConfig: { theme } } },
+									'https://giscus.app',
+								);
+							}
+							const mount = document.querySelector('.giscus-panel .giscus');
+							if (mount) mount.setAttribute('data-theme', theme);
+						}
+
+						window.__blogSyncGiscus = syncGiscus;
+
+						const host = document.currentScript && document.currentScript.parentElement;
+						if (!host) return;
+						const mount = host.querySelector('.giscus') || host;
+
+						const s = document.createElement('script');
+						s.src = 'https://giscus.app/client.js';
+						s.async = true;
+						s.crossOrigin = 'anonymous';
+						s.setAttribute('data-repo', GISCUS.repo);
+						s.setAttribute('data-repo-id', GISCUS.repoId);
+						s.setAttribute('data-category', GISCUS.category);
+						s.setAttribute('data-category-id', GISCUS.categoryId);
+						s.setAttribute('data-mapping', GISCUS.mapping);
+						s.setAttribute('data-strict', GISCUS.strict);
+						s.setAttribute('data-reactions-enabled', GISCUS.reactionsEnabled);
+						s.setAttribute('data-emit-metadata', GISCUS.emitMetadata);
+						s.setAttribute('data-input-position', GISCUS.inputPosition);
+						s.setAttribute('data-theme', giscusTheme(siteMode()));
+						s.setAttribute('data-lang', GISCUS.lang);
+						s.setAttribute('data-loading', 'lazy');
+						mount.appendChild(s);
+
+						window.addEventListener('blog:appearance', function (ev) {
+							const mode = (ev && ev.detail && ev.detail.mode) || siteMode();
+							syncGiscus(mode);
+						});
+
+						// iframe 晚到时再同步一次
+						const obs = new MutationObserver(function () {
+							if (document.querySelector('iframe.giscus-frame')) {
+								syncGiscus(siteMode());
+								obs.disconnect();
+							}
+						});
+						obs.observe(mount, { childList: true, subtree: true });
+					})();
+				</script>
+			</div>
 		) : (
 			<div class="rounded-[var(--radius)] border border-dashed border-[var(--line)] bg-[var(--bg-elevated)] p-5 text-[var(--muted)]">
 				<p class="m-0">
-					评论使用 <strong>Giscus</strong>（GitHub 登录）。请先：
+					评论使用 <strong>Giscus</strong>（GitHub 登录）。请先配置 <code>src/consts.ts</code> 中的{' '}
+					<code>GISCUS</code>。
 				</p>
-				<ol class="mt-3 mb-0">
-					<li>
-						打开仓库 <strong>Settings → General → Features</strong>，勾选 <code>Discussions</code>
-					</li>
-					<li>
-						打开{' '}
-						<a href="https://giscus.app/zh" target="_blank" rel="noreferrer">
-							giscus.app/zh
-						</a>
-						，选仓库 <code>{GISCUS.repo}</code>，生成配置
-					</li>
-					<li>
-						把 <code>repoId</code> / <code>categoryId</code> 填进{' '}
-						<code>src/consts.ts</code> 的 <code>GISCUS</code>
-					</li>
-				</ol>
 			</div>
 		)
 	}
 </section>
+
+<style>
+	.giscus-panel {
+		padding: 0.85rem 0.9rem 0.4rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow);
+		color-scheme: light;
+		overflow: hidden;
+	}
+	:global(html.dark) .giscus-panel {
+		color-scheme: dark;
+	}
+	.giscus-panel :global(.giscus),
+	.giscus-panel :global(.giscus-frame) {
+		width: 100%;
+		max-width: 100% !important;
+		color-scheme: inherit;
+	}
+</style>

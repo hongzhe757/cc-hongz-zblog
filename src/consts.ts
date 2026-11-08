@@ -13,6 +13,7 @@ export const GISCUS = {
 	reactionsEnabled: '1',
 	emitMetadata: '0',
 	inputPosition: 'top',
-	theme: 'preferred_color_scheme',
+	/** 实际主题由页面脚本按站点明暗同步为 noborder_light / noborder_dark */
+	theme: 'noborder_light',
 	lang: 'zh-CN',
 } as const;
