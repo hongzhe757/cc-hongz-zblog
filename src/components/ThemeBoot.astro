@@ -7,21 +7,25 @@
 		try {
 			const root = document.documentElement;
 			const legacy = {
-				cyber: 'paper',
-				ink: 'paper',
-				ocean: 'mist',
-				navy: 'mist',
-				forest: 'olive',
-				slate: 'olive',
-				cinnabar: 'paper',
-				amber: 'paper',
-				'noir-red': 'paper',
+				paper: 'studio',
+				mist: 'studio',
+				olive: 'orchard',
+				mono: 'carbon',
+				cyber: 'studio',
+				ink: 'studio',
+				ocean: 'studio',
+				navy: 'studio',
+				forest: 'orchard',
+				slate: 'studio',
+				cinnabar: 'studio',
+				amber: 'studio',
+				'noir-red': 'carbon',
 			};
-			const valid = ['paper', 'mist', 'olive', 'mono'];
+			const valid = ['studio', 'orchard', 'carbon'];
 			let mode = localStorage.getItem('theme') || 'light';
-			let skin = localStorage.getItem('blog-skin') || 'paper';
+			let skin = localStorage.getItem('blog-skin') || 'studio';
 			if (legacy[skin]) skin = legacy[skin];
-			if (valid.indexOf(skin) === -1) skin = 'paper';
+			if (valid.indexOf(skin) === -1) skin = 'studio';
 			localStorage.setItem('blog-skin', skin);
 			root.classList.toggle('dark', mode === 'dark');
 			root.setAttribute('data-skin', skin);

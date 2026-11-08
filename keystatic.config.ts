@@ -16,7 +16,7 @@ export default config({
 		blog: collection({
 			label: '博客文章',
 			slugField: 'title',
-			path: 'src/content/blog/*',
+			path: 'src/content/blog/*/*',
 			format: { contentField: 'content' },
 			schema: {
 				title: fields.slug({ name: { label: '标题' } }),
@@ -31,10 +31,20 @@ export default config({
 				updatedDate: fields.date({
 					label: '更新日期',
 				}),
+				category: fields.select({
+					label: '分类',
+					options: [
+						{ label: 'ztools', value: 'ztools' },
+						{ label: '工程', value: 'engineering' },
+						{ label: '架构', value: 'architecture' },
+						{ label: '随笔', value: 'journal' },
+					],
+					defaultValue: 'journal',
+				}),
 				heroImage: fields.image({
 					label: '封面图',
 					directory: 'src/assets/blog',
-					publicPath: '../../assets/blog/',
+					publicPath: '../../../assets/blog/',
 				}),
 				tags: fields.array(fields.text({ label: '标签' }), {
 					label: '标签',
@@ -45,7 +55,7 @@ export default config({
 					options: {
 						image: {
 							directory: 'src/assets/blog',
-							publicPath: '../../assets/blog/',
+							publicPath: '../../../assets/blog/',
 						},
 					},
 				}),

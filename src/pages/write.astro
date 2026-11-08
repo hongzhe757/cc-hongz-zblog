@@ -7,8 +7,6 @@ import { SITE_LANG, SITE_TITLE } from '../consts';
 const repo = 'hongzhe757/cc-hongz-zblog';
 const branch = 'main';
 const contentDir = 'src/content/blog';
-const newFileBase = `https://github.com/${repo}/new/${branch}/${contentDir}`;
-const editBase = `https://github.com/${repo}/edit/${branch}/${contentDir}`;
 const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 ---
 
@@ -49,6 +47,16 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 						<input id="f-date" name="pubDate" type="date" required />
 					</label>
 					<label class="field">
+						<span>分类</span>
+						<select id="f-category" name="category">
+							<option value="ztools">ztools</option>
+							<option value="engineering">工程</option>
+							<option value="architecture">架构</option>
+							<option value="journal" selected>随笔</option>
+						</select>
+						<small>文件会放到对应分类目录：src/content/blog/分类/</small>
+					</label>
+					<label class="field">
 						<span>标签</span>
 						<input id="f-tags" name="tags" type="text" placeholder="ztools, 网络, 架构（逗号分隔）" />
 						<small>会出现在文章页，并进入知识图谱（类似 Obsidian Graph）</small>
@@ -63,7 +71,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 						<a
 							id="btn-github"
 							class="btn-cyber btn-cyber-ghost"
-							href={newFileBase}
+							href={`https://github.com/${repo}/new/${branch}/${contentDir}/journal`}
 							target="_blank"
 							rel="noreferrer"
 						>
@@ -91,7 +99,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 	</body>
 </html>
 
-<script is:inline define:vars={{ newFileBase, editBase }}>
+<script is:inline define:vars={{ repo, branch, contentDir }}>
 	(function () {
 		const titleEl = document.getElementById('f-title');
 		const slugEl = document.getElementById('f-slug');
@@ -99,6 +107,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 		const dateEl = document.getElementById('f-date');
 		const bodyEl = document.getElementById('f-body');
 		const tagsEl = document.getElementById('f-tags');
+		const categoryEl = document.getElementById('f-category');
 		const hint = document.getElementById('write-hint');
 		const btnCopy = document.getElementById('btn-copy');
 		const btnGithub = document.getElementById('btn-github');
@@ -149,6 +158,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 			const description = (descEl.value || '').trim() || title;
 			const pubDate = formatPubDate(dateEl.value || todayInput());
 			const body = (bodyEl.value || '').trim() || '在这里写正文。';
+			const category = categoryEl.value || 'journal';
 			const tags = parseTags();
 			const tagLine = tags.length
 				? `tags: [${tags.map((t) => JSON.stringify(t)).join(', ')}]`
@@ -158,7 +168,8 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 				`title: '${escapeYaml(title)}'`,
 				`description: '${escapeYaml(description)}'`,
 				`pubDate: '${pubDate}'`,
-				`heroImage: '../../assets/blog-placeholder-1.jpg'`,
+				`heroImage: '../../../assets/blog-placeholder-1.jpg'`,
+				`category: '${category}'`,
 				tagLine,
 				'---',
 				'',
@@ -173,8 +184,9 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 
 		function syncGithubHref() {
 			const slug = currentSlug();
+			const category = categoryEl.value || 'journal';
 			slugEl.value = slug;
-			btnGithub.href = `${newFileBase}?filename=${encodeURIComponent(slug + '.md')}`;
+			btnGithub.href = `https://github.com/${repo}/new/${branch}/${contentDir}/${category}?filename=${encodeURIComponent(slug + '.md')}`;
 		}
 
 		function showHint(text, ok) {
@@ -196,6 +208,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 			slugTouched = true;
 			syncGithubHref();
 		});
+		categoryEl.addEventListener('change', syncGithubHref);
 
 		btnCopy.addEventListener('click', async () => {
 			syncGithubHref();
@@ -260,7 +273,8 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 	}
 
 	.field input,
-	.field textarea {
+	.field textarea,
+	.field select {
 		width: 100%;
 		box-sizing: border-box;
 		padding: 0.7rem 0.8rem;

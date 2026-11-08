@@ -1,16 +1,20 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
+import CategoryBadge from '../../components/CategoryBadge.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import TagList from '../../components/TagList.astro';
+import { CATEGORIES, CATEGORY_IDS } from '../../consts/categories';
 import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../../consts';
+import { getAllPosts } from '../../lib/tags';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = await getAllPosts();
+const grouped = CATEGORY_IDS.map((id) => ({
+	meta: CATEGORIES[id],
+	posts: posts.filter((p) => p.data.category === id),
+})).filter((g) => g.posts.length > 0);
 ---
 
 <!doctype html>
@@ -23,39 +27,99 @@ const posts = (await getCollection('blog')).sort(
 		<main class="site-shell py-8 sm:py-14">
 			<header class="mb-6 max-w-2xl sm:mb-10">
 				<p class="m-0 text-sm text-[var(--muted)]">文章</p>
-				<h1 class="mt-2 mb-2 text-2xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
+				<h1 class="mt-2 mb-2 text-2xl font-bold text-[var(--ink)] sm:text-4xl">按分类浏览</h1>
 				<p class="m-0 text-sm text-[var(--muted)]">
-					按发布时间排序 · <a href="/tags/">标签</a> · <a href="/graph/">知识图谱</a>
+					共 {posts.length} 篇 · <a href="/tags/">标签</a> · <a href="/graph/">知识图谱</a>
 				</p>
-			</header>
-			<ul class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-4 md:grid-cols-2">
-				{
-					posts.map((post) => (
-						<li class="card">
-							<a href={`/blog/${post.id}/`} class="block no-underline">
-								{post.data.heroImage && (
-									<Image
-										class="h-36 w-full object-cover sm:h-44"
-										width={720}
-										height={360}
-										src={post.data.heroImage}
-										alt=""
-									/>
-								)}
-								<div class="p-3.5 sm:p-5">
-									<p class="mono m-0 text-[0.7rem] text-[var(--accent)] sm:text-xs">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-									<h2 class="mt-1.5 mb-1.5 text-base font-bold text-[var(--ink)] sm:text-xl">{post.data.title}</h2>
-									<p class="m-0 mb-2.5 text-sm text-[var(--muted)]">{post.data.description}</p>
-									<TagList tags={post.data.tags} />
-								</div>
+				<nav class="mt-4 flex flex-wrap gap-2">
+					{
+						grouped.map((g) => (
+							<a class="cat-jump" href={`#cat-${g.meta.id}`}>
+								{g.meta.label}
+								<span>{g.posts.length}</span>
 							</a>
-						</li>
-					))
-				}
-			</ul>
+						))
+					}
+				</nav>
+			</header>
+
+			{
+				grouped.map((g) => (
+					<section id={`cat-${g.meta.id}`} class="cat-section">
+						<div class="mb-4 flex items-end justify-between gap-3">
+							<div>
+								<h2 class="m-0 text-xl font-bold text-[var(--ink)] sm:text-2xl">{g.meta.label}</h2>
+								<p class="m-0 mt-1 text-sm text-[var(--muted)]">{g.meta.description}</p>
+							</div>
+							<a class="text-sm text-[var(--accent)] no-underline" href={`/category/${g.meta.id}/`}>
+								只看此类 →
+							</a>
+						</div>
+						<ul class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-4 md:grid-cols-2">
+							{g.posts.map((post) => (
+								<li class="card">
+									<a href={`/blog/${post.id}/`} class="block no-underline">
+										{post.data.heroImage && (
+											<Image
+												class="h-36 w-full object-cover sm:h-44"
+												width={720}
+												height={360}
+												src={post.data.heroImage}
+												alt=""
+											/>
+										)}
+										<div class="p-3.5 sm:p-5">
+											<div class="mb-2 flex flex-wrap items-center gap-2">
+												<CategoryBadge category={post.data.category} />
+												<p class="mono m-0 text-[0.7rem] text-[var(--accent)] sm:text-xs">
+													<FormattedDate date={post.data.pubDate} />
+												</p>
+											</div>
+											<h3 class="mt-0 mb-1.5 text-base font-bold text-[var(--ink)] sm:text-xl">{post.data.title}</h3>
+											<p class="m-0 mb-2.5 text-sm text-[var(--muted)]">{post.data.description}</p>
+											<TagList tags={post.data.tags} />
+										</div>
+									</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				))
+			}
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.cat-jump {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.35rem 0.7rem;
+		border-radius: 999px;
+		border: 1px solid var(--line);
+		background: var(--bg-elevated);
+		color: var(--ink);
+		font-size: 0.82rem;
+		text-decoration: none;
+	}
+	.cat-jump span {
+		color: var(--muted);
+		font-variant-numeric: tabular-nums;
+	}
+	.cat-jump:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+		filter: none;
+	}
+	.cat-section {
+		margin-top: 2.25rem;
+		padding-top: 0.25rem;
+	}
+	.cat-section + .cat-section {
+		margin-top: 2.75rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--line);
+	}
+</style>

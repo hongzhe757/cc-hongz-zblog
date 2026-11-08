@@ -1,0 +1,35 @@
+---
+import { categoryLabel, isCategoryId } from '../consts/categories';
+
+interface Props {
+	category?: string;
+	class?: string;
+}
+
+const { category = 'journal', class: className = '' } = Astro.props;
+const label = categoryLabel(category);
+const href = isCategoryId(category) ? `/category/${category}/` : '/blog/';
+---
+
+<a class:list={['cat-badge', className]} href={href}>{label}</a>
+
+<style>
+	.cat-badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.12rem 0.55rem;
+		border-radius: 999px;
+		border: 1px solid var(--line);
+		background: var(--bg);
+		color: var(--ink);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		text-decoration: none;
+	}
+	.cat-badge:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+		filter: none;
+	}
+</style>

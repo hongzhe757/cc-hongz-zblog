@@ -4,12 +4,24 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import CategoryBadge from '../components/CategoryBadge.astro';
 import Header from '../components/Header.astro';
+import TagList from '../components/TagList.astro';
+import { CATEGORIES, CATEGORY_IDS } from '../consts/categories';
 import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 6);
+
+const categoryCounts = CATEGORY_IDS.map((id) => ({
+	...CATEGORIES[id],
+	count: 0,
+}));
+for (const post of await getCollection('blog')) {
+	const row = categoryCounts.find((c) => c.id === post.data.category);
+	if (row) row.count += 1;
+}
 ---
 
 <!doctype html>
@@ -31,13 +43,26 @@ const posts = (await getCollection('blog'))
 				<div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:gap-3">
 					<a href="/blog" class="btn-cyber btn-cyber-primary">阅读文章</a>
 					<a href="/about" class="btn-cyber btn-cyber-ghost">关于我</a>
+					<a href="/graph" class="btn-cyber btn-cyber-ghost">知识图谱</a>
 				</div>
+				<nav class="mt-5 flex flex-wrap gap-2">
+					{
+						categoryCounts
+							.filter((c) => c.count > 0)
+							.map((c) => (
+								<a class="home-cat" href={`/category/${c.id}/`}>
+									{c.label}
+									<span>{c.count}</span>
+								</a>
+							))
+					}
+				</nav>
 			</section>
 
 			<section class="mt-12 sm:mt-16">
 				<div class="mb-5 flex items-end justify-between gap-3">
 					<h2 class="m-0 text-xl font-bold text-[var(--ink)] sm:text-2xl">最近更新</h2>
-					<a href="/blog" class="text-sm font-medium text-[var(--accent)] no-underline">全部文章 →</a>
+					<a href="/blog" class="text-sm font-medium text-[var(--accent)] no-underline">全部分类 →</a>
 				</div>
 				<ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
 					{
@@ -57,13 +82,17 @@ const posts = (await getCollection('blog'))
 										/>
 									)}
 									<div class="p-4 sm:p-5">
-										<p class="m-0 text-xs text-[var(--muted)]">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
-										<h3 class="mt-2 mb-1.5 text-lg font-bold text-[var(--ink)] sm:text-xl">
+										<div class="mb-2 flex flex-wrap items-center gap-2">
+											<CategoryBadge category={post.data.category} />
+											<p class="m-0 text-xs text-[var(--muted)]">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+										</div>
+										<h3 class="mt-0 mb-1.5 text-lg font-bold text-[var(--ink)] sm:text-xl">
 											{post.data.title}
 										</h3>
-										<p class="m-0 text-sm text-[var(--muted)]">{post.data.description}</p>
+										<p class="m-0 mb-2.5 text-sm text-[var(--muted)]">{post.data.description}</p>
+										<TagList tags={post.data.tags} />
 									</div>
 								</a>
 							</li>
@@ -71,6 +100,31 @@ const posts = (await getCollection('blog'))
 					}
 				</ul>
 			</section>
+
+			<style>
+				.home-cat {
+					display: inline-flex;
+					align-items: center;
+					gap: 0.35rem;
+					padding: 0.35rem 0.7rem;
+					border-radius: 999px;
+					border: 1px solid var(--line);
+					background: var(--bg-elevated);
+					color: var(--ink);
+					font-size: 0.82rem;
+					text-decoration: none;
+					box-shadow: var(--shadow);
+				}
+				.home-cat span {
+					color: var(--muted);
+					font-variant-numeric: tabular-nums;
+				}
+				.home-cat:hover {
+					border-color: var(--accent);
+					color: var(--accent);
+					filter: none;
+				}
+			</style>
 		</main>
 		<Footer />
 	</body>

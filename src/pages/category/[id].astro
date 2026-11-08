@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import BaseHead from '../../components/BaseHead.astro';
+import CategoryBadge from '../../components/CategoryBadge.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import TagList from '../../components/TagList.astro';
+import { CATEGORIES, CATEGORY_IDS, type CategoryId } from '../../consts/categories';
+import { SITE_LANG, SITE_TITLE } from '../../consts';
+import { getAllPosts } from '../../lib/tags';
+
+export function getStaticPaths() {
+	return CATEGORY_IDS.map((id) => ({ params: { id } }));
+}
+
+const id = Astro.params.id as CategoryId;
+const meta = CATEGORIES[id];
+const posts = (await getAllPosts()).filter((p) => p.data.category === id);
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`${meta.label} · ${SITE_TITLE}`} description={meta.description} />
+	</head>
+	<body>
+		<Header />
+		<main class="site-shell py-8 sm:py-14">
+			<header class="mb-6 max-w-2xl sm:mb-10">
+				<p class="m-0 text-sm text-[var(--muted)]">
+					<a href="/blog/" class="no-underline">文章</a> / 分类
+				</p>
+				<h1 class="mt-2 mb-2 text-2xl font-bold text-[var(--ink)] sm:text-4xl">{meta.label}</h1>
+				<p class="m-0 text-sm text-[var(--muted)]">{meta.description} · {posts.length} 篇</p>
+			</header>
+			{
+				posts.length === 0 ? (
+					<p class="text-[var(--muted)]">该分类暂无文章。</p>
+				) : (
+					<ul class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-4 md:grid-cols-2">
+						{posts.map((post) => (
+							<li class="card">
+								<a href={`/blog/${post.id}/`} class="block no-underline">
+									{post.data.heroImage && (
+										<Image
+											class="h-36 w-full object-cover sm:h-44"
+											width={720}
+											height={360}
+											src={post.data.heroImage}
+											alt=""
+										/>
+									)}
+									<div class="p-3.5 sm:p-5">
+										<div class="mb-2 flex flex-wrap items-center gap-2">
+											<CategoryBadge category={post.data.category} />
+											<p class="mono m-0 text-[0.7rem] text-[var(--accent)] sm:text-xs">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+										</div>
+										<h2 class="mt-0 mb-1.5 text-base font-bold text-[var(--ink)] sm:text-xl">{post.data.title}</h2>
+										<p class="m-0 mb-2.5 text-sm text-[var(--muted)]">{post.data.description}</p>
+										<TagList tags={post.data.tags} />
+									</div>
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</main>
+		<Footer />
+	</body>
+</html>

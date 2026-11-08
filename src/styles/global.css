@@ -22,24 +22,24 @@ body {
 	font-family: var(--font-atkinson), "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 	color: var(--ink);
 	background-color: var(--bg);
-	background-image: radial-gradient(720px 360px at 12% -8%, var(--page-tint, transparent), transparent 62%);
+	background-image: var(--surface-glow, none);
 	background-attachment: scroll;
 	line-height: 1.65;
 	font-size: 16px;
+	letter-spacing: -0.01em;
 	word-wrap: break-word;
 	overflow-wrap: anywhere;
 	overflow-x: hidden;
 	padding-left: env(safe-area-inset-left, 0px);
 	padding-right: env(safe-area-inset-right, 0px);
 	-webkit-tap-highlight-color: transparent;
-	transition: background-color 0.2s ease, color 0.2s ease;
+	transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 @media (min-width: 640px) {
 	body {
 		font-size: 17px;
 		overflow-wrap: break-word;
-		background-image: radial-gradient(900px 420px at 8% -12%, var(--page-tint, transparent), transparent 60%);
 	}
 }
 
@@ -205,12 +205,13 @@ iframe {
 	align-items: center;
 	justify-content: center;
 	padding: 0.7rem 1.15rem;
-	border-radius: 8px;
+	border-radius: calc(var(--radius) - 4px);
 	font-size: 0.92rem;
 	font-weight: 700;
+	letter-spacing: 0.01em;
 	text-decoration: none;
 	border: 1px solid transparent;
-	transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+	transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 @media (min-width: 640px) {
