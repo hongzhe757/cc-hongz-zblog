@@ -1,25 +1,26 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import SkinSettings from './SkinSettings.astro';
 ---
 
-<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--bg-elevated)_82%,transparent)] backdrop-blur-md">
-	<nav class="site-shell flex items-center justify-between gap-4 py-3">
-		<a href="/" class="group flex items-baseline gap-2 no-underline">
-			<span class="text-xl font-bold tracking-wide text-[var(--ink)] group-hover:text-[var(--accent)]">
+<header class="site-header sticky top-0 z-40 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--bg-elevated)_88%,transparent)] backdrop-blur-md">
+	<nav class="site-shell flex items-center justify-between gap-2 py-2.5 sm:py-3">
+		<a href="/" class="group min-w-0 flex items-baseline gap-2 no-underline">
+			<span class="truncate text-lg font-bold tracking-wide text-[var(--ink)] group-hover:text-[var(--accent)] sm:text-xl">
 				{SITE_TITLE}
 			</span>
-			<span class="hidden text-sm text-[var(--muted)] sm:inline">笔记 · 工程 · 折腾</span>
+			<span class="hidden text-sm text-[var(--muted)] md:inline">笔记 · 工程 · 折腾</span>
 		</a>
-		<div class="flex items-center gap-1 sm:gap-2">
-			<div class="internal-links flex items-center gap-1 text-sm font-semibold">
+
+		<div class="flex shrink-0 items-center gap-1.5">
+			<div class="internal-links hidden items-center gap-1 text-sm font-semibold sm:flex">
 				<HeaderLink href="/">首页</HeaderLink>
 				<HeaderLink href="/blog">文章</HeaderLink>
 				<HeaderLink href="/about">关于</HeaderLink>
 			</div>
 			<a
-				class="hidden h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-[var(--ink)] no-underline sm:inline-flex"
+				class="hidden h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-[var(--ink)] no-underline md:inline-flex"
 				href="https://github.com/hongzhe757/cc-hongz-zblog"
 				target="_blank"
 				rel="noreferrer"
@@ -33,9 +34,36 @@ import ThemeToggle from './ThemeToggle.astro';
 					></path>
 				</svg>
 			</a>
-			<ThemeToggle />
+			<SkinSettings />
+			<button
+				id="nav-toggle"
+				type="button"
+				class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--bg-elevated)] text-[var(--ink)] sm:hidden"
+				aria-label="打开菜单"
+				aria-expanded="false"
+				aria-controls="mobile-nav"
+			>
+				<span class="nav-icon-open" aria-hidden="true">☰</span>
+				<span class="nav-icon-close hidden" aria-hidden="true">✕</span>
+			</button>
 		</div>
 	</nav>
+
+	<div id="mobile-nav" class="mobile-nav hidden border-t border-[var(--line)] sm:hidden">
+		<div class="site-shell flex flex-col gap-1 py-3 text-base font-semibold">
+			<HeaderLink href="/">首页</HeaderLink>
+			<HeaderLink href="/blog">文章</HeaderLink>
+			<HeaderLink href="/about">关于</HeaderLink>
+			<a
+				class="rounded-lg px-3 py-2.5 text-[var(--ink)] no-underline"
+				href="https://github.com/hongzhe757/cc-hongz-zblog"
+				target="_blank"
+				rel="noreferrer"
+			>
+				GitHub
+			</a>
+		</div>
+	</div>
 </header>
 
 <style>
@@ -54,4 +82,32 @@ import ThemeToggle from './ThemeToggle.astro';
 		border-color: color-mix(in srgb, var(--accent) 25%, transparent);
 		color: var(--accent);
 	}
+	.mobile-nav :global(a) {
+		display: block;
+		padding: 0.7rem 0.85rem;
+		border-radius: 10px;
+		color: var(--ink);
+		text-decoration: none;
+	}
+	.mobile-nav :global(a.active),
+	.mobile-nav :global(a:hover) {
+		background: var(--accent-soft);
+		color: var(--accent);
+	}
 </style>
+
+<script is:inline>
+	(function () {
+		const toggle = document.getElementById('nav-toggle');
+		const panel = document.getElementById('mobile-nav');
+		const openIcon = toggle?.querySelector('.nav-icon-open');
+		const closeIcon = toggle?.querySelector('.nav-icon-close');
+		toggle?.addEventListener('click', () => {
+			const open = panel?.classList.toggle('hidden') === false;
+			toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			toggle.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+			openIcon?.classList.toggle('hidden', open);
+			closeIcon?.classList.toggle('hidden', !open);
+		});
+	})();
+</script>

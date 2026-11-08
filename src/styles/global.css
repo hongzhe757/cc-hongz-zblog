@@ -1,29 +1,5 @@
 @import "tailwindcss";
-
-:root {
-	--bg: #eef1f6;
-	--bg-elevated: #ffffff;
-	--ink: #0f172a;
-	--muted: #5b6472;
-	--line: #d7dde8;
-	--accent: #1d4ed8;
-	--accent-soft: #dbe7ff;
-	--shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-	--radius: 16px;
-	color-scheme: light;
-}
-
-html.dark {
-	--bg: #0b1220;
-	--bg-elevated: #121a2b;
-	--ink: #e8eefc;
-	--muted: #9aa6bd;
-	--line: #243149;
-	--accent: #7aa2ff;
-	--accent-soft: #1a2740;
-	--shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
-	color-scheme: dark;
-}
+@import "./skins.css";
 
 * {
 	box-sizing: border-box;
@@ -31,6 +7,8 @@ html.dark {
 
 html {
 	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 body {
@@ -43,9 +21,17 @@ body {
 		radial-gradient(700px 380px at 100% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 55%),
 		linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, #d8d2c4) 100%);
 	line-height: 1.7;
-	font-size: 18px;
+	font-size: 16px;
 	word-wrap: break-word;
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
+	overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+	body {
+		font-size: 18px;
+		overflow-wrap: break-word;
+	}
 }
 
 a {
@@ -101,19 +87,43 @@ hr {
 }
 
 .site-shell {
-	width: min(1080px, calc(100% - 2rem));
+	width: min(1080px, calc(100% - 1.25rem));
 	margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+	.site-shell {
+		width: min(1080px, calc(100% - 2rem));
+	}
 }
 
 .prose-body {
 	width: min(720px, 100%);
 	margin: 0 auto;
+	max-width: 100%;
 }
 
 .prose-body :where(h1, h2, h3, h4) {
 	line-height: 1.25;
 	margin: 1.6em 0 0.6em;
 	color: var(--ink);
+	overflow-wrap: anywhere;
+}
+
+.prose-body :where(pre, table) {
+	max-width: 100%;
+}
+
+.prose-body :where(table) {
+	display: block;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* giscus 在窄屏不要撑破 */
+.giscus,
+.giscus-frame {
+	max-width: 100%;
 }
 
 .prose-body :where(p, ul, ol) {
@@ -133,9 +143,11 @@ hr {
 	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.card:hover {
-	transform: translateY(-3px);
-	border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+@media (hover: hover) and (pointer: fine) {
+	.card:hover {
+		transform: translateY(-3px);
+		border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+	}
 }
 
 .sr-only {

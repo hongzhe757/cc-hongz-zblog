@@ -1,0 +1,16 @@
+---
+/** 尽早应用皮肤，减少闪烁；放在 <head> */
+---
+
+<script is:inline>
+	(function () {
+		try {
+			const root = document.documentElement;
+			const mode = localStorage.getItem('theme');
+			const skin = localStorage.getItem('blog-skin') || 'navy';
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			root.classList.toggle('dark', (mode || (prefersDark ? 'dark' : 'light')) === 'dark');
+			root.setAttribute('data-skin', skin);
+		} catch (_) {}
+	})();
+</script>

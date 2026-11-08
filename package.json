@@ -6,10 +6,10 @@
     "node": ">=22.23.4"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "node ./scripts/with-node.mjs dev --host 0.0.0.0 --port 4321 --force",
+    "build": "node ./scripts/with-node.mjs build",
+    "preview": "node ./scripts/with-node.mjs preview --host 0.0.0.0 --port 4321",
+    "astro": "node ./scripts/with-node.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.3",

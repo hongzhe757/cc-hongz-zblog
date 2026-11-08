@@ -16,22 +16,13 @@ const posts = (await getCollection('blog')).sort(
 <html lang={SITE_LANG}>
 	<head>
 		<BaseHead title={`文章 · ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-		<script is:inline>
-			(function () {
-				const stored = localStorage.getItem('theme');
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				if ((stored || (prefersDark ? 'dark' : 'light')) === 'dark') {
-					document.documentElement.classList.add('dark');
-				}
-			})();
-		</script>
 	</head>
 	<body>
 		<Header />
-		<main class="site-shell py-10 sm:py-12">
-			<header class="mb-8">
-				<h1 class="m-0 text-3xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
-				<p class="mt-2 mb-0 text-[var(--muted)]">用 Markdown 写，Astro 自动生成列表与页面。</p>
+		<main class="site-shell py-6 sm:py-12">
+			<header class="mb-6 sm:mb-8">
+				<h1 class="m-0 text-2xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
+				<p class="mt-2 mb-0 text-sm text-[var(--muted)] sm:text-base">用 Markdown 写，Astro 自动生成列表与页面。</p>
 			</header>
 			<ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2">
 				{

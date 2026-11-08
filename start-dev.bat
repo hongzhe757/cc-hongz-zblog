@@ -30,8 +30,8 @@ if not exist "node_modules\" (
 
 echo [zblog] starting http://127.0.0.1:4321/
 start "" "http://127.0.0.1:4321/"
-:: --force：若已有旧进程占用，直接替换
-call npm run dev -- --host 127.0.0.1 --port 4321 --force
+:: 0.0.0.0：本机 + 同网手机可访问；--force 替换旧进程
+call npm run dev
 echo.
 echo [zblog] 服务已退出，exit=%ERRORLEVEL%
 pause

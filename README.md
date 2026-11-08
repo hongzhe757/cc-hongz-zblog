@@ -16,33 +16,28 @@ Astro + Markdown 个人博客，GitHub Pages 托管。
 
 需要 Node **≥ 22.23.4**（推荐 scoop 的 `nodejs24`）。
 
-### 方式 A：一键脚本（推荐）
+> Astro 实际需要 Node **≥ 22**（不建议降到 14，生态不支持）。  
+> 若系统默认是 Node 14，`npm run dev` 会**自动切换**到 scoop 的 `nodejs24`，一般可直接启动。
 
-双击或在仓库根目录执行：
-
-```bat
-start-dev.bat
-```
-
-脚本会：选用 Node 24 → 必要时 `npm install` → 打开浏览器 → 启动开发服务。
-
-本地地址：**http://127.0.0.1:4321/**
-
-### 方式 B：手动命令
+### 方式 A：直接启动
 
 ```bat
 cd /d D:\workspace\code_workspace\code_misrui\cc-hongz-parent\cc-hongz-zblog
-
-:: 若默认 node 太旧，先把 Node 24 放到 PATH 前面
-set PATH=%USERPROFILE%\scoop\apps\nodejs24\current;%PATH%
-
-npm install
-npm run dev -- --host 127.0.0.1 --port 4321
+npm run dev
 ```
 
-浏览器打开 http://127.0.0.1:4321/ 。改 Markdown 后页面一般会自动刷新。
+或双击 `start-dev.bat`。本地地址：**http://127.0.0.1:4321/**
 
-停止：在运行 `npm run dev` 的终端按 `Ctrl+C`。
+### 方式 B：手机同网访问
+
+终端会打印 `Network http://192.168.x.x:4321/`，手机连同一 WiFi 打开该地址。
+
+停止：终端按 `Ctrl+C`。
+
+### 关于「登录后台写文章」
+
+当前**没有**网页后台。写文章仍是改 `src/content/blog/*.md` 再 `git push`。  
+若需要「登录后在网页里发文」，可加 **Keystatic** 或 **Decap CMS**（GitHub 登录），需要的话再说一声我帮你接。
 
 ---
 
@@ -124,7 +119,17 @@ npm run preview
 
 ## 五、主题与插件
 
-当前主题：深蓝点缀 + 浅色/深色切换、卡片式文章列表、粘性导航。
+页头 **皮肤** 面板可切换明暗与配色（本地记住选择）。
+
+内置皮肤：
+
+| 皮肤 | 说明 |
+| --- | --- |
+| 深蓝 | 默认蓝调 |
+| 黑红 | 黑底猩红点缀 |
+| 墨金 | 暖琥珀 |
+| 黑白 | 极简灰阶 |
+| 青石 | 冷青 |
 
 已集成：
 
@@ -133,6 +138,7 @@ npm run preview
 | Tailwind CSS v4 | 布局与组件样式 |
 | MDX / Sitemap / RSS | Astro 官方集成 |
 | Giscus | 文章评论，**用 GitHub 登录** |
+| 皮肤设置 | `src/styles/skins.css` + 页头面板 |
 
 ### 开通 Giscus（评论登录）
 

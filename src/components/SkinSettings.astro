@@ -1,0 +1,132 @@
+---
+const skins = [
+	{ id: 'navy', label: '深蓝', swatch: '#1d4ed8' },
+	{ id: 'noir-red', label: '黑红', swatch: '#ef4444' },
+	{ id: 'amber', label: '墨金', swatch: '#f59e0b' },
+	{ id: 'mono', label: '黑白', swatch: '#222222' },
+	{ id: 'slate', label: '青石', swatch: '#0e7490' },
+] as const;
+---
+
+<div class="skin-settings relative">
+	<button
+		id="skin-settings-btn"
+		type="button"
+		class="inline-flex h-9 items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--bg-elevated)] px-3 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:border-[var(--accent)]"
+		aria-haspopup="dialog"
+		aria-expanded="false"
+		aria-controls="skin-settings-panel"
+		title="皮肤设置"
+	>
+		<span aria-hidden="true">◐</span>
+		<span class="hidden sm:inline">皮肤</span>
+	</button>
+
+	<div
+		id="skin-settings-panel"
+		class="fixed inset-x-3 top-[3.75rem] z-50 hidden max-h-[min(70vh,28rem)] w-auto overflow-y-auto rounded-[14px] border border-[var(--line)] bg-[var(--bg-elevated)] p-3 shadow-[var(--shadow)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-[calc(100%+0.5rem)] sm:max-h-none sm:w-64 sm:overflow-visible"
+		role="dialog"
+		aria-label="皮肤设置"
+	>
+		<p class="m-0 mb-2 text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">明暗</p>
+		<div class="mb-3 grid grid-cols-2 gap-2">
+			<button type="button" data-mode="light" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm">
+				浅色
+			</button>
+			<button type="button" data-mode="dark" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm">
+				深色
+			</button>
+		</div>
+
+		<p class="m-0 mb-2 text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">配色皮肤</p>
+		<div class="grid grid-cols-1 gap-1.5">
+			{
+				skins.map((skin) => (
+					<button
+						type="button"
+						data-skin={skin.id}
+						class="skin-btn flex items-center gap-2 rounded-lg border border-[var(--line)] px-2.5 py-2 text-left text-sm transition hover:border-[var(--accent)]"
+					>
+						<span
+							class="inline-block h-4 w-4 rounded-full border border-[var(--line)]"
+							style={`background:${skin.swatch}`}
+							aria-hidden="true"
+						/>
+						<span>{skin.label}</span>
+						<span class="skin-check ml-auto hidden text-[var(--accent)]">✓</span>
+					</button>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<style>
+	.mode-btn.is-active,
+	.skin-btn.is-active {
+		border-color: var(--accent);
+		background: var(--accent-soft);
+		color: var(--accent);
+	}
+	.skin-btn.is-active .skin-check {
+		display: inline;
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		const root = document.documentElement;
+		const SKIN_KEY = 'blog-skin';
+		const MODE_KEY = 'theme';
+		const validSkins = ['navy', 'noir-red', 'amber', 'mono', 'slate'];
+
+		function applyMode(mode) {
+			root.classList.toggle('dark', mode === 'dark');
+			localStorage.setItem(MODE_KEY, mode);
+			document.querySelectorAll('.mode-btn').forEach((btn) => {
+				btn.classList.toggle('is-active', btn.getAttribute('data-mode') === mode);
+			});
+			const frame = document.querySelector('iframe.giscus-frame');
+			if (frame) {
+				frame.contentWindow?.postMessage(
+					{ giscus: { setConfig: { theme: mode === 'dark' ? 'dark' : 'light' } } },
+					'https://giscus.app',
+				);
+			}
+		}
+
+		function applySkin(skin) {
+			const next = validSkins.includes(skin) ? skin : 'navy';
+			root.setAttribute('data-skin', next);
+			localStorage.setItem(SKIN_KEY, next);
+			document.querySelectorAll('.skin-btn').forEach((btn) => {
+				btn.classList.toggle('is-active', btn.getAttribute('data-skin') === next);
+			});
+		}
+
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		applyMode(localStorage.getItem(MODE_KEY) || (prefersDark ? 'dark' : 'light'));
+		applySkin(localStorage.getItem(SKIN_KEY) || 'navy');
+
+		const btn = document.getElementById('skin-settings-btn');
+		const panel = document.getElementById('skin-settings-panel');
+		btn?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const open = panel?.classList.toggle('hidden') === false;
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+		});
+		document.addEventListener('click', (e) => {
+			if (!panel || panel.classList.contains('hidden')) return;
+			if (panel.contains(e.target) || btn?.contains(e.target)) return;
+			panel.classList.add('hidden');
+			btn?.setAttribute('aria-expanded', 'false');
+		});
+
+		document.querySelectorAll('.mode-btn').forEach((el) => {
+			el.addEventListener('click', () => applyMode(el.getAttribute('data-mode') || 'light'));
+		});
+		document.querySelectorAll('.skin-btn').forEach((el) => {
+			el.addEventListener('click', () => applySkin(el.getAttribute('data-skin') || 'navy'));
+		});
+	})();
+</script>

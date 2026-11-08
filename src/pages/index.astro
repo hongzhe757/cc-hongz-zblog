@@ -16,41 +16,32 @@ const posts = (await getCollection('blog'))
 <html lang={SITE_LANG}>
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<script is:inline>
-			(function () {
-				const stored = localStorage.getItem('theme');
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				if ((stored || (prefersDark ? 'dark' : 'light')) === 'dark') {
-					document.documentElement.classList.add('dark');
-				}
-			})();
-		</script>
 	</head>
 	<body>
 		<Header />
-		<main class="site-shell py-10 sm:py-14">
-			<section class="relative overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--bg-elevated)] px-6 py-10 shadow-[var(--shadow)] sm:px-10 sm:py-14">
+		<main class="site-shell py-6 sm:py-14">
+			<section class="relative overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] px-4 py-8 shadow-[var(--shadow)] sm:rounded-[28px] sm:px-10 sm:py-14">
 				<div
 					class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[var(--accent-soft)] blur-2xl"
 					aria-hidden="true"
 				></div>
-				<p class="relative m-0 text-sm font-semibold tracking-[0.18em] text-[var(--accent)] uppercase">
+				<p class="relative m-0 text-xs font-semibold tracking-[0.16em] text-[var(--accent)] uppercase sm:text-sm sm:tracking-[0.18em]">
 					Personal Blog
 				</p>
-				<h1 class="relative mt-3 mb-3 text-4xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">
+				<h1 class="relative mt-3 mb-3 text-3xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">
 					{SITE_TITLE}
 				</h1>
-				<p class="relative m-0 max-w-2xl text-lg text-[var(--muted)]">{SITE_DESCRIPTION}</p>
-				<div class="relative mt-7 flex flex-wrap gap-3">
+				<p class="relative m-0 max-w-2xl text-base text-[var(--muted)] sm:text-lg">{SITE_DESCRIPTION}</p>
+				<div class="relative mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap">
 					<a
 						href="/blog"
-						class="inline-flex items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white no-underline shadow-sm transition hover:opacity-90"
+						class="inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white no-underline shadow-sm transition hover:opacity-90"
 					>
 						浏览文章
 					</a>
 					<a
 						href="/about"
-						class="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--bg)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] no-underline"
+						class="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--bg)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] no-underline"
 					>
 						关于我
 					</a>
