@@ -6,8 +6,8 @@ export const SITE_LANG = 'zh-CN';
 export const GISCUS = {
 	repo: 'hongzhe757/cc-hongz-zblog',
 	repoId: 'R_kgDOVm6Dew',
-	category: 'Announcements',
-	categoryId: 'DIC_kwDOVm6De84DKpZ7',
+	category: 'General',
+	categoryId: 'DIC_kwDOVm6De84DKpZ8',
 	mapping: 'pathname',
 	strict: '0',
 	reactionsEnabled: '1',
