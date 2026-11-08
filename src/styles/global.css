@@ -24,14 +24,17 @@ body {
 	background-color: var(--bg);
 	background-image: var(--surface-glow, none);
 	background-attachment: scroll;
-	line-height: 1.65;
+	line-height: 1.7;
 	font-size: 16px;
-	letter-spacing: -0.01em;
+	letter-spacing: 0;
 	word-wrap: break-word;
-	overflow-wrap: anywhere;
+	overflow-wrap: break-word;
+	word-break: normal;
 	overflow-x: hidden;
 	padding-left: env(safe-area-inset-left, 0px);
 	padding-right: env(safe-area-inset-right, 0px);
+	/* 底部安全区：刘海屏 / 部分浏览器底栏（含 Yandex 底栏收起时的 inset） */
+	padding-bottom: env(safe-area-inset-bottom, 0px);
 	-webkit-tap-highlight-color: transparent;
 	transition: background-color 0.25s ease, color 0.25s ease;
 }
@@ -39,7 +42,8 @@ body {
 @media (min-width: 640px) {
 	body {
 		font-size: 17px;
-		overflow-wrap: break-word;
+		line-height: 1.65;
+		letter-spacing: -0.01em;
 	}
 }
 
@@ -61,23 +65,37 @@ img {
 
 code {
 	font-family: var(--font-mono);
-	font-size: 0.9em;
-	padding: 0.12em 0.4em;
+	font-size: 0.86em;
+	padding: 0.1em 0.35em;
 	border-radius: 4px;
 	background: var(--accent-soft);
 	border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+	word-break: break-word;
 }
 
 pre {
-	padding: 1rem;
-	border-radius: var(--radius);
+	margin: 0.9rem 0 1.15rem;
+	padding: 0.85rem 0.9rem;
+	border-radius: calc(var(--radius) - 2px);
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
+	overscroll-behavior-x: contain;
 	border: 1px solid var(--line);
 	background: var(--bg);
 	color: var(--ink);
 	box-shadow: none;
 	max-width: 100%;
+	/* 防止超长 token 撑破页面；块内横向滚动即可 */
+	white-space: pre;
+	tab-size: 2;
+}
+
+@media (min-width: 640px) {
+	pre {
+		margin: 1rem 0 1.25rem;
+		padding: 1rem 1.1rem;
+		border-radius: var(--radius);
+	}
 }
 
 html.dark pre {
@@ -87,36 +105,55 @@ html.dark pre {
 
 pre > code {
 	all: unset;
+	display: block;
 	font-family: var(--font-mono);
-	font-size: 0.85em;
+	font-size: 0.78em;
+	line-height: 1.55;
+	white-space: inherit;
+}
+
+@media (min-width: 640px) {
+	pre > code {
+		font-size: 0.85em;
+		line-height: 1.6;
+	}
 }
 
 blockquote {
-	margin: 1.25rem 0;
-	padding: 0.35rem 0 0.35rem 0.85rem;
+	margin: 1rem 0;
+	padding: 0.55rem 0.75rem 0.55rem 0.8rem;
 	border-left: 3px solid var(--accent);
+	border-radius: 0 8px 8px 0;
 	color: var(--muted);
 	background: color-mix(in srgb, var(--accent-soft) 55%, transparent);
+}
+
+blockquote > :first-child {
+	margin-top: 0;
+}
+
+blockquote > :last-child {
+	margin-bottom: 0;
 }
 
 hr {
 	border: none;
 	border-top: 1px solid var(--line);
-	margin: 1.5rem 0;
+	margin: 1.25rem 0;
 }
 
 .site-shell {
 	width: 100%;
 	max-width: 1120px;
 	margin: 0 auto;
-	padding-left: max(0.875rem, env(safe-area-inset-left));
-	padding-right: max(0.875rem, env(safe-area-inset-right));
+	padding-left: max(1rem, env(safe-area-inset-left));
+	padding-right: max(1rem, env(safe-area-inset-right));
 }
 
 @media (min-width: 640px) {
 	.site-shell {
-		padding-left: 1rem;
-		padding-right: 1rem;
+		padding-left: 1.25rem;
+		padding-right: 1.25rem;
 	}
 }
 
@@ -124,24 +161,123 @@ hr {
 	width: 100%;
 	max-width: 740px;
 	margin: 0 auto;
+	min-width: 0;
 }
 
 .prose-body :where(h1, h2, h3, h4) {
-	line-height: 1.25;
-	margin: 1.4em 0 0.55em;
+	line-height: 1.35;
+	margin: 1.35em 0 0.5em;
 	color: var(--ink);
-	overflow-wrap: anywhere;
-	letter-spacing: -0.02em;
+	overflow-wrap: break-word;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	text-wrap: pretty;
 }
 
-.prose-body :where(pre, table, img, iframe) {
+/* 仅正文标题缩放；页面大标题在 layout 里单独控制 */
+.post-content :where(h1) {
+	font-size: 1.3rem;
+}
+
+.post-content :where(h2) {
+	font-size: 1.18rem;
+	padding-bottom: 0.25rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+.post-content :where(h3) {
+	font-size: 1.06rem;
+}
+
+.post-content :where(h4) {
+	font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+	.prose-body :where(h1, h2, h3, h4) {
+		line-height: 1.28;
+		letter-spacing: -0.02em;
+	}
+	.post-content :where(h1) {
+		font-size: 1.7rem;
+	}
+	.post-content :where(h2) {
+		font-size: 1.35rem;
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+	.post-content :where(h3) {
+		font-size: 1.18rem;
+	}
+}
+
+.prose-body :where(pre, img, iframe, video) {
 	max-width: 100%;
 }
 
-.prose-body :where(table) {
+.prose-body :where(img) {
+	margin: 0.85rem auto 1.1rem;
+	border-radius: 8px;
+	border: 1px solid var(--line);
+}
+
+.prose-body :where(a) {
+	overflow-wrap: anywhere;
+}
+
+/* 表格：外层 .table-scroll 横向滑动，不撑破整页 */
+.prose-body .table-scroll {
 	display: block;
+	width: 100%;
+	max-width: 100%;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
+	overscroll-behavior-x: contain;
+	margin: 0.85rem 0 1.15rem;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	background: var(--bg-elevated);
+}
+
+.prose-body :where(table) {
+	width: max-content;
+	min-width: 100%;
+	border-collapse: collapse;
+	font-size: 0.88em;
+	line-height: 1.45;
+	margin: 0;
+}
+
+.prose-body :where(th, td) {
+	padding: 0.55rem 0.7rem;
+	border: 1px solid var(--line);
+	text-align: left;
+	vertical-align: top;
+}
+
+.prose-body :where(th) {
+	background: color-mix(in srgb, var(--accent-soft) 70%, var(--bg-elevated));
+	font-weight: 600;
+	color: var(--ink);
+	white-space: nowrap;
+}
+
+.prose-body :where(td) {
+	min-width: 4.5rem;
+	max-width: 18rem;
+	overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+	.prose-body :where(table) {
+		font-size: 0.92em;
+	}
+	.prose-body :where(th, td) {
+		padding: 0.65rem 0.85rem;
+	}
+	.prose-body :where(td) {
+		max-width: none;
+	}
 }
 
 .giscus,
@@ -151,11 +287,41 @@ iframe {
 }
 
 .prose-body :where(p, ul, ol) {
-	margin: 0 0 1em;
+	margin: 0 0 0.95em;
 }
 
 .prose-body :where(ul, ol) {
-	padding-left: 1.2em;
+	padding-left: 1.15em;
+}
+
+.prose-body :where(li) {
+	margin: 0.28em 0;
+	padding-left: 0.1em;
+}
+
+.prose-body :where(li > p) {
+	margin: 0.35em 0;
+}
+
+.prose-body :where(li > ul, li > ol) {
+	margin: 0.35em 0 0.45em;
+}
+
+.prose-body :where(p) {
+	text-wrap: pretty;
+}
+
+/* 手机端收紧首尾空隙，避免标题区显得空 */
+@media (max-width: 639.98px) {
+	.post-content :where(h1, h2, h3, h4) {
+		margin-top: 1.15em;
+	}
+	.post-content :where(h1:first-child, h2:first-child, h3:first-child) {
+		margin-top: 0.35em;
+	}
+	hr {
+		margin: 1rem 0;
+	}
 }
 
 .mono {

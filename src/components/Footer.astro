@@ -2,7 +2,7 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-shell mt-14 border-t border-[var(--line)] py-8 sm:mt-20 sm:py-10">
+<footer class="site-footer site-shell mt-14 border-t border-[var(--line)] py-8 sm:mt-20 sm:py-10">
 	<div class="flex flex-col gap-2 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
 		<p class="m-0">© {year} hongz · <a href="https://blog.hongz.cc">blog.hongz.cc</a></p>
 		<p class="m-0">
@@ -12,3 +12,14 @@ const year = new Date().getFullYear();
 		</p>
 	</div>
 </footer>
+
+<style>
+	.site-footer {
+		padding-bottom: max(2rem, calc(1.5rem + env(safe-area-inset-bottom, 0px)));
+	}
+	@media (min-width: 640px) {
+		.site-footer {
+			padding-bottom: max(2.5rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
+		}
+	}
+</style>

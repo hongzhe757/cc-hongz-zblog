@@ -22,7 +22,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 	<body>
 		<Header />
 		<main class="site-shell py-4 sm:py-10">
-			<article>
+			<article class="post-article">
 				{
 					heroImage && (
 						<div class="panel overflow-hidden !p-0">
@@ -30,7 +30,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 						</div>
 					)
 				}
-				<div class="prose-body pt-4 sm:pt-8">
+				<header class="prose-body pt-4 sm:pt-8">
 					<p class="hud-label m-0">
 						LOG · <FormattedDate date={pubDate} />
 						{
@@ -42,10 +42,12 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 							)
 						}
 					</p>
-					<h1 class="mt-2 mb-2 text-xl font-bold tracking-tight text-[var(--ink)] sm:mt-3 sm:mb-4 sm:text-4xl">
+					<h1 class="post-title mt-2 mb-2 text-[1.35rem] font-bold tracking-tight text-[var(--ink)] sm:mt-3 sm:mb-4 sm:text-4xl">
 						{title}
 					</h1>
-					<p class="mt-0 mb-3 text-sm text-[var(--muted)] sm:mb-4 sm:text-base">{description}</p>
+					<p class="post-desc mt-0 mb-3 text-[0.95rem] leading-relaxed text-[var(--muted)] sm:mb-4 sm:text-base">
+						{description}
+					</p>
 					<div class="mb-5 flex flex-wrap items-center gap-2 sm:mb-8">
 						<CategoryBadge category={category} />
 						<TagList tags={tags} />
@@ -58,22 +60,45 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 						}
 					</div>
 					<hr />
-					<div class="prose-body">
-						<slot />
-					</div>
+				</header>
+				<div class="prose-body post-content">
+					<slot />
+				</div>
+				<div class="prose-body">
 					<Giscus />
 				</div>
 			</article>
 		</main>
+		<script is:inline>
+			(function () {
+				document.querySelectorAll('.post-content table').forEach(function (table) {
+					if (table.parentElement && table.parentElement.classList.contains('table-scroll')) return;
+					var wrap = document.createElement('div');
+					wrap.className = 'table-scroll';
+					table.parentNode.insertBefore(wrap, table);
+					wrap.appendChild(table);
+				});
+			})();
+		</script>
 		<Footer />
 	</body>
 </html>
 
 <style>
+	.post-article {
+		min-width: 0;
+	}
+	.post-title {
+		text-wrap: pretty;
+		overflow-wrap: break-word;
+	}
+	.post-desc {
+		text-wrap: pretty;
+	}
 	.graph-link {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.15rem 0.55rem;
+		padding: 0.2rem 0.6rem;
 		border-radius: 999px;
 		border: 1px solid var(--line);
 		color: var(--muted);
@@ -84,5 +109,10 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 		border-color: var(--accent);
 		color: var(--accent);
 		filter: none;
+	}
+	@media (max-width: 639.98px) {
+		.graph-link {
+			font-size: 0.72rem;
+		}
 	}
 </style>
