@@ -27,3 +27,6 @@ pnpm-debug.log*
 .gitee.local.env
 Thumbs.db
 
+
+.vercel
+
