@@ -3,6 +3,7 @@ title: 'builder 包设计模式总结'
 description: '主体（ / / / ）迁移自 Apache Commons Lang3，用于辅助构建 / / 方法； 为 hutool 原创（5.7.21），基于函数式接口构建任意对象。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # builder 包设计模式总结

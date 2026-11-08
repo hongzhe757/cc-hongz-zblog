@@ -3,6 +3,7 @@ title: 'codec 包（编解码）总结'
 description: 'codec 包集合了各类编码 / 解码（codec = coder + decoder）算法，按用途可分为五大类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # codec 包（编解码）总结

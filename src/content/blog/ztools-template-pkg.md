@@ -3,6 +3,7 @@ title: 'template 包（模板引擎）总结'
 description: 'template 包是 extra 模块的模板引擎抽象层（26 类），统一封装 8 种模板引擎，分根包 + engine 子包：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # template 包（模板引擎）总结

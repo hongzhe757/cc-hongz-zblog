@@ -3,6 +3,7 @@ title: 'collection 包（集合工具）总结'
 description: 'collection 包围绕迭代器（Iterator）的增强和列表（List）的分区/转换展开，可分成四类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # collection 包（集合工具）总结

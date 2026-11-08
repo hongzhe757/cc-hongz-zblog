@@ -3,6 +3,7 @@ title: 'crypto 包（密钥与工具）总结'
 description: 'crypto 根包是加密模块的统一入口与密钥/工具层，17 个类，可按用途分类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # crypto 包（密钥与工具）总结

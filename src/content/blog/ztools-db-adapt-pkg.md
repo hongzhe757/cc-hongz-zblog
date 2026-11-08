@@ -3,6 +3,7 @@ title: '数据库与框架适配 包（分页/中间件适配）总结'
 description: '性质：自有模块（非 hutool 移植）'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "数据"]
 ---
 
 # 数据库与框架适配 包（分页/中间件适配）总结

@@ -3,6 +3,7 @@ title: 'stream 包（Stream 工具）总结'
 description: 'stream 包对 JDK Stream/Collector 做增强，共 3 个类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # stream 包（Stream 工具）总结

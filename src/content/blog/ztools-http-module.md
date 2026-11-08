@@ -3,6 +3,7 @@ title: 'http 模块总结'
 description: '是 hutool-http 的移植镜像，包路径 。共 62 主类（+10 package-info），分根包 + body/cookie/server/ssl/useragent/webservice 六个子包，实现 HTTP 客户端与简易 HTTP 服务器。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+tags: ["ztools", "网络"]
 ---
 
 # http 模块总结（MOC）

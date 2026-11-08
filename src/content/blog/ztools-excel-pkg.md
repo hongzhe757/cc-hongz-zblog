@@ -3,6 +3,7 @@ title: 'excel 包（Excel 读写）总结'
 description: 'excel 包是 poi 模块的核心（57 类），按层级分 6 个子包 + 根包：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "数据"]
 ---
 
 # excel 包（Excel 读写）总结

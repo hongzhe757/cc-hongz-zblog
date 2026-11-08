@@ -3,6 +3,7 @@ title: 'protector 包（代码保护）总结'
 description: '说明：ztools **自有模块**，非 hutool 移植，无对照基准'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # protector 包（代码保护）总结

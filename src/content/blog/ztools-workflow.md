@@ -3,6 +3,7 @@ title: 'ztools 项目约定与工作流'
 description: '提取自持久记忆（memory 目录），涵盖项目结构、checkstyle 清理约定、脚本坑、提交工作流、用户工作方式。生成时间 2026-08-25，更新于 2026-09-01。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["工程", "ztools"]
 ---
 
 # ztools 项目约定与工作流

@@ -3,6 +3,7 @@ title: 'date 包（日期时间）总结'
 description: 'date 包是 ztools 最大的包（43 文件），覆盖公历、农历、格式化、计时四大块：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # date 包（日期时间）总结

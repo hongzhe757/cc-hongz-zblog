@@ -3,6 +3,7 @@ title: 'clone 包（克隆）总结'
 description: '1. 序列化/反序列化：对象实现 Serializable，用 ObjectOutputStream/ObjectInputStream 写读（hutool 有 ObjectUtil.cloneByStream）。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # clone 包（克隆）总结

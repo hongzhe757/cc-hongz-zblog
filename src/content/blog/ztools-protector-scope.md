@@ -3,6 +3,7 @@ title: 'protector 能力边界与扩展'
 description: 'protector 当前只做「可执行 jar 的 class AES 加密 + 运行时解密加载」。本文梳理它**没做**的能力（设备绑定、资源加密、分离式 lib jar 加密），以及要补时的集成思路。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # protector 能力边界与扩展

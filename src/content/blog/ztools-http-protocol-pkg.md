@@ -3,6 +3,7 @@ title: 'http 与标准协议 包（HTTP 包装与行业规范）总结'
 description: '性质：自有模块（非 hutool 移植）'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "网络"]
 ---
 
 # http 与标准协议 包（HTTP 包装与行业规范）总结

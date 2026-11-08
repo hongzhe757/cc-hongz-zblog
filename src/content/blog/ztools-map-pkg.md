@@ -3,6 +3,7 @@ title: 'map 包（Map 增强）总结'
 description: 'map 包围绕 java.util.Map 做创建、装饰、增强，可分成几类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # map 包（Map 增强）总结

@@ -3,6 +3,7 @@ title: 'protector 模块总结'
 description: '是 ztools **自有模块**（非 hutool 移植），包路径 。共 8 主类（+1 package-info），分根包 + runtime 两个层次，实现 jar 代码保护：AES 加密 class + 运行时自定义类加载器解密。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # protector 模块总结（MOC）

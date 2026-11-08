@@ -3,6 +3,7 @@ title: 'compress 包（压缩）总结'
 description: 'compress 包封装了流式压缩/解压和 Zip 文件读写：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # compress 包（压缩）总结

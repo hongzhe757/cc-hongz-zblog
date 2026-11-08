@@ -3,6 +3,7 @@ title: 'ofd 包（OFD 文档）总结'
 description: 'ofd 包负责 OFD（国产版式文档） 的生成，1 个类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "数据"]
 ---
 
 # ofd 包（OFD 文档）总结

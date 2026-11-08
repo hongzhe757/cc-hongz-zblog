@@ -3,6 +3,7 @@ title: 'getter 包（取值器接口）总结'
 description: 'getter 包把「从一个 key 对应的容器里取出不同类型的值」抽象成一组接口。它本身不含任何实现类（只有接口 + package-info），是 Bean、Dict、Opt、JSONObject 等数据容器的统一取值基座。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # getter 包（取值器接口）总结

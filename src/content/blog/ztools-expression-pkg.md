@@ -3,6 +3,7 @@ title: 'expression 包（表达式引擎）总结'
 description: 'expression 包统一封装 7 种表达式引擎（11 类），根包 + engine 子包：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # expression 包（表达式引擎）总结

@@ -3,6 +3,7 @@ title: 'crypto 模块总结'
 description: '是 hutool-crypto 的移植镜像，包路径 。共 70 源码，分 4 层。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # crypto 模块总结（MOC）

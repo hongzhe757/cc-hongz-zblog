@@ -3,6 +3,7 @@ title: 'dfa 包（敏感词过滤）总结'
 description: 'dfa 包是 dfa 模块的全部内容（5 类），单包结构：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # dfa 包（敏感词过滤）总结

@@ -3,6 +3,7 @@ title: 'qdox 迁移总结（cc-hongz-zdox）'
 description: '对象：（qdox 迁移版，parent 直接子模块）'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["工程", "ztools"]
 ---
 
 # qdox 迁移总结（cc-hongz-zdox）

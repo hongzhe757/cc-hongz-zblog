@@ -3,6 +3,7 @@ title: 'img 包（图像处理）总结'
 description: 'img 包基于 Java AWT 做图片读取、编辑、生成，子包 gif 提供 GIF 编解码：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # img 包（图像处理）总结

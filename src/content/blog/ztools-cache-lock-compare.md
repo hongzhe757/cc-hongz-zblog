@@ -3,6 +3,7 @@ title: '缓存与分布式锁方案横向对比'
 description: '场景：缓存（读多写少、热点数据、加速访问）+ 分布式锁（并发互斥、防重复、幂等）在分布式系统的技术选型。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "缓存任务"]
 ---
 
 # 缓存与分布式锁方案横向对比

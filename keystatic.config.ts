@@ -36,6 +36,10 @@ export default config({
 					directory: 'src/assets/blog',
 					publicPath: '../../assets/blog/',
 				}),
+				tags: fields.array(fields.text({ label: '标签' }), {
+					label: '标签',
+					itemLabel: (props) => props.value || '标签',
+				}),
 				content: fields.markdoc({
 					label: '正文',
 					options: {

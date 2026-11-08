@@ -3,6 +3,7 @@ title: 'script 模块总结'
 description: '是 hutool-script 的移植镜像，包路径 。共 4 主类（+1 package-info），单包结构，基于 JSR-223 封装脚本引擎（JavaScript 为主）的获取与执行。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "框架"]
 ---
 
 # script 模块总结（MOC）

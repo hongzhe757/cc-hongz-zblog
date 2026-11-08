@@ -1,0 +1,70 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_LANG, SITE_TITLE } from '../../consts';
+import { getTagMap } from '../../lib/tags';
+
+const tagMap = await getTagMap();
+const tags = [...tagMap.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0], 'zh'));
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`标签 · ${SITE_TITLE}`} description="按标签浏览文章" />
+	</head>
+	<body>
+		<Header />
+		<main class="site-shell py-8 sm:py-14">
+			<header class="mb-6 max-w-2xl sm:mb-10">
+				<p class="m-0 text-sm text-[var(--muted)]">标签</p>
+				<h1 class="mt-2 mb-2 text-2xl font-bold text-[var(--ink)] sm:text-4xl">全部标签</h1>
+				<p class="m-0 text-sm text-[var(--muted)]">
+					也可打开 <a href="/graph/">知识图谱</a>（类似 Obsidian Graph / Local graph）
+				</p>
+			</header>
+			<ul class="m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+				{
+					tags.map(([tag, posts]) => (
+						<li>
+							<a class="tag-card" href={`/tags/${encodeURIComponent(tag)}/`}>
+								<span class="tag-name">#{tag}</span>
+								<span class="tag-count">{posts.length} 篇</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.tag-card {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.9rem 1rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		background: var(--bg-elevated);
+		text-decoration: none;
+		color: var(--ink);
+		box-shadow: var(--shadow);
+	}
+	.tag-card:hover {
+		border-color: var(--accent);
+		filter: none;
+	}
+	.tag-name {
+		font-weight: 700;
+		color: var(--accent);
+	}
+	.tag-count {
+		font-size: 0.8rem;
+		color: var(--muted);
+	}
+</style>

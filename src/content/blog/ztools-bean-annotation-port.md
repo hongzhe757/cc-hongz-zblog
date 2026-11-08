@@ -3,6 +3,7 @@ title: 'bean 与 annotation 包移植总结'
 description: '本文是 bean 包补齐 + annotation 框架移植 + checkstyle 清理 + 测试补充的完整总结，含设计模式分析与依据标准。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # bean 与 annotation 包移植总结

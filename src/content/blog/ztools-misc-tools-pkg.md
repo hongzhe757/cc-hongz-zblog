@@ -3,6 +3,7 @@ title: '其他工具包（qrcode/compress/emoji/cglib/servlet/spring/validation�
 description: 'extra 模块中除模板/邮件/远程/表达式/拼音分词之外的 7 个小工具子包，共 22 类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # 其他工具包（qrcode/compress/emoji/cglib/servlet/spring/validation）总结

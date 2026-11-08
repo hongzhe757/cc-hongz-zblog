@@ -3,6 +3,7 @@ title: 'mail 包（邮件发送）总结'
 description: 'mail 包封装 SMTP 邮件发送（11 类），基于 JavaMail，兼容 javax.mail 与 jakarta.mail 两套命名空间：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "网络", "框架"]
 ---
 
 # mail 包（邮件发送）总结

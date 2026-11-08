@@ -49,6 +49,11 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 						<input id="f-date" name="pubDate" type="date" required />
 					</label>
 					<label class="field">
+						<span>标签</span>
+						<input id="f-tags" name="tags" type="text" placeholder="ztools, 网络, 架构（逗号分隔）" />
+						<small>会出现在文章页，并进入知识图谱（类似 Obsidian Graph）</small>
+					</label>
+					<label class="field">
 						<span>正文（Markdown）</span>
 						<textarea id="f-body" name="body" rows="12" placeholder="## 小节&#10;&#10;正文写这里……"></textarea>
 					</label>
@@ -93,6 +98,7 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 		const descEl = document.getElementById('f-desc');
 		const dateEl = document.getElementById('f-date');
 		const bodyEl = document.getElementById('f-body');
+		const tagsEl = document.getElementById('f-tags');
 		const hint = document.getElementById('write-hint');
 		const btnCopy = document.getElementById('btn-copy');
 		const btnGithub = document.getElementById('btn-github');
@@ -131,17 +137,29 @@ const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
 				.replace(/\r?\n/g, ' ');
 		}
 
+		function parseTags() {
+			return String(tagsEl.value || '')
+				.split(/[,，]/)
+				.map((t) => t.trim())
+				.filter(Boolean);
+		}
+
 		function buildMarkdown() {
 			const title = (titleEl.value || '').trim() || '未命名';
 			const description = (descEl.value || '').trim() || title;
 			const pubDate = formatPubDate(dateEl.value || todayInput());
 			const body = (bodyEl.value || '').trim() || '在这里写正文。';
+			const tags = parseTags();
+			const tagLine = tags.length
+				? `tags: [${tags.map((t) => JSON.stringify(t)).join(', ')}]`
+				: `tags: ["笔记"]`;
 			return [
 				'---',
 				`title: '${escapeYaml(title)}'`,
 				`description: '${escapeYaml(description)}'`,
 				`pubDate: '${pubDate}'`,
 				`heroImage: '../../assets/blog-placeholder-1.jpg'`,
+				tagLine,
 				'---',
 				'',
 				body,

@@ -3,6 +3,7 @@ title: 'crypto.symmetric 包（对称加密）总结'
 description: 'symmetric 包提供对称加密（加解密用同一密钥），16 个类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # crypto.symmetric 包（对称加密）总结

@@ -3,6 +3,7 @@ title: 'cache 模块总结'
 description: '是 hutool-cache 的移植镜像，包路径 。共 19 主类，分 3 层：缓存接口、文件缓存、缓存实现。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "缓存任务"]
 ---
 
 # cache 模块总结（MOC）

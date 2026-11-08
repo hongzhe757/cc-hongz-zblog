@@ -3,6 +3,7 @@ title: 'cron 包（定时任务）总结'
 description: 'cron 包是定时任务调度的实现，34 个类分 5 组：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "缓存任务"]
 ---
 
 # cron 包（定时任务）总结

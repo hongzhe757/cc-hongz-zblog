@@ -3,6 +3,7 @@ title: 'protector 加密实现总结'
 description: '本轮完成：protector 代码保护工具 + 端到端演示模块 + 验收清单 + 提交推送。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # protector 加密实现总结

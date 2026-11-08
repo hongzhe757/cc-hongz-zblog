@@ -3,6 +3,7 @@ title: 'protector 加密能力规划'
 description: '待扩展方向，按优先级排序。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # protector 加密能力规划

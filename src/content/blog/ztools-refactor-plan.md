@@ -3,6 +3,7 @@ title: 'ztools 重构规划'
 description: '提取自持久记忆（memory/ztools-refactor-plan.md）。hutool 22 个模块已全部迁移完成，进入重构阶段。完整规范见仓库内 。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["工程", "ztools"]
 ---
 
 # ztools 重构规划

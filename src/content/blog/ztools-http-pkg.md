@@ -3,6 +3,7 @@ title: 'http 包（HTTP 客户端与简易服务器）总结'
 description: 'http 包是 hutool 的 HTTP 客户端 + 简易 HTTP 服务器封装，62 个类分 7 组（根包 + 6 子包）：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "网络"]
 ---
 
 # http 包（HTTP 客户端与简易服务器）总结

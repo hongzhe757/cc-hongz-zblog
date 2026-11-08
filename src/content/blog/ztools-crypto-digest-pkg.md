@@ -3,6 +3,7 @@ title: 'crypto.digest 包（摘要与密码哈希）总结'
 description: 'digest 包提供摘要算法、消息认证码（HMAC）、密码哈希、一次性密码（OTP），23 个类：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # crypto.digest 包（摘要与密码哈希）总结

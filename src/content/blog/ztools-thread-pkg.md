@@ -3,6 +3,7 @@ title: 'thread 包（线程与线程池）总结'
 description: 'thread 包封装线程、线程池、并发工具：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # thread 包（线程与线程池）总结

@@ -3,6 +3,7 @@ title: 'json 包（JSON 解析与序列化）总结'
 description: 'json 包是 JSON 模块的主体（30 类），分 3 层：根包（数据结构 + 门面 + 解析器）、serialize 子包、xml 子包：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "数据"]
 ---
 
 # json 包（JSON 解析与序列化）总结

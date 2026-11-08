@@ -3,6 +3,7 @@ title: 'captcha 模块总结'
 description: '是 hutool-captcha 的移植镜像，包路径 。共 15 个类（+2 package-info），分 2 层：验证码图像生成、验证码内容生成策略。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # captcha 模块总结（MOC）

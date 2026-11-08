@@ -3,6 +3,7 @@ title: 'jwt 包（JWT 令牌）总结'
 description: 'jwt 包是 JWT（RFC 7519）令牌的实现，共 15 类，分 2 层：根包（结构 + 门面 + 校验）、signers 子包（签名策略）：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # jwt 包（JWT 令牌）总结

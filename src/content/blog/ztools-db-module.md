@@ -3,6 +3,7 @@ title: 'db 模块总结'
 description: '是 hutool-db 的移植镜像，包路径 。共 87 主类，分 8 层：ORM 门面、方言、数据源、结果集处理、元数据、NoSQL、SQL 构建、事务。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "数据"]
 ---
 
 # db 模块总结（MOC）

@@ -3,6 +3,7 @@ title: 'ai 包（AI 调用）总结'
 description: 'ai 包是 LLM（大语言模型）调用的统一封装，48 个类分 3 组：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "框架"]
 ---
 
 # ai 包（AI 调用）总结

@@ -3,6 +3,7 @@ title: '仓库盘点报告'
 description: '生成时间：2026-08-16 | 根目录：cc-hongz-parent'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+tags: ["工程", "ztools"]
 ---
 
 # 仓库盘点报告

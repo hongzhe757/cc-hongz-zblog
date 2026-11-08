@@ -3,6 +3,7 @@ title: 'log 包（日志门面与多方言适配）总结'
 description: 'log 包是日志模块的门面 + 多方言适配层，共 34 类，分 3 层：根包（门面）、dialect 子包（9 个框架方言）、level 子包（级别前缀接口）：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["ztools", "框架"]
 ---
 
 # log 包（日志门面与多方言适配）总结

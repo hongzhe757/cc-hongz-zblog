@@ -3,6 +3,7 @@ title: 'text 包（文本处理）总结'
 description: 'text 包提供字符串/文本处理的进阶能力：字符串操作、拼接、分割、CSV、转义、密码强度、文本相似度等。16 个顶层类 + 6 个子包：'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ["ztools", "基础核心"]
 ---
 
 # text 包（文本处理）总结

@@ -3,6 +3,7 @@ title: 'dfa 模块总结'
 description: '是 hutool-dfa 的移植镜像，包路径 。共 5 个类（+1 package-info），单包结构，实现基于 DFA 算法的敏感词过滤。'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ["ztools", "安全"]
 ---
 
 # dfa 模块总结（MOC）

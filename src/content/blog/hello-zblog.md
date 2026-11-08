@@ -3,6 +3,7 @@ title: '你好，cc-hongz-zblog'
 description: '基于 Astro + Markdown 的博客起步'
 pubDate: 'Nov 08 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+tags: ["博客", "meta"]
 ---
 
 这是迁到 **Astro** 后的第一篇。之后只需要在 `src/content/blog/` 下新增 Markdown 文件即可。
