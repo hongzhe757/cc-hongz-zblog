@@ -1,0 +1,316 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_LANG, SITE_TITLE } from '../consts';
+
+const repo = 'hongzhe757/cc-hongz-zblog';
+const branch = 'main';
+const contentDir = 'src/content/blog';
+const newFileBase = `https://github.com/${repo}/new/${branch}/${contentDir}`;
+const editBase = `https://github.com/${repo}/edit/${branch}/${contentDir}`;
+const treeUrl = `https://github.com/${repo}/tree/${branch}/${contentDir}`;
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`发文 · ${SITE_TITLE}`} description="起草文章并提交到 GitHub，Actions 自动发布" />
+	</head>
+	<body>
+		<Header />
+		<main class="site-shell py-6 sm:py-12">
+			<section class="max-w-2xl">
+				<p class="m-0 text-sm text-[var(--muted)]">发文</p>
+				<h1 class="mt-2 mb-2 text-[1.6rem] font-bold tracking-tight text-[var(--ink)] sm:text-4xl">写一篇文章</h1>
+				<p class="m-0 text-sm leading-relaxed text-[var(--muted)] sm:text-base">
+					线上 Keystatic 登录目前会 500（GitHub App 未配好）。这里用「起草 → 复制 → GitHub 提交」即可发布到
+					<a href="https://blog.hongz.cc/blog/">blog.hongz.cc</a>。
+				</p>
+			</section>
+
+			<section class="mt-8 max-w-2xl write-panel">
+				<form id="write-form" class="write-form" autocomplete="off">
+					<label class="field">
+						<span>标题</span>
+						<input id="f-title" name="title" type="text" required placeholder="例如：一次 Astro 部署踩坑" />
+					</label>
+					<label class="field">
+						<span>文件名 slug</span>
+						<input id="f-slug" name="slug" type="text" required placeholder="astro-deploy-notes" pattern="[a-z0-9\-]+" />
+						<small>英文小写、数字、连字符；最终文件：`slug.md`</small>
+					</label>
+					<label class="field">
+						<span>摘要</span>
+						<textarea id="f-desc" name="description" rows="2" placeholder="一句话介绍，出现在列表页"></textarea>
+					</label>
+					<label class="field">
+						<span>发布日期</span>
+						<input id="f-date" name="pubDate" type="date" required />
+					</label>
+					<label class="field">
+						<span>正文（Markdown）</span>
+						<textarea id="f-body" name="body" rows="12" placeholder="## 小节&#10;&#10;正文写这里……"></textarea>
+					</label>
+
+					<div class="actions">
+						<button type="button" id="btn-copy" class="btn-cyber btn-cyber-primary">复制 Markdown</button>
+						<a
+							id="btn-github"
+							class="btn-cyber btn-cyber-ghost"
+							href={newFileBase}
+							target="_blank"
+							rel="noreferrer"
+						>
+							打开 GitHub 新建
+						</a>
+					</div>
+					<p id="write-hint" class="hint" hidden></p>
+				</form>
+
+				<details class="more">
+					<summary>本地图形后台（推荐本机写长文）</summary>
+					<ol>
+						<li>在仓库目录执行 <code>npm run admin</code></li>
+						<li>浏览器打开 <code>http://127.0.0.1:4321/keystatic</code></li>
+						<li>保存后 <code>git push origin main</code>，等待 Actions 部署</li>
+					</ol>
+					<p>
+						也可直接在 GitHub 改已有文件：
+						<a href={treeUrl} target="_blank" rel="noreferrer">打开 blog 目录</a>
+					</p>
+				</details>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script is:inline define:vars={{ newFileBase, editBase }}>
+	(function () {
+		const titleEl = document.getElementById('f-title');
+		const slugEl = document.getElementById('f-slug');
+		const descEl = document.getElementById('f-desc');
+		const dateEl = document.getElementById('f-date');
+		const bodyEl = document.getElementById('f-body');
+		const hint = document.getElementById('write-hint');
+		const btnCopy = document.getElementById('btn-copy');
+		const btnGithub = document.getElementById('btn-github');
+		let slugTouched = false;
+
+		function pad(n) {
+			return String(n).padStart(2, '0');
+		}
+
+		function todayInput() {
+			const d = new Date();
+			return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+		}
+
+		function slugify(text) {
+			const ascii = String(text || '')
+				.toLowerCase()
+				.replace(/[^a-z0-9]+/g, '-')
+				.replace(/^-+|-+$/g, '')
+				.slice(0, 48);
+			if (ascii) return ascii;
+			const d = new Date();
+			return `post-${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+		}
+
+		function formatPubDate(iso) {
+			const d = new Date(`${iso}T12:00:00`);
+			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			return `${months[d.getMonth()]} ${pad(d.getDate())} ${d.getFullYear()}`;
+		}
+
+		function escapeYaml(s) {
+			return String(s || '')
+				.replace(/\\/g, '\\\\')
+				.replace(/'/g, '’')
+				.replace(/\r?\n/g, ' ');
+		}
+
+		function buildMarkdown() {
+			const title = (titleEl.value || '').trim() || '未命名';
+			const description = (descEl.value || '').trim() || title;
+			const pubDate = formatPubDate(dateEl.value || todayInput());
+			const body = (bodyEl.value || '').trim() || '在这里写正文。';
+			return [
+				'---',
+				`title: '${escapeYaml(title)}'`,
+				`description: '${escapeYaml(description)}'`,
+				`pubDate: '${pubDate}'`,
+				`heroImage: '../../assets/blog-placeholder-1.jpg'`,
+				'---',
+				'',
+				body,
+				'',
+			].join('\n');
+		}
+
+		function currentSlug() {
+			return slugify(slugEl.value || titleEl.value);
+		}
+
+		function syncGithubHref() {
+			const slug = currentSlug();
+			slugEl.value = slug;
+			btnGithub.href = `${newFileBase}?filename=${encodeURIComponent(slug + '.md')}`;
+		}
+
+		function showHint(text, ok) {
+			hint.hidden = false;
+			hint.textContent = text;
+			hint.dataset.ok = ok ? '1' : '0';
+		}
+
+		dateEl.value = todayInput();
+		syncGithubHref();
+
+		titleEl.addEventListener('input', () => {
+			if (!slugTouched) {
+				slugEl.value = slugify(titleEl.value);
+				syncGithubHref();
+			}
+		});
+		slugEl.addEventListener('input', () => {
+			slugTouched = true;
+			syncGithubHref();
+		});
+
+		btnCopy.addEventListener('click', async () => {
+			syncGithubHref();
+			const md = buildMarkdown();
+			try {
+				await navigator.clipboard.writeText(md);
+				showHint('已复制。接着点「打开 GitHub 新建」，粘贴到编辑器后 Commit。', true);
+			} catch (_) {
+				showHint('复制失败，请手动全选下方预览内容。', false);
+				window.prompt('复制下面的 Markdown：', md);
+			}
+		});
+
+		btnGithub.addEventListener('click', async () => {
+			syncGithubHref();
+			const md = buildMarkdown();
+			try {
+				await navigator.clipboard.writeText(md);
+				showHint('Markdown 已复制到剪贴板，GitHub 新建页里 Ctrl+V 粘贴后提交即可。', true);
+			} catch (_) {
+				showHint('请先点「复制 Markdown」，再到 GitHub 粘贴提交。', false);
+			}
+		});
+	})();
+</script>
+
+<style>
+	.write-panel {
+		padding: 1.1rem 1rem 1.25rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow);
+	}
+
+	@media (min-width: 640px) {
+		.write-panel {
+			padding: 1.35rem 1.4rem 1.5rem;
+		}
+	}
+
+	.write-form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.95rem;
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		margin: 0;
+		color: var(--ink);
+		font-size: 0.9rem;
+		font-weight: 600;
+	}
+
+	.field small {
+		font-weight: 400;
+		font-size: 0.75rem;
+		color: var(--muted);
+	}
+
+	.field input,
+	.field textarea {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.7rem 0.8rem;
+		border: 1px solid var(--line);
+		border-radius: 10px;
+		background: var(--bg);
+		color: var(--ink);
+		font: inherit;
+		font-weight: 400;
+		line-height: 1.5;
+	}
+
+	.field textarea {
+		resize: vertical;
+		min-height: 10rem;
+		font-family: var(--font-mono), ui-monospace, monospace;
+		font-size: 0.86rem;
+	}
+
+	.actions {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		margin-top: 0.25rem;
+	}
+
+	@media (min-width: 640px) {
+		.actions {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	}
+
+	.hint {
+		margin: 0.25rem 0 0;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		color: var(--muted);
+	}
+
+	.hint[data-ok='1'] {
+		color: var(--accent);
+	}
+
+	.more {
+		margin-top: 1.25rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--line);
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+
+	.more summary {
+		cursor: pointer;
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	.more ol {
+		margin: 0.75rem 0 0;
+		padding-left: 1.2rem;
+	}
+
+	.more li {
+		margin: 0.35rem 0;
+	}
+
+	.more code {
+		font-size: 0.82em;
+	}
+</style>
