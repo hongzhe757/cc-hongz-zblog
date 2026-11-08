@@ -19,11 +19,11 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main class="site-shell py-4 sm:py-12">
-			<header class="panel mb-4 px-3.5 py-4 sm:mb-8 sm:px-6 sm:py-6">
-				<p class="hud-label m-0">Archive / Index</p>
-				<h1 class="mt-2 mb-1.5 text-xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
-				<p class="m-0 text-sm text-[var(--muted)]">Markdown → Astro → Pages</p>
+		<main class="site-shell py-8 sm:py-14">
+			<header class="mb-6 max-w-2xl sm:mb-10">
+				<p class="m-0 text-sm text-[var(--muted)]">文章</p>
+				<h1 class="mt-2 mb-2 text-2xl font-bold text-[var(--ink)] sm:text-4xl">全部文章</h1>
+				<p class="m-0 text-sm text-[var(--muted)]">按发布时间排序</p>
 			</header>
 			<ul class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-4 md:grid-cols-2">
 				{

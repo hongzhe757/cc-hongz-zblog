@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_LANG, SITE_TITLE } from '../consts';
+import { ADMIN_URL, SITE_LANG, SITE_TITLE } from '../consts';
 
 /** 按项目起始年份从早到晚 */
 const timeline = [
@@ -90,10 +90,10 @@ const timeline = [
 	<body>
 		<Header />
 		<main class="site-shell py-4 sm:py-12">
-			<section class="panel relative px-3.5 py-6 sm:px-10 sm:py-10">
-				<p class="hud-label m-0">Profile / Projects</p>
-				<h1 class="mt-2 mb-2 text-[1.6rem] font-bold tracking-tight text-[var(--ink)] sm:mt-3 sm:text-4xl">
-					秦鸿哲 <span class="text-[var(--accent)]">/ hongz</span>
+			<section class="max-w-2xl pb-2">
+				<p class="m-0 text-sm text-[var(--muted)]">关于</p>
+				<h1 class="mt-2 mb-2 text-[1.6rem] font-bold tracking-tight text-[var(--ink)] sm:text-4xl">
+					秦鸿哲 <span class="text-[var(--muted)] font-normal">/ hongz</span>
 				</h1>
 				<p class="m-0 text-sm text-[var(--muted)] sm:text-base">
 					项目时间轴 · 按起始年份从早到晚
@@ -112,24 +112,14 @@ const timeline = [
 						GitHub
 					</a>
 					<a class="btn-cyber btn-cyber-ghost" href="/blog">看文章</a>
-					{
-						import.meta.env.PUBLIC_ADMIN_URL && (
-							<a
-								class="btn-cyber btn-cyber-ghost"
-								href={import.meta.env.PUBLIC_ADMIN_URL}
-								target="_blank"
-								rel="noreferrer"
-							>
-								写文章后台
-							</a>
-						)
-					}
+					<a class="btn-cyber btn-cyber-ghost" href={ADMIN_URL} target="_blank" rel="noreferrer">
+						写文章后台
+					</a>
 				</div>
 			</section>
 
-			<section class="mt-6 sm:mt-10">
-				<p class="hud-label m-0">Timeline</p>
-				<h2 class="mt-1 mb-4 text-lg font-bold text-[var(--ink)] sm:mb-6 sm:text-2xl">项目时间轴</h2>
+			<section class="mt-10 sm:mt-14">
+				<h2 class="mt-0 mb-5 text-xl font-bold text-[var(--ink)] sm:mb-6 sm:text-2xl">项目时间轴</h2>
 
 				<ol class="timeline m-0 list-none p-0">
 					{
@@ -150,11 +140,10 @@ const timeline = [
 				</ol>
 			</section>
 
-			<section class="panel mt-8 px-3.5 py-5 sm:mt-12 sm:px-6 sm:py-6">
-				<p class="hud-label m-0">Contact</p>
-				<p class="mt-2 mb-0 text-sm text-[var(--muted)]">
+			<section class="mt-10 border-t border-[var(--line)] pt-6 sm:mt-14">
+				<p class="m-0 text-sm text-[var(--muted)]">
 					邮箱 <a href="mailto:hongzhe.qin@outlook.com">hongzhe.qin@outlook.com</a>
-					· 本站 Astro + Pages · 评论 Giscus（GitHub 登录）
+					· 本站 Astro + Pages · 评论 Giscus
 				</p>
 			</section>
 		</main>

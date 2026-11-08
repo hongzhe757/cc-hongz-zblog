@@ -1,9 +1,8 @@
 ---
 const skins = [
-	{ id: 'ink', label: '墨青', swatch: '#0f766e' },
-	{ id: 'ocean', label: '海雾', swatch: '#2563eb' },
-	{ id: 'forest', label: '林间', swatch: '#15803d' },
-	{ id: 'cinnabar', label: '朱砂', swatch: '#c2410c' },
+	{ id: 'paper', label: '纸白', swatch: '#4338ca' },
+	{ id: 'mist', label: '雾蓝', swatch: '#0369a1' },
+	{ id: 'olive', label: '橄榄', swatch: '#3f6212' },
 	{ id: 'mono', label: '黑白', swatch: '#171717' },
 ] as const;
 ---
@@ -12,43 +11,43 @@ const skins = [
 	<button
 		id="skin-settings-btn"
 		type="button"
-		class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:border-[var(--accent)] mono sm:w-auto sm:gap-1.5 sm:px-3"
+		class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--bg-elevated)] text-sm text-[var(--ink)] transition hover:border-[var(--accent)] sm:w-auto sm:gap-1.5 sm:px-3"
 		aria-haspopup="dialog"
 		aria-expanded="false"
 		aria-controls="skin-settings-panel"
-		title="皮肤设置"
+		title="外观"
 	>
 		<span aria-hidden="true">◐</span>
-		<span class="hidden sm:inline">皮肤</span>
+		<span class="hidden sm:inline">外观</span>
 	</button>
 
 	<div
 		id="skin-settings-panel"
-		class="fixed inset-x-3 top-[3.75rem] z-50 hidden max-h-[min(70vh,28rem)] w-auto overflow-y-auto rounded-[14px] border border-[var(--line)] bg-[var(--bg-elevated)] p-3 shadow-[var(--shadow)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-[calc(100%+0.5rem)] sm:max-h-none sm:w-64 sm:overflow-visible"
+		class="fixed inset-x-3 top-[3.75rem] z-50 hidden max-h-[min(70vh,28rem)] w-auto overflow-y-auto rounded-xl border border-[var(--line)] bg-[var(--bg-elevated)] p-3 shadow-[var(--shadow)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-[calc(100%+0.5rem)] sm:max-h-none sm:w-60 sm:overflow-visible"
 		role="dialog"
-		aria-label="皮肤设置"
+		aria-label="外观设置"
 	>
-		<p class="m-0 mb-2 text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">明暗</p>
+		<p class="m-0 mb-2 text-xs font-medium text-[var(--muted)]">明暗</p>
 		<div class="mb-3 grid grid-cols-2 gap-2">
-			<button type="button" data-mode="light" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm">
+			<button type="button" data-mode="light" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm text-[var(--ink)]">
 				浅色
 			</button>
-			<button type="button" data-mode="dark" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm">
+			<button type="button" data-mode="dark" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm text-[var(--ink)]">
 				深色
 			</button>
 		</div>
 
-		<p class="m-0 mb-2 text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">配色皮肤</p>
+		<p class="m-0 mb-2 text-xs font-medium text-[var(--muted)]">配色</p>
 		<div class="grid grid-cols-1 gap-1.5">
 			{
 				skins.map((skin) => (
 					<button
 						type="button"
 						data-skin={skin.id}
-						class="skin-btn flex items-center gap-2 rounded-lg border border-[var(--line)] px-2.5 py-2 text-left text-sm transition hover:border-[var(--accent)]"
+						class="skin-btn flex items-center gap-2 rounded-lg border border-[var(--line)] px-2.5 py-2 text-left text-sm text-[var(--ink)] transition hover:border-[var(--accent)]"
 					>
 						<span
-							class="inline-block h-4 w-4 rounded-full border border-[var(--line)]"
+							class="inline-block h-3.5 w-3.5 rounded-full border border-[var(--line)]"
 							style={`background:${skin.swatch}`}
 							aria-hidden="true"
 						/>
@@ -78,8 +77,18 @@ const skins = [
 		const root = document.documentElement;
 		const SKIN_KEY = 'blog-skin';
 		const MODE_KEY = 'theme';
-		const validSkins = ['ink', 'ocean', 'forest', 'cinnabar', 'mono'];
-		const legacy = { cyber: 'ink', navy: 'ocean', slate: 'forest', amber: 'cinnabar', 'noir-red': 'cinnabar' };
+		const validSkins = ['paper', 'mist', 'olive', 'mono'];
+		const legacy = {
+			cyber: 'paper',
+			ink: 'paper',
+			ocean: 'mist',
+			navy: 'mist',
+			forest: 'olive',
+			slate: 'olive',
+			cinnabar: 'paper',
+			amber: 'paper',
+			'noir-red': 'paper',
+		};
 
 		function applyMode(mode) {
 			root.classList.toggle('dark', mode === 'dark');
@@ -98,7 +107,7 @@ const skins = [
 
 		function applySkin(skin) {
 			let next = legacy[skin] || skin;
-			if (!validSkins.includes(next)) next = 'ink';
+			if (!validSkins.includes(next)) next = 'paper';
 			root.setAttribute('data-skin', next);
 			localStorage.setItem(SKIN_KEY, next);
 			document.querySelectorAll('.skin-btn').forEach((btn) => {
@@ -107,7 +116,7 @@ const skins = [
 		}
 
 		applyMode(localStorage.getItem(MODE_KEY) || 'light');
-		applySkin(localStorage.getItem(SKIN_KEY) || 'ink');
+		applySkin(localStorage.getItem(SKIN_KEY) || 'paper');
 
 		const btn = document.getElementById('skin-settings-btn');
 		const panel = document.getElementById('skin-settings-panel');
@@ -127,7 +136,7 @@ const skins = [
 			el.addEventListener('click', () => applyMode(el.getAttribute('data-mode') || 'light'));
 		});
 		document.querySelectorAll('.skin-btn').forEach((el) => {
-			el.addEventListener('click', () => applySkin(el.getAttribute('data-skin') || 'ink'));
+			el.addEventListener('click', () => applySkin(el.getAttribute('data-skin') || 'paper'));
 		});
 	})();
 </script>

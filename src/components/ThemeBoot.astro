@@ -7,20 +7,22 @@
 		try {
 			const root = document.documentElement;
 			const legacy = {
-				cyber: 'ink',
-				navy: 'ocean',
-				slate: 'forest',
-				amber: 'cinnabar',
-				'noir-red': 'cinnabar',
+				cyber: 'paper',
+				ink: 'paper',
+				ocean: 'mist',
+				navy: 'mist',
+				forest: 'olive',
+				slate: 'olive',
+				cinnabar: 'paper',
+				amber: 'paper',
+				'noir-red': 'paper',
 			};
-			const valid = ['ink', 'ocean', 'forest', 'cinnabar', 'mono'];
+			const valid = ['paper', 'mist', 'olive', 'mono'];
 			let mode = localStorage.getItem('theme') || 'light';
-			let skin = localStorage.getItem('blog-skin') || 'ink';
-			if (legacy[skin]) {
-				skin = legacy[skin];
-				localStorage.setItem('blog-skin', skin);
-			}
-			if (!valid.includes(skin)) skin = 'ink';
+			let skin = localStorage.getItem('blog-skin') || 'paper';
+			if (legacy[skin]) skin = legacy[skin];
+			if (!valid.includes(skin)) skin = 'paper';
+			localStorage.setItem('blog-skin', skin);
 			root.classList.toggle('dark', mode === 'dark');
 			root.setAttribute('data-skin', skin);
 		} catch (_) {}
