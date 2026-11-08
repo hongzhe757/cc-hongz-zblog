@@ -24,7 +24,7 @@ const graph = await buildKnowledgeGraph();
 					<p class="m-0 text-sm text-[var(--muted)]">知识图谱</p>
 					<h1 class="mt-1 mb-1 text-xl font-bold text-[var(--ink)] sm:text-3xl">Graph / Local graph</h1>
 					<p class="m-0 text-sm text-[var(--muted)]">
-						全局力导向关系图；点选节点进入星状 Local graph（一跳邻居）。拖拽节点，滚轮缩放。
+						布局稳定后会停住。点选进入星状 Local graph；拖拽节点、滚轮缩放。
 					</p>
 				</div>
 				<div class="graph-controls">
@@ -67,6 +67,8 @@ const graph = await buildKnowledgeGraph();
 		let width = 0;
 		let height = 0;
 		let raf = 0;
+		let alpha = 0;
+		let running = false;
 
 		const css = getComputedStyle(document.documentElement);
 		const colorInk = () => css.getPropertyValue('--ink').trim() || '#111';
@@ -130,33 +132,46 @@ const graph = await buildKnowledgeGraph();
 					center.y = cy;
 					center.fx = cx;
 					center.fy = cy;
+					center.vx = 0;
+					center.vy = 0;
 				}
-				others.forEach((n) => {
-					n.fx = null;
-					n.fy = null;
-				});
 				others.forEach((n, i) => {
 					const a = (i / Math.max(others.length, 1)) * Math.PI * 2 - Math.PI / 2;
 					const r = Math.min(width, height) * 0.28;
 					n.x = cx + Math.cos(a) * r;
 					n.y = cy + Math.sin(a) * r;
+					n.fx = n.x;
+					n.fy = n.y;
+					n.vx = 0;
+					n.vy = 0;
 				});
 			} else {
 				nodes.forEach((n) => {
 					n.fx = null;
 					n.fy = null;
+					n.vx = 0;
+					n.vy = 0;
 				});
 			}
 
 			status.textContent = mode === 'local' && focusId
 				? `Local graph · 中心：${byId[focusId]?.label || focusId} · ${nodes.length} 节点`
 				: `Graph · ${nodes.length} 节点 · ${links.length} 边`;
+
+			// Local 用固定星状，不再持续模拟；Global 冷却后停下
+			if (mode === 'local') {
+				stopSim();
+				draw();
+			} else {
+				reheat(1);
+			}
 		}
 
 		function tick() {
 			const n = nodes.length;
-			if (!n) return;
+			if (!n || alpha <= 0.001) return;
 
+			const energy = alpha;
 			// repulsion
 			for (let i = 0; i < n; i++) {
 				for (let j = i + 1; j < n; j++) {
@@ -165,7 +180,7 @@ const graph = await buildKnowledgeGraph();
 					let dx = a.x - b.x;
 					let dy = a.y - b.y;
 					let dist = Math.hypot(dx, dy) || 0.01;
-					const force = (mode === 'local' ? 1800 : 3200) / (dist * dist);
+					const force = (2200 * energy) / (dist * dist);
 					dx = (dx / dist) * force;
 					dy = (dy / dist) * force;
 					if (a.fx == null) {
@@ -180,14 +195,14 @@ const graph = await buildKnowledgeGraph();
 			}
 
 			// springs
-			const ideal = mode === 'local' ? Math.min(width, height) * 0.28 : 90;
+			const ideal = 110;
 			for (const l of links) {
 				const a = l.source;
 				const b = l.target;
 				let dx = b.x - a.x;
 				let dy = b.y - a.y;
 				const dist = Math.hypot(dx, dy) || 0.01;
-				const f = ((dist - ideal) / dist) * 0.04;
+				const f = ((dist - ideal) / dist) * 0.035 * energy;
 				dx *= f;
 				dy *= f;
 				if (a.fx == null) {
@@ -211,13 +226,15 @@ const graph = await buildKnowledgeGraph();
 					node.vy = 0;
 					continue;
 				}
-				node.vx += (cx - node.x) * 0.004;
-				node.vy += (cy - node.y) * 0.004;
-				node.vx *= 0.86;
-				node.vy *= 0.86;
+				node.vx += (cx - node.x) * 0.003 * energy;
+				node.vy += (cy - node.y) * 0.003 * energy;
+				node.vx *= 0.82;
+				node.vy *= 0.82;
 				node.x += node.vx;
 				node.y += node.vy;
 			}
+
+			alpha *= 0.92;
 		}
 
 		function draw() {
@@ -260,10 +277,43 @@ const graph = await buildKnowledgeGraph();
 			ctx.restore();
 		}
 
+		function stopSim() {
+			running = false;
+			alpha = 0;
+			if (raf) {
+				cancelAnimationFrame(raf);
+				raf = 0;
+			}
+		}
+
+		function reheat(amount) {
+			if (mode === 'local' && !dragging) {
+				draw();
+				return;
+			}
+			alpha = Math.min(1, Math.max(alpha, amount || 0.7));
+			if (!running) {
+				running = true;
+				raf = requestAnimationFrame(loop);
+			}
+		}
+
 		function loop() {
+			if (!running) return;
 			tick();
 			draw();
-			raf = requestAnimationFrame(loop);
+			if (alpha > 0.002 || dragging) {
+				raf = requestAnimationFrame(loop);
+			} else {
+				running = false;
+				raf = 0;
+				// 彻底刹住残余速度，避免肉眼微抖
+				nodes.forEach((n) => {
+					n.vx = 0;
+					n.vy = 0;
+				});
+				draw();
+			}
 		}
 
 		function resize() {
@@ -317,6 +367,7 @@ const graph = await buildKnowledgeGraph();
 				node.fx = node.x;
 				node.fy = node.y;
 				canvas.setPointerCapture(e.pointerId);
+				reheat(0.4);
 			} else {
 				last = { x: e.clientX, y: e.clientY };
 			}
@@ -330,17 +381,27 @@ const graph = await buildKnowledgeGraph();
 				dragging.fy = p.y;
 				dragging.x = p.x;
 				dragging.y = p.y;
+				draw();
 			} else if (last) {
 				transform.x += e.clientX - last.x;
 				transform.y += e.clientY - last.y;
 				last = { x: e.clientX, y: e.clientY };
+				draw();
 			}
 		});
 
-		function endDrag(e) {
-			if (dragging && mode === 'global') {
-				dragging.fx = null;
-				dragging.fy = null;
+		function endDrag() {
+			if (dragging) {
+				if (mode === 'global') {
+					dragging.fx = null;
+					dragging.fy = null;
+					reheat(0.35);
+				} else {
+					// Local 保持固定位置
+					dragging.fx = dragging.x;
+					dragging.fy = dragging.y;
+					draw();
+				}
 			}
 			dragging = null;
 			last = null;
@@ -376,6 +437,7 @@ const graph = await buildKnowledgeGraph();
 				const after = screenToWorld(mx, my);
 				transform.x += (after.x - before.x) * transform.k;
 				transform.y += (after.y - before.y) * transform.k;
+				draw();
 			},
 			{ passive: false },
 		);
@@ -389,11 +451,10 @@ const graph = await buildKnowledgeGraph();
 		});
 
 		window.addEventListener('resize', resize);
+		window.addEventListener('blog:appearance', draw);
 		resize();
 		if (focusId) setMode('local');
 		else rebuild();
-		cancelAnimationFrame(raf);
-		raf = requestAnimationFrame(loop);
 	})();
 </script>
 
