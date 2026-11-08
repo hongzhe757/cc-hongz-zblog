@@ -19,7 +19,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	</head>
 	<body>
 		<Header />
-		<main class="site-shell py-5 sm:py-10">
+		<main class="site-shell py-4 sm:py-10">
 			<article>
 				{
 					heroImage && (
@@ -28,7 +28,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						</div>
 					)
 				}
-				<div class="prose-body pt-5 sm:pt-8">
+				<div class="prose-body pt-4 sm:pt-8">
 					<p class="hud-label m-0">
 						LOG · <FormattedDate date={pubDate} />
 						{
@@ -40,10 +40,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							)
 						}
 					</p>
-					<h1 class="mt-3 mb-3 text-2xl font-bold tracking-tight text-[var(--ink)] sm:mb-4 sm:text-4xl">
+					<h1 class="mt-2 mb-2 text-xl font-bold tracking-tight text-[var(--ink)] sm:mt-3 sm:mb-4 sm:text-4xl">
 						{title}
 					</h1>
-					<p class="mt-0 mb-6 text-[var(--muted)] sm:mb-8">{description}</p>
+					<p class="mt-0 mb-5 text-sm text-[var(--muted)] sm:mb-8 sm:text-base">{description}</p>
 					<hr />
 					<div class="prose-body">
 						<slot />

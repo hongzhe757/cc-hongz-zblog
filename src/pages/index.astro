@@ -19,55 +19,54 @@ const posts = (await getCollection('blog'))
 	</head>
 	<body>
 		<Header />
-		<main class="site-shell py-6 sm:py-12">
-			<section class="panel relative px-4 py-8 sm:px-10 sm:py-12">
+		<main class="site-shell py-4 sm:py-12">
+			<section class="panel relative px-3.5 py-6 sm:px-10 sm:py-12">
 				<div
-					class="pointer-events-none absolute -right-10 top-0 h-64 w-64 rounded-full bg-[color-mix(in_srgb,var(--accent)_18%,transparent)] blur-3xl"
+					class="pointer-events-none absolute -right-8 top-0 h-40 w-40 rounded-full bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] blur-2xl sm:h-64 sm:w-64 sm:blur-3xl"
 					aria-hidden="true"
 				></div>
-				<div class="relative flex flex-wrap gap-2">
-					<span class="chip"><span class="chip-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
-					<span class="chip">ASTRO · MD</span>
+				<div class="relative flex flex-wrap gap-1.5 sm:gap-2">
+					<span class="chip"><span class="chip-dot" aria-hidden="true"></span>ONLINE</span>
+					<span class="chip">ASTRO</span>
 					<span class="chip">PAGES</span>
 				</div>
-				<p class="hud-label relative mt-5 mb-0">Signal / Personal Blog</p>
-				<h1 class="relative mt-2 mb-3 text-3xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">
-					{SITE_TITLE}
-					<span class="text-[var(--accent)]">_</span>
+				<p class="hud-label relative mt-4 mb-0 sm:mt-5">Signal / Blog</p>
+				<h1 class="relative mt-2 mb-2 text-[1.75rem] font-bold leading-tight tracking-tight text-[var(--ink)] sm:mb-3 sm:text-5xl">
+					{SITE_TITLE}<span class="text-[var(--accent)]">_</span>
 				</h1>
-				<p class="relative m-0 max-w-2xl text-base text-[var(--muted)] sm:text-lg">
-					{SITE_DESCRIPTION} · 赛博笔记终端，工程与折腾记录。
+				<p class="relative m-0 max-w-2xl text-sm text-[var(--muted)] sm:text-lg">
+					{SITE_DESCRIPTION}
 				</p>
-				<div class="relative mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+				<div class="relative mt-5 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:gap-3">
 					<a href="/blog" class="btn-cyber btn-cyber-primary">进入文章流</a>
 					<a href="/about" class="btn-cyber btn-cyber-ghost">关于节点</a>
 				</div>
 			</section>
 
-			<section class="mt-8 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-3">
-				<div class="panel px-4 py-4">
+			<section class="stats-row mt-4 sm:mt-10">
+				<div class="panel stat-card">
 					<p class="hud-label m-0">Latency</p>
-					<p class="mono mt-2 mb-0 text-2xl font-bold text-[var(--ink)]">LOW</p>
+					<p class="mono mt-1.5 mb-0 font-bold text-[var(--ink)]">LOW</p>
 				</div>
-				<div class="panel px-4 py-4">
+				<div class="panel stat-card">
 					<p class="hud-label m-0">Posts</p>
-					<p class="mono mt-2 mb-0 text-2xl font-bold text-[var(--ink)]">{String(posts.length).padStart(2, '0')}</p>
+					<p class="mono mt-1.5 mb-0 font-bold text-[var(--ink)]">{String(posts.length).padStart(2, '0')}</p>
 				</div>
-				<div class="panel px-4 py-4">
+				<div class="panel stat-card">
 					<p class="hud-label m-0">Stack</p>
-					<p class="mono mt-2 mb-0 text-sm font-bold text-[var(--ink)]">Astro / Tailwind / Giscus</p>
+					<p class="mono mt-1.5 mb-0 text-[0.7rem] font-bold text-[var(--ink)] sm:text-sm">Astro</p>
 				</div>
 			</section>
 
-			<section class="mt-10 sm:mt-12">
-				<div class="mb-5 flex items-end justify-between gap-3">
-					<div>
+			<section class="mt-8 sm:mt-12">
+				<div class="mb-4 flex items-end justify-between gap-3 sm:mb-5">
+					<div class="min-w-0">
 						<p class="hud-label m-0">Feed</p>
-						<h2 class="mt-1 mb-0 text-xl font-bold text-[var(--ink)] sm:text-2xl">最近更新</h2>
+						<h2 class="mt-1 mb-0 text-lg font-bold text-[var(--ink)] sm:text-2xl">最近更新</h2>
 					</div>
-					<a href="/blog" class="mono text-xs font-semibold no-underline sm:text-sm">VIEW_ALL →</a>
+					<a href="/blog" class="mono shrink-0 text-[0.7rem] font-semibold no-underline sm:text-sm">ALL →</a>
 				</div>
-				<ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
+				<ul class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-4 md:grid-cols-2">
 					{
 						posts.map((post, index) => (
 							<li class:list={['card', index === 0 && 'md:col-span-2']}>
@@ -76,7 +75,7 @@ const posts = (await getCollection('blog'))
 										<Image
 											class:list={[
 												'w-full object-cover opacity-95',
-												index === 0 ? 'h-52 sm:h-64' : 'h-40',
+												index === 0 ? 'h-44 sm:h-64' : 'h-36 sm:h-40',
 											]}
 											width={index === 0 ? 1200 : 720}
 											height={index === 0 ? 520 : 360}
@@ -84,12 +83,14 @@ const posts = (await getCollection('blog'))
 											alt=""
 										/>
 									)}
-									<div class="p-4 sm:p-5">
-										<p class="mono m-0 text-xs text-[var(--accent)]">
+									<div class="p-3.5 sm:p-5">
+										<p class="mono m-0 text-[0.7rem] text-[var(--accent)] sm:text-xs">
 											<FormattedDate date={post.data.pubDate} />
 										</p>
-										<h3 class="mt-2 mb-2 text-lg font-bold text-[var(--ink)] sm:text-xl">{post.data.title}</h3>
-										<p class="m-0 text-sm text-[var(--muted)] sm:text-base">{post.data.description}</p>
+										<h3 class="mt-1.5 mb-1.5 text-base font-bold text-[var(--ink)] sm:mt-2 sm:mb-2 sm:text-xl">
+											{post.data.title}
+										</h3>
+										<p class="m-0 text-sm text-[var(--muted)]">{post.data.description}</p>
 									</div>
 								</a>
 							</li>
