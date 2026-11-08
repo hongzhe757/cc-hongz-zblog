@@ -1,11 +1,10 @@
 ---
 const skins = [
-	{ id: 'cyber', label: '赛博', swatch: '#22d3ee' },
-	{ id: 'noir-red', label: '黑红', swatch: '#ef4444' },
-	{ id: 'navy', label: '深蓝', swatch: '#1d4ed8' },
-	{ id: 'amber', label: '墨金', swatch: '#f59e0b' },
-	{ id: 'mono', label: '黑白', swatch: '#222222' },
-	{ id: 'slate', label: '青石', swatch: '#0e7490' },
+	{ id: 'ink', label: '墨青', swatch: '#0f766e' },
+	{ id: 'ocean', label: '海雾', swatch: '#2563eb' },
+	{ id: 'forest', label: '林间', swatch: '#15803d' },
+	{ id: 'cinnabar', label: '朱砂', swatch: '#c2410c' },
+	{ id: 'mono', label: '黑白', swatch: '#171717' },
 ] as const;
 ---
 
@@ -79,7 +78,8 @@ const skins = [
 		const root = document.documentElement;
 		const SKIN_KEY = 'blog-skin';
 		const MODE_KEY = 'theme';
-		const validSkins = ['cyber', 'navy', 'noir-red', 'amber', 'mono', 'slate'];
+		const validSkins = ['ink', 'ocean', 'forest', 'cinnabar', 'mono'];
+		const legacy = { cyber: 'ink', navy: 'ocean', slate: 'forest', amber: 'cinnabar', 'noir-red': 'cinnabar' };
 
 		function applyMode(mode) {
 			root.classList.toggle('dark', mode === 'dark');
@@ -97,7 +97,8 @@ const skins = [
 		}
 
 		function applySkin(skin) {
-			const next = validSkins.includes(skin) ? skin : 'cyber';
+			let next = legacy[skin] || skin;
+			if (!validSkins.includes(next)) next = 'ink';
 			root.setAttribute('data-skin', next);
 			localStorage.setItem(SKIN_KEY, next);
 			document.querySelectorAll('.skin-btn').forEach((btn) => {
@@ -105,8 +106,8 @@ const skins = [
 			});
 		}
 
-		applyMode(localStorage.getItem(MODE_KEY) || 'dark');
-		applySkin(localStorage.getItem(SKIN_KEY) || 'cyber');
+		applyMode(localStorage.getItem(MODE_KEY) || 'light');
+		applySkin(localStorage.getItem(SKIN_KEY) || 'ink');
 
 		const btn = document.getElementById('skin-settings-btn');
 		const panel = document.getElementById('skin-settings-panel');
@@ -126,7 +127,7 @@ const skins = [
 			el.addEventListener('click', () => applyMode(el.getAttribute('data-mode') || 'light'));
 		});
 		document.querySelectorAll('.skin-btn').forEach((el) => {
-			el.addEventListener('click', () => applySkin(el.getAttribute('data-skin') || 'navy'));
+			el.addEventListener('click', () => applySkin(el.getAttribute('data-skin') || 'ink'));
 		});
 	})();
 </script>

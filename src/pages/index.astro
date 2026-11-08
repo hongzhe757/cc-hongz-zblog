@@ -21,32 +21,28 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main class="site-shell py-4 sm:py-12">
 			<section class="panel relative px-3.5 py-6 sm:px-10 sm:py-12">
-				<div
-					class="pointer-events-none absolute -right-8 top-0 h-40 w-40 rounded-full bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] blur-2xl sm:h-64 sm:w-64 sm:blur-3xl"
-					aria-hidden="true"
-				></div>
 				<div class="relative flex flex-wrap gap-1.5 sm:gap-2">
-					<span class="chip"><span class="chip-dot" aria-hidden="true"></span>ONLINE</span>
-					<span class="chip">ASTRO</span>
-					<span class="chip">PAGES</span>
+					<span class="chip"><span class="chip-dot" aria-hidden="true"></span>Blog</span>
+					<span class="chip">Astro</span>
+					<span class="chip">Pages</span>
 				</div>
-				<p class="hud-label relative mt-4 mb-0 sm:mt-5">Signal / Blog</p>
+				<p class="hud-label relative mt-4 mb-0 sm:mt-5">Hongz / Notes</p>
 				<h1 class="relative mt-2 mb-2 text-[1.75rem] font-bold leading-tight tracking-tight text-[var(--ink)] sm:mb-3 sm:text-5xl">
-					{SITE_TITLE}<span class="text-[var(--accent)]">_</span>
+					{SITE_TITLE}
 				</h1>
 				<p class="relative m-0 max-w-2xl text-sm text-[var(--muted)] sm:text-lg">
 					{SITE_DESCRIPTION}
 				</p>
 				<div class="relative mt-5 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:gap-3">
-					<a href="/blog" class="btn-cyber btn-cyber-primary">进入文章流</a>
-					<a href="/about" class="btn-cyber btn-cyber-ghost">关于节点</a>
+					<a href="/blog" class="btn-cyber btn-cyber-primary">阅读文章</a>
+					<a href="/about" class="btn-cyber btn-cyber-ghost">关于我</a>
 				</div>
 			</section>
 
 			<section class="stats-row mt-4 sm:mt-10">
 				<div class="panel stat-card">
-					<p class="hud-label m-0">Latency</p>
-					<p class="mono mt-1.5 mb-0 font-bold text-[var(--ink)]">LOW</p>
+					<p class="hud-label m-0">Focus</p>
+					<p class="mono mt-1.5 mb-0 text-[0.85rem] font-bold text-[var(--ink)] sm:text-base">Java</p>
 				</div>
 				<div class="panel stat-card">
 					<p class="hud-label m-0">Posts</p>
