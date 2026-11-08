@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+_site/
+.jekyll-cache/
+node_modules/
+.gitee.local.env
+.env
