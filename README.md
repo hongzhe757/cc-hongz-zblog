@@ -34,16 +34,30 @@ npm run dev
 
 停止：终端按 `Ctrl+C`。
 
-### 关于「登录后台写文章」
+### 后台写文章（Keystatic）
 
-当前**没有**网页后台。写文章仍是改 `src/content/blog/*.md` 再 `git push`。  
-若需要「登录后在网页里发文」，可加 **Keystatic** 或 **Decap CMS**（GitHub 登录），需要的话再说一声我帮你接。
+已接入 **Keystatic** 可视化后台（本地即可用）。
+
+1. `npm run dev`
+2. 浏览器打开：**http://127.0.0.1:4321/keystatic**（导航栏「后台」也可进）
+3. 点 **博客文章** → **Create entry** → 填标题 / 摘要 / 日期 / 正文 → **Save**
+4. 会在 `src/content/blog/` 生成 `.mdoc` 文件；本地首页立刻能看到
+5. `git add` → `commit` → `push` 到 `main`/`dev`，Actions 自动上线
+
+> GitHub Pages **没有服务器**，线上 `blog.hongz.cc/keystatic` 不可用。  
+> 日常发文：本地后台写完再推送。若要「打开网页、GitHub 登录直接发」，需另挂 Netlify/Vercel 后台（见文末）。
 
 ---
 
 ## 二、怎么写博客
 
-1. 在 `src/content/blog/` 新建文件，例如 `my-topic.md`（也可用 `.mdx`）。
+### 方式 A：后台（推荐）
+
+见上一节 Keystatic。
+
+### 方式 B：手写 Markdown
+
+1. 在 `src/content/blog/` 新建 `my-topic.md`（或后台生成的 `.mdoc`）。
 2. 文件开头写 frontmatter（必填）：
 
 ```md
@@ -57,11 +71,9 @@ heroImage: '../../assets/blog-placeholder-1.jpg'
 正文从这里开始，支持普通 Markdown。
 ```
 
-3. 保存后本地预览会自动出现在首页 / Blog 列表（无需再改 `index.html`）。
-4. 可选封面：把图片放进 `src/assets/`，在 `heroImage` 里引用。
-5. 参考示例：
-   - `src/content/blog/hello-zblog.md`
-   - `src/content/blog/markdown-style-guide.md`
+3. 保存后本地预览会出现在首页 / Blog 列表。
+4. 可选封面：图片放 `src/assets/` 或 `src/assets/blog/`。
+5. 示例：`src/content/blog/hello-zblog.md`
 
 ---
 
@@ -147,6 +159,16 @@ npm run preview
 2. 打开 https://giscus.app/zh → 用 GitHub 登录 → 选择仓库 `hongzhe757/cc-hongz-zblog`
 3. 安装 **Giscus** GitHub App 到该仓库（页面会提示）
 4. `src/consts.ts` 里 `GISCUS.repoId` / `categoryId` 已预填；若你改了分类，按 giscus 页面重新复制即可
+
+### 线上 GitHub 登录发文（可选）
+
+读者站继续用 Pages；后台需 Node 主机（Netlify / Vercel 等）：
+
+1. 把本仓库另部署一份，构建时设 `KEYSTATIC_ADMIN=1`，并配置适配器
+2. 环境变量见 `.env.example`（`PUBLIC_KEYSTATIC_STORAGE=github` + GitHub App 密钥）
+3. 打开该后台域名的 `/keystatic` → 按提示创建 GitHub App → 登录后保存即 commit → Pages 自动重建
+
+本地日常用不需要这一步。
 
 ---
 
