@@ -9,28 +9,39 @@ html {
 	scroll-behavior: smooth;
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
+	/* 避免部分 WebView 横向溢出把布局撑破 */
+	overflow-x: clip;
+	width: 100%;
 }
 
 body {
 	margin: 0;
 	min-height: 100vh;
 	min-height: 100dvh;
+	width: 100%;
 	font-family: var(--font-atkinson), "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 	color: var(--ink);
 	background-color: var(--bg);
-	/* 移动端不用 fixed，避免 iOS Safari 背景错乱 */
-	background-image:
-		radial-gradient(700px 360px at 10% -8%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 55%),
-		radial-gradient(520px 300px at 100% 0%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 50%),
-		linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 92%, #000) 100%);
+	/* 移动端：纯色+轻渐变，兼容不支持 color-mix / fixed 的浏览器 */
+	background-image: linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
 	background-attachment: scroll;
 	line-height: 1.65;
 	font-size: 16px;
 	word-wrap: break-word;
 	overflow-wrap: anywhere;
 	overflow-x: hidden;
-	padding-left: env(safe-area-inset-left);
-	padding-right: env(safe-area-inset-right);
+	padding-left: env(safe-area-inset-left, 0px);
+	padding-right: env(safe-area-inset-right, 0px);
+	-webkit-tap-highlight-color: transparent;
+}
+
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+	body {
+		background-image:
+			radial-gradient(700px 360px at 10% -8%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 55%),
+			radial-gradient(520px 300px at 100% 0%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 50%),
+			linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 92%, #000) 100%);
+	}
 }
 
 @media (min-width: 640px) {
@@ -180,11 +191,17 @@ iframe {
 
 .panel {
 	position: relative;
-	background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+	background: var(--bg-elevated);
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
 	box-shadow: var(--shadow);
 	overflow: hidden;
+}
+
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+	.panel {
+		background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+	}
 }
 
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
@@ -209,12 +226,18 @@ iframe {
 
 .card {
 	position: relative;
-	background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+	background: var(--bg-elevated);
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
 	box-shadow: var(--shadow);
 	overflow: hidden;
 	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+	.card {
+		background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+	}
 }
 
 .card::after {

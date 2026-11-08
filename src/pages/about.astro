@@ -1,25 +1,165 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_LANG, SITE_TITLE } from '../consts';
+
+const skills = [
+	'Java / Spring Boot / Spring Cloud',
+	'Vue / React / 小程序 / H5',
+	'MySQL / Redis / MQTT / Nacos',
+	'Docker / Jenkins / Maven',
+	'规则引擎 / 风控 / ESB / 工作流',
+	'AI 提效：Cursor / Copilot / Dify',
+];
+
+const timeline = [
+	{
+		period: '2025.12 — 2026.01',
+		org: '南天信息',
+		role: '全栈工程师',
+		note: '个贷 / 网贷系统前后端研发',
+	},
+	{
+		period: '2025.06 — 2025.12',
+		org: '上海赛印软件',
+		role: '全栈工程师',
+		note: '实验室 LIMS：委托、样品、检测、报告',
+	},
+	{
+		period: '2018.04 — 2025.03',
+		org: '中电金信',
+		role: '高级设计开发工程师 / 架构师',
+		note: 'V2X/V2I 仿真平台主程、智慧停车、银行消贷改造',
+	},
+	{
+		period: '2017.04 — 2018.03',
+		org: '上海金仕达卫宁',
+		role: '开发工程师',
+		note: '医保智能审核 / 监控审核（多地市落地）',
+	},
+];
+
+const highlights = [
+	{
+		title: 'V2X / V2I 仿真测试平台',
+		desc: '从 0 到 1 做 Web 架构与主程：C-V2X 场景覆盖、中间件适配、虚幻引擎 3D 升级、高精地图与红绿灯模拟，联调车机与性能测试。',
+	},
+	{
+		title: '银行消费贷款 / 银企直连',
+		desc: '汽车消贷与消费贷流程改造，对接核心、ESB、影像与签章；Blaze 规则引擎与风控；烟草回单等多维报表。',
+	},
+	{
+		title: 'E 泊士智慧停车 / 道闸',
+		desc: '国央企停车场需求对接，收费与道闸模块研发、规范建设与上线部署。',
+	},
+	{
+		title: '实验室 LIMS / 个贷网贷',
+		desc: '近年全栈交付：LIMS 核心业务模块；个人信贷与网贷系统前后端。',
+	},
+];
 ---
 
-<Layout
-	title="关于"
-	description="hongz 的技术博客：笔记、工程与折腾记录"
-	pubDate={new Date('November 08 2026')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		这里是 <strong>hongz</strong> 的个人站点。技术栈：Astro + Markdown，托管在 GitHub Pages，域名
-		<code>blog.hongz.cc</code>。
-	</p>
-	<p>
-		文章评论使用 <strong>Giscus</strong>，用你的 <strong>GitHub 账号登录</strong> 即可留言。
-	</p>
-	<p>
-		仓库：
-		<a href="https://github.com/hongzhe757/cc-hongz-zblog" target="_blank" rel="noreferrer">
-			hongzhe757/cc-hongz-zblog
-		</a>
-	</p>
-</Layout>
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead
+			title={`关于 · ${SITE_TITLE}`}
+			description="秦鸿哲（hongz）—— Java 全栈 / 架构，金融 · 智能汽车 · 医疗 · 企业级系统"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="site-shell py-4 sm:py-12">
+			<section class="panel relative px-3.5 py-6 sm:px-10 sm:py-10">
+				<p class="hud-label m-0">Profile / Node</p>
+				<h1 class="mt-2 mb-2 text-[1.6rem] font-bold tracking-tight text-[var(--ink)] sm:mt-3 sm:text-4xl">
+					秦鸿哲 <span class="text-[var(--accent)]">/ hongz</span>
+				</h1>
+				<p class="m-0 text-sm text-[var(--muted)] sm:text-base">
+					Java 全栈 · 架构师向 · 约 10 年研发与带队经验
+				</p>
+				<p class="mt-3 mb-0 text-sm leading-relaxed text-[var(--ink)] sm:mt-4 sm:text-base">
+					覆盖互联网金融、智能汽车（V2X）、医疗医保、停车充电、实验室信息化与科研申报等
+					B/C 端系统。擅长从 0 到 1 架构落地、跨端联调、规范建设，以及 8–10
+					人团队的任务拆分、跟踪与客户对接。日常用 Cursor / Copilot 等 AI 工具提效。
+				</p>
+				<div class="mt-4 flex flex-col gap-2 sm:mt-5 sm:flex-row sm:flex-wrap sm:gap-3">
+					<a class="btn-cyber btn-cyber-primary" href="mailto:hongzhe.qin@outlook.com">邮件联系</a>
+					<a
+						class="btn-cyber btn-cyber-ghost"
+						href="https://github.com/hongzhe757"
+						target="_blank"
+						rel="noreferrer"
+					>
+						GitHub
+					</a>
+					<a class="btn-cyber btn-cyber-ghost" href="/blog">看文章</a>
+				</div>
+			</section>
+
+			<section class="mt-4 sm:mt-8">
+				<p class="hud-label m-0">Skills</p>
+				<h2 class="mt-1 mb-3 text-lg font-bold text-[var(--ink)] sm:mb-4 sm:text-2xl">技能栈</h2>
+				<ul class="m-0 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2 sm:gap-3">
+					{
+						skills.map((s) => (
+							<li class="panel px-3.5 py-3 text-sm text-[var(--ink)] sm:px-4">{s}</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="mt-8 sm:mt-12">
+				<p class="hud-label m-0">Career</p>
+				<h2 class="mt-1 mb-3 text-lg font-bold text-[var(--ink)] sm:mb-4 sm:text-2xl">经历</h2>
+				<ol class="m-0 flex list-none flex-col gap-2.5 p-0 sm:gap-3">
+					{
+						timeline.map((item) => (
+							<li class="panel px-3.5 py-3.5 sm:px-5 sm:py-4">
+								<p class="mono m-0 text-[0.7rem] text-[var(--accent)] sm:text-xs">{item.period}</p>
+								<p class="mt-1 mb-0 text-base font-bold text-[var(--ink)]">
+									{item.org}
+									<span class="font-normal text-[var(--muted)]"> · {item.role}</span>
+								</p>
+								<p class="mt-1 mb-0 text-sm text-[var(--muted)]">{item.note}</p>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+
+			<section class="mt-8 sm:mt-12">
+				<p class="hud-label m-0">Highlights</p>
+				<h2 class="mt-1 mb-3 text-lg font-bold text-[var(--ink)] sm:mb-4 sm:text-2xl">代表项目</h2>
+				<ul class="m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:gap-3 md:grid-cols-2">
+					{
+						highlights.map((h) => (
+							<li class="card p-3.5 sm:p-5">
+								<h3 class="mt-0 mb-2 text-base font-bold text-[var(--ink)] sm:text-lg">{h.title}</h3>
+								<p class="m-0 text-sm text-[var(--muted)]">{h.desc}</p>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="panel mt-8 px-3.5 py-5 sm:mt-12 sm:px-6 sm:py-6">
+				<p class="hud-label m-0">Education</p>
+				<h2 class="mt-1 mb-3 text-lg font-bold text-[var(--ink)] sm:text-xl">教育</h2>
+				<p class="m-0 text-sm text-[var(--ink)]">
+					2015.9 — 2017.6 · 海南热带海洋学院 · 计算机科学与技术 · 本科
+				</p>
+				<p class="mt-2 mb-0 text-sm text-[var(--ink)]">
+					2012.9 — 2015.6 · 海南软件职业技术学院 · 软件技术 · 专科
+				</p>
+				<p class="mt-4 mb-0 text-sm text-[var(--muted)]">
+					本站：Astro + Markdown，GitHub Pages，域名 <code>blog.hongz.cc</code>。评论用
+					Giscus（GitHub 登录）。邮箱：
+					<a href="mailto:hongzhe.qin@outlook.com">hongzhe.qin@outlook.com</a>
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
