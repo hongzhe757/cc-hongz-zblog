@@ -21,7 +21,7 @@
 			let mode = localStorage.getItem('theme') || 'light';
 			let skin = localStorage.getItem('blog-skin') || 'paper';
 			if (legacy[skin]) skin = legacy[skin];
-			if (!valid.includes(skin)) skin = 'paper';
+			if (valid.indexOf(skin) === -1) skin = 'paper';
 			localStorage.setItem('blog-skin', skin);
 			root.classList.toggle('dark', mode === 'dark');
 			root.setAttribute('data-skin', skin);

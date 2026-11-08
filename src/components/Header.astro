@@ -1,5 +1,5 @@
 ---
-import { ADMIN_URL, SITE_TITLE } from '../consts';
+import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 import SkinSettings from './SkinSettings.astro';
 ---
@@ -23,20 +23,6 @@ import SkinSettings from './SkinSettings.astro';
 				<HeaderLink href="/">首页</HeaderLink>
 				<HeaderLink href="/blog">文章</HeaderLink>
 				<HeaderLink href="/about">关于</HeaderLink>
-				{
-					import.meta.env.DEV ? (
-						<HeaderLink href="/keystatic">后台</HeaderLink>
-					) : (
-						<a
-							class="inline-flex items-center rounded-lg px-3 py-1.5 text-[var(--ink)] no-underline hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
-							href={ADMIN_URL}
-							target="_blank"
-							rel="noreferrer"
-						>
-							后台
-						</a>
-					)
-				}
 			</div>
 			<a
 				class="hidden h-9 w-9 items-center justify-center rounded-lg border border-[var(--line)] text-[var(--ink)] no-underline md:inline-flex"
@@ -73,16 +59,12 @@ import SkinSettings from './SkinSettings.astro';
 			<HeaderLink href="/">首页</HeaderLink>
 			<HeaderLink href="/blog">文章</HeaderLink>
 			<HeaderLink href="/about">关于</HeaderLink>
-			{
-				import.meta.env.DEV ? (
-					<HeaderLink href="/keystatic">后台发文</HeaderLink>
-				) : (
-					<a class="rounded-lg px-3 py-2.5 text-[var(--ink)] no-underline" href={ADMIN_URL} target="_blank" rel="noreferrer">
-						后台发文
-					</a>
-				)
-			}
-			<a class="rounded-lg px-3 py-2.5 text-[var(--ink)] no-underline" href="https://github.com/hongzhe757/cc-hongz-zblog" target="_blank" rel="noreferrer">
+			<a
+				class="rounded-lg px-3 py-2.5 text-[var(--ink)] no-underline"
+				href="https://github.com/hongzhe757/cc-hongz-zblog"
+				target="_blank"
+				rel="noreferrer"
+			>
 				GitHub
 			</a>
 		</div>

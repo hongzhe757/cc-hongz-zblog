@@ -1,74 +1,82 @@
 ---
 const skins = [
-	{ id: 'paper', label: '纸白', swatch: '#4338ca' },
+	{ id: 'paper', label: '青绿', swatch: '#0f766e' },
 	{ id: 'mist', label: '雾蓝', swatch: '#0369a1' },
 	{ id: 'olive', label: '橄榄', swatch: '#3f6212' },
-	{ id: 'mono', label: '黑白', swatch: '#171717' },
+	{ id: 'mono', label: '黑白', swatch: '#111111' },
 ] as const;
 ---
 
-<div class="skin-settings relative">
-	<button
-		id="skin-settings-btn"
-		type="button"
-		class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--bg-elevated)] text-sm text-[var(--ink)] transition hover:border-[var(--accent)] sm:w-auto sm:gap-1.5 sm:px-3"
-		aria-haspopup="dialog"
-		aria-expanded="false"
-		aria-controls="skin-settings-panel"
-		title="外观"
-	>
-		<span aria-hidden="true">◐</span>
-		<span class="hidden sm:inline">外观</span>
-	</button>
-
-	<div
-		id="skin-settings-panel"
-		class="fixed inset-x-3 top-[3.75rem] z-50 hidden max-h-[min(70vh,28rem)] w-auto overflow-y-auto rounded-xl border border-[var(--line)] bg-[var(--bg-elevated)] p-3 shadow-[var(--shadow)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-[calc(100%+0.5rem)] sm:max-h-none sm:w-60 sm:overflow-visible"
-		role="dialog"
-		aria-label="外观设置"
-	>
-		<p class="m-0 mb-2 text-xs font-medium text-[var(--muted)]">明暗</p>
-		<div class="mb-3 grid grid-cols-2 gap-2">
-			<button type="button" data-mode="light" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm text-[var(--ink)]">
-				浅色
+<div class="skin-bar" role="group" aria-label="外观">
+	<button type="button" class="mode-chip" data-mode="light" title="浅色" aria-label="浅色">☀</button>
+	<button type="button" class="mode-chip" data-mode="dark" title="深色" aria-label="深色">☾</button>
+	<span class="skin-sep" aria-hidden="true"></span>
+	{
+		skins.map((skin) => (
+			<button
+				type="button"
+				class="skin-chip"
+				data-skin={skin.id}
+				title={skin.label}
+				aria-label={skin.label}
+				style={`--swatch:${skin.swatch}`}
+			>
+				<span class="skin-dot" aria-hidden="true" />
 			</button>
-			<button type="button" data-mode="dark" class="mode-btn rounded-lg border border-[var(--line)] px-2 py-1.5 text-sm text-[var(--ink)]">
-				深色
-			</button>
-		</div>
-
-		<p class="m-0 mb-2 text-xs font-medium text-[var(--muted)]">配色</p>
-		<div class="grid grid-cols-1 gap-1.5">
-			{
-				skins.map((skin) => (
-					<button
-						type="button"
-						data-skin={skin.id}
-						class="skin-btn flex items-center gap-2 rounded-lg border border-[var(--line)] px-2.5 py-2 text-left text-sm text-[var(--ink)] transition hover:border-[var(--accent)]"
-					>
-						<span
-							class="inline-block h-3.5 w-3.5 rounded-full border border-[var(--line)]"
-							style={`background:${skin.swatch}`}
-							aria-hidden="true"
-						/>
-						<span>{skin.label}</span>
-						<span class="skin-check ml-auto hidden text-[var(--accent)]">✓</span>
-					</button>
-				))
-			}
-		</div>
-	</div>
+		))
+	}
 </div>
 
 <style>
-	.mode-btn.is-active,
-	.skin-btn.is-active {
+	.skin-bar {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.2rem;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		background: var(--bg-elevated);
+	}
+	.mode-chip,
+	.skin-chip {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.85rem;
+		height: 1.85rem;
+		margin: 0;
+		padding: 0;
+		border: 1px solid transparent;
+		border-radius: 999px;
+		background: transparent;
+		color: var(--muted);
+		cursor: pointer;
+		line-height: 1;
+		font-size: 0.85rem;
+	}
+	.mode-chip.is-active,
+	.skin-chip.is-active {
 		border-color: var(--accent);
 		background: var(--accent-soft);
 		color: var(--accent);
 	}
-	.skin-btn.is-active .skin-check {
-		display: inline;
+	.skin-sep {
+		width: 1px;
+		height: 1rem;
+		margin: 0 0.15rem;
+		background: var(--line);
+	}
+	.skin-dot {
+		width: 0.85rem;
+		height: 0.85rem;
+		border-radius: 999px;
+		background: var(--swatch);
+		border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+	}
+	.skin-chip.is-active .skin-dot {
+		outline: 2px solid var(--accent);
+		outline-offset: 1px;
 	}
 </style>
 
@@ -90,16 +98,27 @@ const skins = [
 			'noir-red': 'paper',
 		};
 
-		function applyMode(mode) {
-			root.classList.toggle('dark', mode === 'dark');
-			localStorage.setItem(MODE_KEY, mode);
-			document.querySelectorAll('.mode-btn').forEach((btn) => {
+		function syncUi(mode, skin) {
+			document.querySelectorAll('.mode-chip').forEach((btn) => {
 				btn.classList.toggle('is-active', btn.getAttribute('data-mode') === mode);
 			});
+			document.querySelectorAll('.skin-chip').forEach((btn) => {
+				btn.classList.toggle('is-active', btn.getAttribute('data-skin') === skin);
+			});
+		}
+
+		function applyMode(mode) {
+			const next = mode === 'dark' ? 'dark' : 'light';
+			root.classList.toggle('dark', next === 'dark');
+			try {
+				localStorage.setItem(MODE_KEY, next);
+			} catch (_) {}
+			const skin = root.getAttribute('data-skin') || 'paper';
+			syncUi(next, skin);
 			const frame = document.querySelector('iframe.giscus-frame');
-			if (frame) {
-				frame.contentWindow?.postMessage(
-					{ giscus: { setConfig: { theme: mode === 'dark' ? 'dark' : 'light' } } },
+			if (frame && frame.contentWindow) {
+				frame.contentWindow.postMessage(
+					{ giscus: { setConfig: { theme: next === 'dark' ? 'dark' : 'light' } } },
 					'https://giscus.app',
 				);
 			}
@@ -107,36 +126,40 @@ const skins = [
 
 		function applySkin(skin) {
 			let next = legacy[skin] || skin;
-			if (!validSkins.includes(next)) next = 'paper';
+			if (validSkins.indexOf(next) === -1) next = 'paper';
 			root.setAttribute('data-skin', next);
-			localStorage.setItem(SKIN_KEY, next);
-			document.querySelectorAll('.skin-btn').forEach((btn) => {
-				btn.classList.toggle('is-active', btn.getAttribute('data-skin') === next);
-			});
+			try {
+				localStorage.setItem(SKIN_KEY, next);
+			} catch (_) {}
+			const mode = root.classList.contains('dark') ? 'dark' : 'light';
+			syncUi(mode, next);
 		}
 
-		applyMode(localStorage.getItem(MODE_KEY) || 'light');
-		applySkin(localStorage.getItem(SKIN_KEY) || 'paper');
+		function boot() {
+			let mode = 'light';
+			let skin = 'paper';
+			try {
+				mode = localStorage.getItem(MODE_KEY) || 'light';
+				skin = localStorage.getItem(SKIN_KEY) || 'paper';
+			} catch (_) {}
+			applyMode(mode);
+			applySkin(skin);
+		}
 
-		const btn = document.getElementById('skin-settings-btn');
-		const panel = document.getElementById('skin-settings-panel');
-		btn?.addEventListener('click', (e) => {
-			e.stopPropagation();
-			const open = panel?.classList.toggle('hidden') === false;
-			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-		});
+		boot();
+
 		document.addEventListener('click', (e) => {
-			if (!panel || panel.classList.contains('hidden')) return;
-			if (panel.contains(e.target) || btn?.contains(e.target)) return;
-			panel.classList.add('hidden');
-			btn?.setAttribute('aria-expanded', 'false');
-		});
-
-		document.querySelectorAll('.mode-btn').forEach((el) => {
-			el.addEventListener('click', () => applyMode(el.getAttribute('data-mode') || 'light'));
-		});
-		document.querySelectorAll('.skin-btn').forEach((el) => {
-			el.addEventListener('click', () => applySkin(el.getAttribute('data-skin') || 'paper'));
+			const t = e.target;
+			if (!(t instanceof Element)) return;
+			const modeBtn = t.closest('.mode-chip');
+			if (modeBtn) {
+				applyMode(modeBtn.getAttribute('data-mode') || 'light');
+				return;
+			}
+			const skinBtn = t.closest('.skin-chip');
+			if (skinBtn) {
+				applySkin(skinBtn.getAttribute('data-skin') || 'paper');
+			}
 		});
 	})();
 </script>

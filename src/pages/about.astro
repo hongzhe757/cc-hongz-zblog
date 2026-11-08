@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { ADMIN_URL, SITE_LANG, SITE_TITLE } from '../consts';
+import { SITE_LANG, SITE_TITLE } from '../consts';
 
 /** 按项目起始年份从早到晚 */
 const timeline = [
@@ -112,9 +112,6 @@ const timeline = [
 						GitHub
 					</a>
 					<a class="btn-cyber btn-cyber-ghost" href="/blog">看文章</a>
-					<a class="btn-cyber btn-cyber-ghost" href={ADMIN_URL} target="_blank" rel="noreferrer">
-						写文章后台
-					</a>
 				</div>
 			</section>
 
