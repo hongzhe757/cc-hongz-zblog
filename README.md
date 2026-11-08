@@ -44,8 +44,8 @@ npm run dev
 4. 会在 `src/content/blog/` 生成 `.mdoc` 文件；本地首页立刻能看到
 5. `git add` → `commit` → `push` 到 `main`/`dev`，Actions 自动上线
 
-> GitHub Pages **没有服务器**，线上 `blog.hongz.cc/keystatic` 不可用。  
-> 日常发文：本地后台写完再推送。若要「打开网页、GitHub 登录直接发」，需另挂 Netlify/Vercel 后台（见文末）。
+> 读者站 `blog.hongz.cc` 是 GitHub Pages（纯静态），**没有** `/keystatic`。  
+> 线上发文后台挂在 **Vercel**（见下方「线上后台」）。本地仍可用 `/keystatic`。
 
 ---
 
@@ -160,15 +160,21 @@ npm run preview
 3. 安装 **Giscus** GitHub App 到该仓库（页面会提示）
 4. `src/consts.ts` 里 `GISCUS.repoId` / `categoryId` 已预填；若你改了分类，按 giscus 页面重新复制即可
 
-### 线上 GitHub 登录发文（可选）
+### 线上后台（Vercel + GitHub 登录）
 
-读者站继续用 Pages；后台需 Node 主机（Netlify / Vercel 等）：
+同一仓库双部署：
 
-1. 把本仓库另部署一份，构建时设 `KEYSTATIC_ADMIN=1`，并配置适配器
-2. 环境变量见 `.env.example`（`PUBLIC_KEYSTATIC_STORAGE=github` + GitHub App 密钥）
-3. 打开该后台域名的 `/keystatic` → 按提示创建 GitHub App → 登录后保存即 commit → Pages 自动重建
+| 用途 | 平台 | 地址 |
+| --- | --- | --- |
+| 读者站 | GitHub Pages | https://blog.hongz.cc |
+| 发文后台 | Vercel | `https://<项目>.vercel.app/keystatic` |
 
-本地日常用不需要这一步。
+1. 打开后台 URL 的 `/keystatic`
+2. 点 **Log in with GitHub** → 按向导创建 GitHub App 并授权本仓库
+3. 把生成的 `KEYSTATIC_*` / `PUBLIC_KEYSTATIC_*` 填进 Vercel → Settings → Environment Variables，Redeploy
+4. 登录后写文章 → Save 会 **commit 到仓库** → Pages Actions 自动发布到 `blog.hongz.cc`
+
+本地：`npm run dev` → http://127.0.0.1:4321/keystatic（无需登录）。
 
 ---
 

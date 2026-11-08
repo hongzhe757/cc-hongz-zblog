@@ -112,6 +112,18 @@ const timeline = [
 						GitHub
 					</a>
 					<a class="btn-cyber btn-cyber-ghost" href="/blog">看文章</a>
+					{
+						import.meta.env.PUBLIC_ADMIN_URL && (
+							<a
+								class="btn-cyber btn-cyber-ghost"
+								href={import.meta.env.PUBLIC_ADMIN_URL}
+								target="_blank"
+								rel="noreferrer"
+							>
+								写文章后台
+							</a>
+						)
+					}
 				</div>
 			</section>
 

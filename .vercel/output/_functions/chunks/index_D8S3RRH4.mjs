@@ -1,0 +1,32 @@
+import { t as __exportAll } from "./rolldown-runtime_D8jQpDG7.mjs";
+import { D as addAttribute, d as renderComponent, x as renderHead, y as renderTemplate } from "./jsx-runtime_B3hLhILp.mjs";
+import { t as createComponent } from "./astro-component_BaA6IVZM.mjs";
+import "./compiler_LbqzbmMT.mjs";
+import { r as $$Image } from "./_astro_assets_DT738yx5.mjs";
+import { t as getCollection } from "./_astro_content_BjKl28YN.mjs";
+import { n as $$Footer, r as $$BaseHead, t as $$Header } from "./Header_DhSVDWH4.mjs";
+import { t as $$FormattedDate } from "./FormattedDate_BMdOrkl6.mjs";
+import { i as SITE_TITLE, n as SITE_DESCRIPTION, r as SITE_LANG } from "./consts_BigjK7kT.mjs";
+// src/pages/index.astro
+var pages_exports = /* @__PURE__ */ __exportAll({
+	default: () => $$Index,
+	file: () => $$file,
+	url: () => ""
+});
+var $$Index = createComponent(async ($$result, $$props, $$slots) => {
+	const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 6);
+	return renderTemplate`<html${addAttribute(SITE_LANG, "lang")}><head>${renderComponent($$result, "BaseHead", $$BaseHead, {
+		"title": SITE_TITLE,
+		"description": SITE_DESCRIPTION
+	})}${renderHead($$result)}</head><body>${renderComponent($$result, "Header", $$Header, {})}<main class="site-shell py-4 sm:py-12"><section class="panel relative px-3.5 py-6 sm:px-10 sm:py-12"><div class="pointer-events-none absolute -right-8 top-0 h-40 w-40 rounded-full bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] blur-2xl sm:h-64 sm:w-64 sm:blur-3xl" aria-hidden="true"></div><div class="relative flex flex-wrap gap-1.5 sm:gap-2"><span class="chip"><span class="chip-dot" aria-hidden="true"></span>ONLINE</span><span class="chip">ASTRO</span><span class="chip">PAGES</span></div><p class="hud-label relative mt-4 mb-0 sm:mt-5">Signal / Blog</p><h1 class="relative mt-2 mb-2 text-[1.75rem] font-bold leading-tight tracking-tight text-[var(--ink)] sm:mb-3 sm:text-5xl">${SITE_TITLE}<span class="text-[var(--accent)]">_</span></h1><p class="relative m-0 max-w-2xl text-sm text-[var(--muted)] sm:text-lg">${SITE_DESCRIPTION}</p><div class="relative mt-5 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:gap-3"><a href="/blog" class="btn-cyber btn-cyber-primary">进入文章流</a><a href="/about" class="btn-cyber btn-cyber-ghost">关于节点</a></div></section><section class="stats-row mt-4 sm:mt-10"><div class="panel stat-card"><p class="hud-label m-0">Latency</p><p class="mono mt-1.5 mb-0 font-bold text-[var(--ink)]">LOW</p></div><div class="panel stat-card"><p class="hud-label m-0">Posts</p><p class="mono mt-1.5 mb-0 font-bold text-[var(--ink)]">${String(posts.length).padStart(2, "0")}</p></div><div class="panel stat-card"><p class="hud-label m-0">Stack</p><p class="mono mt-1.5 mb-0 text-[0.7rem] font-bold text-[var(--ink)] sm:text-sm">Astro</p></div></section><section class="mt-8 sm:mt-12"><div class="mb-4 flex items-end justify-between gap-3 sm:mb-5"><div class="min-w-0"><p class="hud-label m-0">Feed</p><h2 class="mt-1 mb-0 text-lg font-bold text-[var(--ink)] sm:text-2xl">最近更新</h2></div><a href="/blog" class="mono shrink-0 text-[0.7rem] font-semibold no-underline sm:text-sm">ALL →</a></div><ul class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-4 md:grid-cols-2">${posts.map((post, index) => renderTemplate`<li${addAttribute(["card", index === 0 && "md:col-span-2"], "class:list")}><a${addAttribute(`/blog/${post.id}/`, "href")} class="block no-underline">${post.data.heroImage && renderTemplate`${renderComponent($$result, "Image", $$Image, {
+		"class:list": ["w-full object-cover opacity-95", index === 0 ? "h-44 sm:h-64" : "h-36 sm:h-40"],
+		"width": index === 0 ? 1200 : 720,
+		"height": index === 0 ? 520 : 360,
+		"src": post.data.heroImage,
+		"alt": ""
+	})}`}<div class="p-3.5 sm:p-5"><p class="mono m-0 text-[0.7rem] text-[var(--accent)] sm:text-xs">${renderComponent($$result, "FormattedDate", $$FormattedDate, { "date": post.data.pubDate })}</p><h3 class="mt-1.5 mb-1.5 text-base font-bold text-[var(--ink)] sm:mt-2 sm:mb-2 sm:text-xl">${post.data.title}</h3><p class="m-0 text-sm text-[var(--muted)]">${post.data.description}</p></div></a></li>`)}</ul></section></main>${renderComponent($$result, "Footer", $$Footer, {})}</body></html>`;
+}, "D:/workspace/code_workspace/code_misrui/cc-hongz-parent/cc-hongz-zblog/src/pages/index.astro", void 0);
+var $$file = "D:/workspace/code_workspace/code_misrui/cc-hongz-parent/cc-hongz-zblog/src/pages/index.astro";
+// \0virtual:astro:page:src/pages/index@_@astro
+var page = () => pages_exports;
+export { page };
