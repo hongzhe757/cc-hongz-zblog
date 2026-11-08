@@ -15,9 +15,11 @@ const ready = Boolean(GISCUS.repoId && GISCUS.categoryId);
 						function siteMode() {
 							try {
 								if (document.documentElement.classList.contains('dark')) return 'dark';
-								return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+								const stored = localStorage.getItem('theme');
+								if (stored === 'light') return 'light';
+								return 'dark';
 							} catch (_) {
-								return 'light';
+								return 'dark';
 							}
 						}
 

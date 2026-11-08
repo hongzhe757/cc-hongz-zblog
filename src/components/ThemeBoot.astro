@@ -22,10 +22,10 @@
 				'noir-red': 'carbon',
 			};
 			const valid = ['studio', 'orchard', 'carbon'];
-			let mode = localStorage.getItem('theme') || 'light';
-			let skin = localStorage.getItem('blog-skin') || 'studio';
+			let mode = localStorage.getItem('theme') || 'dark';
+			let skin = localStorage.getItem('blog-skin') || 'carbon';
 			if (legacy[skin]) skin = legacy[skin];
-			if (valid.indexOf(skin) === -1) skin = 'studio';
+			if (valid.indexOf(skin) === -1) skin = 'carbon';
 			localStorage.setItem('blog-skin', skin);
 			root.classList.toggle('dark', mode === 'dark');
 			root.setAttribute('data-skin', skin);

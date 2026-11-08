@@ -11,7 +11,8 @@
     "build": "node ./scripts/with-node.mjs build",
     "build:admin": "node ./scripts/build-admin.mjs",
     "preview": "node ./scripts/with-node.mjs preview --host 0.0.0.0 --port 4321",
-    "astro": "node ./scripts/with-node.mjs"
+    "astro": "node ./scripts/with-node.mjs",
+    "import:note": "node ./scripts/import-note.mjs"
   },
   "dependencies": {
     "@astrojs/markdoc": "^2.1.3",

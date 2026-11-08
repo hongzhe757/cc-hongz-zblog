@@ -32,36 +32,48 @@ const skins = [
 		title="外观设置"
 		aria-label="外观设置"
 	>
-		<span class="skin-toggle-ring" id="skin-toggle-ring" aria-hidden="true">
-			<span class="skin-toggle-core" id="skin-toggle-core"></span>
-		</span>
-		<svg class="skin-toggle-glyph" id="skin-toggle-glyph" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-			<!-- sun by default; JS swaps path for moon -->
+		<svg class="skin-toggle-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+			<!-- palette (stroke) -->
 			<path
-				id="skin-toggle-glyph-path"
-				fill="currentColor"
-				d="M12 4.2a1 1 0 0 1 1 1V7a1 1 0 1 1-2 0V5.2a1 1 0 0 1 1-1Zm0 11.3a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.8-4.5a1 1 0 0 1-1 1H17a1 1 0 1 1 0-2h1.8a1 1 0 0 1 1 1ZM7 12a1 1 0 0 1-1 1H4.2a1 1 0 1 1 0-2H6a1 1 0 0 1 1 1Zm9.95 5.36a1 1 0 0 1-1.41 0l-1.27-1.27a1 1 0 1 1 1.41-1.41l1.27 1.27a1 1 0 0 1 0 1.41ZM9.73 9.32a1 1 0 0 1-1.41 0L7.05 8.05A1 1 0 0 1 8.46 6.6l1.27 1.27a1 1 0 0 1 0 1.41Zm0 5.36a1 1 0 0 1 0 1.41L8.46 17.4A1 1 0 1 1 7.05 16l1.27-1.27a1 1 0 0 1 1.41 0Zm5.36-5.36a1 1 0 0 1 0-1.41L16 6.64a1 1 0 0 1 1.41 1.41l-1.27 1.27a1 1 0 0 1-1.41 0ZM12 17a1 1 0 0 1 1 1v1.8a1 1 0 1 1-2 0V18a1 1 0 0 1 1-1Z"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.8"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M12 3.2c-4.7 0-8.5 3.5-8.5 7.9 0 3 1.8 5.6 4.5 6.9.35.17.75-.08.75-.47l.05-.35c.12-.72.78-1.18 1.5-.98 3 .75 5.7-1.55 5.7-4.6 0-4.1-1.8-7.4-4-7.4Z"
 			/>
+			<circle cx="8.2" cy="11.2" r="1.05" fill="currentColor" />
+			<circle cx="11.1" cy="8.6" r="1.05" fill="currentColor" />
+			<circle cx="14.6" cy="8.6" r="1.05" fill="currentColor" />
+			<circle cx="16.4" cy="11.6" r="1.05" fill="currentColor" />
 		</svg>
 	</button>
 
 	<div id="skin-panel" class="skin-panel" hidden role="group" aria-label="外观">
 		<p class="skin-panel-label">明暗</p>
-		<div class="skin-row mode-row">
+		<div class="skin-row mode-row" role="group" aria-label="明暗模式">
 			<button type="button" class="mode-chip" data-mode="light" title="浅色" aria-label="浅色">
-				<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+				<svg class="mode-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+					<circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
 					<path
-						fill="currentColor"
-						d="M12 4.2a1 1 0 0 1 1 1V7a1 1 0 1 1-2 0V5.2a1 1 0 0 1 1-1Zm0 11.3a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.8-4.5a1 1 0 0 1-1 1H17a1 1 0 1 1 0-2h1.8a1 1 0 0 1 1 1ZM7 12a1 1 0 0 1-1 1H4.2a1 1 0 1 1 0-2H6a1 1 0 0 1 1 1Zm9.95 5.36a1 1 0 0 1-1.41 0l-1.27-1.27a1 1 0 1 1 1.41-1.41l1.27 1.27a1 1 0 0 1 0 1.41ZM9.73 9.32a1 1 0 0 1-1.41 0L7.05 8.05A1 1 0 0 1 8.46 6.6l1.27 1.27a1 1 0 0 1 0 1.41Zm0 5.36a1 1 0 0 1 0 1.41L8.46 17.4A1 1 0 1 1 7.05 16l1.27-1.27a1 1 0 0 1 1.41 0Zm5.36-5.36a1 1 0 0 1 0-1.41L16 6.64a1 1 0 0 1 1.41 1.41l-1.27 1.27a1 1 0 0 1-1.41 0ZM12 17a1 1 0 0 1 1 1v1.8a1 1 0 1 1-2 0V18a1 1 0 0 1 1-1Z"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.8"
+						stroke-linecap="round"
+						d="M12 2.5v1.8M12 19.7v1.8M2.5 12h1.8M19.7 12h1.8M5.05 5.05l1.27 1.27M17.68 17.68l1.27 1.27M17.68 5.05l-1.27 1.27M6.32 17.68l-1.27 1.27"
 					/>
 				</svg>
 				<span>浅色</span>
 			</button>
 			<button type="button" class="mode-chip" data-mode="dark" title="深色" aria-label="深色">
-				<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+				<svg class="mode-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
 					<path
-						fill="currentColor"
-						d="M14.8 3.1a1 1 0 0 1 1.1 1.4A7.6 7.6 0 1 0 19.5 16a1 1 0 0 1 1.5 1.1A9.6 9.6 0 1 1 13.4 3a1 1 0 0 1 1.4.1Z"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.8"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M20.2 13.35A7.85 7.85 0 0 1 10.65 3.8 7.9 7.9 0 1 0 20.2 13.35Z"
 					/>
 				</svg>
 				<span>深色</span>
@@ -111,57 +123,35 @@ const skins = [
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.4rem;
-		width: 2.45rem;
-		height: 2.2rem;
+		width: 2.25rem;
+		height: 2.25rem;
 		margin: 0;
-		padding: 0 0.35rem;
+		padding: 0;
 		border: 1px solid var(--line);
-		border-radius: 11px;
-		background:
-			linear-gradient(180deg, color-mix(in srgb, var(--bg-elevated) 92%, white), var(--bg-elevated));
+		border-radius: 0.5rem;
+		background: var(--bg-elevated);
 		color: var(--ink);
 		cursor: pointer;
-		box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 6%, transparent);
 		transition:
 			border-color 0.18s ease,
 			background 0.18s ease,
+			color 0.18s ease,
 			transform 0.18s ease,
 			box-shadow 0.18s ease;
 	}
 	.skin-toggle:hover {
 		border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+		color: var(--accent);
 		transform: translateY(-1px);
 	}
 	.skin-toggle[aria-expanded='true'] {
 		border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
 		background: var(--accent-soft);
-		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+		color: var(--accent);
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent);
 	}
-
-	.skin-toggle-ring {
-		position: relative;
-		display: grid;
-		place-items: center;
-		width: 1.05rem;
-		height: 1.05rem;
-		border-radius: 999px;
-		background: conic-gradient(from 210deg, #1f5fbf, #2f6a3a, #555, #1f5fbf);
-		padding: 2px;
-		flex-shrink: 0;
-	}
-	.skin-toggle-core {
+	.skin-toggle-icon {
 		display: block;
-		width: 100%;
-		height: 100%;
-		border-radius: inherit;
-		background: var(--accent);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
-	}
-	.skin-toggle-glyph {
-		flex-shrink: 0;
-		color: var(--muted);
-		opacity: 0.95;
 	}
 
 	.skin-panel {
@@ -199,7 +189,11 @@ const skins = [
 	.mode-row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 0.35rem;
+		gap: 0.25rem;
+		padding: 0.22rem;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background: color-mix(in srgb, var(--bg) 88%, var(--ink) 4%);
 	}
 
 	.mode-chip,
@@ -207,7 +201,7 @@ const skins = [
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.4rem;
+		gap: 0.35rem;
 		min-height: 2.05rem;
 		margin: 0;
 		padding: 0.3rem 0.55rem;
@@ -222,7 +216,16 @@ const skins = [
 			border-color 0.16s ease,
 			background 0.16s ease,
 			color 0.16s ease,
+			box-shadow 0.16s ease,
 			transform 0.16s ease;
+	}
+	.mode-chip {
+		border: 0;
+		border-radius: 9px;
+		background: transparent;
+		box-shadow: none;
+		min-height: 2rem;
+		padding: 0.35rem 0.4rem;
 	}
 	.mode-chip:hover,
 	.skin-chip:hover {
@@ -230,14 +233,34 @@ const skins = [
 		color: var(--ink);
 		transform: translateY(-1px);
 	}
+	.mode-chip:hover {
+		border-color: transparent;
+		background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+		transform: none;
+	}
 	.mode-chip.is-active,
 	.skin-chip.is-active {
 		border-color: color-mix(in srgb, var(--accent) 65%, var(--line));
 		background: var(--accent-soft);
 		color: var(--accent);
 	}
-	.mode-chip svg {
+	.mode-chip.is-active {
+		border-color: transparent;
+		background: var(--bg-elevated);
+		color: var(--accent);
+		box-shadow:
+			0 1px 2px rgba(0, 0, 0, 0.06),
+			0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+	}
+	.mode-icon {
+		display: block;
 		flex-shrink: 0;
+		width: 1.05rem;
+		height: 1.05rem;
+	}
+	.mode-chip span {
+		font-weight: 600;
+		letter-spacing: 0.02em;
 	}
 
 	.skin-chip {
@@ -249,8 +272,8 @@ const skins = [
 		position: relative;
 		display: grid;
 		place-items: center;
-		width: 1.35rem;
-		height: 1.35rem;
+		width: 1.4rem;
+		height: 1.4rem;
 		border-radius: 8px;
 		background: var(--preview);
 		border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
@@ -258,17 +281,17 @@ const skins = [
 			inset 0 0 0 1px rgba(255, 255, 255, 0.22),
 			0 1px 2px rgba(0, 0, 0, 0.08);
 		flex-shrink: 0;
+		overflow: hidden;
 	}
 	.skin-check {
+		position: absolute;
+		inset: 0;
 		display: grid;
 		place-items: center;
-		width: 0.95rem;
-		height: 0.95rem;
-		border-radius: 999px;
-		background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
-		color: var(--accent);
+		background: color-mix(in srgb, var(--swatch) 42%, rgba(0, 0, 0, 0.45));
+		color: #fff;
 		opacity: 0;
-		transform: scale(0.7);
+		transform: scale(0.78);
 		transition:
 			opacity 0.16s ease,
 			transform 0.16s ease;
@@ -289,11 +312,6 @@ const skins = [
 		const SKIN_KEY = 'blog-skin';
 		const MODE_KEY = 'theme';
 		const validSkins = ['studio', 'orchard', 'carbon'];
-		const swatches = { studio: '#1f5fbf', orchard: '#2f6a3a', carbon: '#222222' };
-		const sunPath =
-			'M12 4.2a1 1 0 0 1 1 1V7a1 1 0 1 1-2 0V5.2a1 1 0 0 1 1-1Zm0 11.3a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.8-4.5a1 1 0 0 1-1 1H17a1 1 0 1 1 0-2h1.8a1 1 0 0 1 1 1ZM7 12a1 1 0 0 1-1 1H4.2a1 1 0 1 1 0-2H6a1 1 0 0 1 1 1Zm9.95 5.36a1 1 0 0 1-1.41 0l-1.27-1.27a1 1 0 1 1 1.41-1.41l1.27 1.27a1 1 0 0 1 0 1.41ZM9.73 9.32a1 1 0 0 1-1.41 0L7.05 8.05A1 1 0 0 1 8.46 6.6l1.27 1.27a1 1 0 0 1 0 1.41Zm0 5.36a1 1 0 0 1 0 1.41L8.46 17.4A1 1 0 1 1 7.05 16l1.27-1.27a1 1 0 0 1 1.41 0Zm5.36-5.36a1 1 0 0 1 0-1.41L16 6.64a1 1 0 0 1 1.41 1.41l-1.27 1.27a1 1 0 0 1-1.41 0ZM12 17a1 1 0 0 1 1 1v1.8a1 1 0 1 1-2 0V18a1 1 0 0 1 1-1Z';
-		const moonPath =
-			'M14.8 3.1a1 1 0 0 1 1.1 1.4A7.6 7.6 0 1 0 19.5 16a1 1 0 0 1 1.5 1.1A9.6 9.6 0 1 1 13.4 3a1 1 0 0 1 1.4.1Z';
 		const legacy = {
 			paper: 'studio',
 			mist: 'studio',
@@ -312,8 +330,6 @@ const skins = [
 
 		const toggle = document.getElementById('skin-toggle');
 		const panel = document.getElementById('skin-panel');
-		const toggleCore = document.getElementById('skin-toggle-core');
-		const glyphPath = document.getElementById('skin-toggle-glyph-path');
 
 		function setOpen(open) {
 			if (!toggle || !panel) return;
@@ -328,8 +344,6 @@ const skins = [
 			document.querySelectorAll('.skin-chip').forEach((btn) => {
 				btn.classList.toggle('is-active', btn.getAttribute('data-skin') === skin);
 			});
-			if (toggleCore) toggleCore.style.background = swatches[skin] || swatches.studio;
-			if (glyphPath) glyphPath.setAttribute('d', mode === 'dark' ? moonPath : sunPath);
 		}
 
 		function notifyAppearance(mode, skin) {
@@ -365,14 +379,14 @@ const skins = [
 			try {
 				localStorage.setItem(MODE_KEY, next);
 			} catch (_) {}
-			const skin = root.getAttribute('data-skin') || 'studio';
+			const skin = root.getAttribute('data-skin') || 'carbon';
 			syncUi(next, skin);
 			notifyAppearance(next, skin);
 		}
 
 		function applySkin(skin) {
 			let next = legacy[skin] || skin;
-			if (validSkins.indexOf(next) === -1) next = 'studio';
+			if (validSkins.indexOf(next) === -1) next = 'carbon';
 			root.setAttribute('data-skin', next);
 			try {
 				localStorage.setItem(SKIN_KEY, next);
@@ -383,11 +397,11 @@ const skins = [
 		}
 
 		function boot() {
-			let mode = 'light';
-			let skin = 'studio';
+			let mode = 'dark';
+			let skin = 'carbon';
 			try {
-				mode = localStorage.getItem(MODE_KEY) || 'light';
-				skin = localStorage.getItem(SKIN_KEY) || 'studio';
+				mode = localStorage.getItem(MODE_KEY) || 'dark';
+				skin = localStorage.getItem(SKIN_KEY) || 'carbon';
 			} catch (_) {}
 			applyMode(mode);
 			applySkin(skin);
@@ -408,12 +422,12 @@ const skins = [
 			if (t.closest('.skin-wrap')) {
 				const modeBtn = t.closest('.mode-chip');
 				if (modeBtn) {
-					applyMode(modeBtn.getAttribute('data-mode') || 'light');
+					applyMode(modeBtn.getAttribute('data-mode') || 'dark');
 					return;
 				}
 				const skinBtn = t.closest('.skin-chip');
 				if (skinBtn) {
-					applySkin(skinBtn.getAttribute('data-skin') || 'studio');
+					applySkin(skinBtn.getAttribute('data-skin') || 'carbon');
 					setOpen(false);
 				}
 				return;
